@@ -60,7 +60,7 @@
           </div>
         </div>
         <Pagination
-          v-if="!category"
+          v-if="category=='全部商品'"
           :pages="pagination"
           @emit-pages="getProducts"
         ></Pagination>
@@ -88,13 +88,13 @@ export default {
     getProducts (category, page = 1) {
       this.isLoading = true
       this.page = page
+      this.category = category
       this.$http
         .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/?page=${page}`)
         .then((res) => {
           this.products = res.data.products
           this.pagination = res.data.pagination
           if (category === '全部商品') {
-            this.category = category
             this.productCategory = this.products
           } else {
             this.getCategory(category)
@@ -103,7 +103,6 @@ export default {
         })
     },
     getCategory (category) {
-      this.category = category
       this.productCategory = []
       this.products.forEach((item) => {
         if (item.category === category) {
