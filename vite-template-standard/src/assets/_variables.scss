@@ -46,6 +46,10 @@ $yellow: #ffc107 !default;
 $green: #198754 !default;
 $teal: #20c997 !default;
 $cyan: #0dcaf0 !default;
+$myColor: #ff6915 !default;
+$myBgMain: #121110 !default;
+$myBgCard: #1C1A19 !default;
+$btnBg: #ffdbc7 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -64,6 +68,10 @@ $colors: (
   "white": $white,
   "gray": $gray-600,
   "gray-dark": $gray-800,
+  "myColor": $myColor,
+  "myBgMain": $myBgMain,
+  "myBgCard": $myBgCard,
+  "btnBg": $btnBg,
 ) !default;
 // scss-docs-end colors-map
 
@@ -306,7 +314,10 @@ $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-100 !default;
 $dark: $gray-900 !default;
-$main: #FF6915 !default;
+$main: #ff6915 !default;
+$myBgMain: #121110 !default;
+$myBgCard: #1C1A19 !default;
+$btnBg: #ffdbc7 !default;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -319,6 +330,10 @@ $theme-colors: (
   "danger": $danger,
   "light": $light,
   "dark": $dark,
+  "myColor": $main,
+  "myBgMain": $myBgMain,
+  "myBgCard": $myBgCard,
+  "btnBg": $btnBg,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -1660,3 +1675,23 @@ $kbd-bg: var(--#{$prefix}body-color) !default;
 $nested-kbd-font-weight: null !default; // Deprecated in v5.2.0, removing in v6
 
 $pre-color: null !default;
+
+
+//修改樣式-----------------------------------------------------
+
+$pagination-bg: $myBgMain;
+$pagination-border-color: $myColor;
+$pagination-color: $white;
+
+$pagination-active-color: $myColor;
+$pagination-active-bg: $myBgCard;
+$pagination-active-border-color: $myColor;
+
+$pagination-disabled-bg: $myBgMain;
+$pagination-disabled-border-color: $myColor;
+
+$pagination-hover-color: $myColor;
+$pagination-hover-bg: $btnBg;
+$pagination-hover-border-color: $myBgMain;
+
+

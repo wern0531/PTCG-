@@ -1,35 +1,4 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"
-        ><img src="../assets/image/logo.png" alt=""
-      /></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link active navbarText" aria-current="page" href="#"
-            ><span>首頁</span></a
-          >
-          <a class="nav-link navbarText" href="#"><div>商品列表</div></a>
-          <a class="nav-link navbarText" href="#"><div>最新消息</div></a>
-          <a class="nav-link navbarText" href="#"><div>牌組介紹</div></a>
-          <a class="nav-link" href="#"
-            ><img src="../assets/image/shopping_cart.svg" alt=""
-          /></a>
-        </div>
-      </div>
-    </div>
-  </nav>
   <!-- 主圖輪播 -->
   <div
     id="carouselExampleIndicators"
@@ -108,33 +77,37 @@
   </div>
   <h3>商品列表</h3>
   <div class="cardList container d-flex justify-content-between">
-    <div class="card">
+    <div class="card" type="button" @click="toGetCategory('單卡')">
       <img src="../assets/image/product1.png" class="card-img-top" alt="..." />
       <div class="card-body">
         <p class="card-text">單卡</p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" type="button" @click="toGetCategory('牌組')">
       <img src="../assets/image/product2.png" class="card-img-top" alt="..." />
       <div class="card-body">
         <p class="card-text">牌組</p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" type="button" @click="toGetCategory('禮盒')">
       <img src="../assets/image/product3.png" class="card-img-top" alt="..." />
       <div class="card-body">
         <p class="card-text">禮盒</p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" type="button" @click="toGetCategory('周邊')">
       <img src="../assets/image/product4.png" class="card-img-top" alt="..." />
       <div class="card-body">
         <p class="card-text">周邊</p>
       </div>
     </div>
   </div>
-  <div class="moreProductBtn">
-    <img src="" alt="" />
+  <div
+    class="moreProductBtn d-flex"
+    type="button"
+    @click="toGetCategory('全部商品')"
+  >
+    <img src="../assets/image/pan_tool_alt.png" alt="" />
     <p>選擇以查看更多</p>
   </div>
   <div class="d-flex flex-row">
@@ -195,7 +168,7 @@
   </div>
   <div class="news">
     <div class="newsImgItem">
-      <img class="newsImg" src="../assets/image/image 34.png" alt="" />
+      <img class="newsImg" src="../assets/image/image34.png" alt="" />
       <div class="newsImgText">圖為2022台北聯盟賽現場</div>
     </div>
     <div class="newsText">
@@ -222,7 +195,7 @@
         <div class="newsImg1">
           <img
             style="max-width: 206px; max-height: 206px"
-            src="../assets/image/tw_product_Deck_Shield_9343198 1.png"
+            src="../assets/image/tw_product_Deck_Shield_93431981.png"
             class="newsCardImg"
             alt="..."
           />
@@ -237,7 +210,7 @@
         <div class="newsImg2">
           <img
             style="max-width: 134px; max-height: 154px"
-            src="../assets/image/截圖 2023-02-23 下午3.02 1.png"
+            src="../assets/image/PTCGleague.png"
             class="newsCardImg"
             alt="..."
           />
@@ -282,24 +255,25 @@
       </div>
     </div>
   </div>
-  <div class="footer d-flex justify-content-between align-items-center">
-    <div class="footerText">©2023 PTCG 本網站為個人作品使用，非商業用途</div>
-    <button type="button" class="footerBtn"><p>後台登入</p></button>
-  </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    toGetCategory (category) {
+      this.$router.push({
+        name: 'products',
+        params: {
+          category
+        }
+      })
+    }
+  },
   components: {}
 }
 </script>
 
 <style scoped>
-.navbar {
-  padding: 0px 312px;
-  height: 63px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.48);
-}
 .mainImg {
   widows: 1920px;
   height: 710px;
@@ -328,7 +302,7 @@ export default {
 h1 {
   padding: 0 80px;
 
-  width: 634px;
+  width: 636px;
   height: 192px;
 
   border-right: 1px solid #ffffff;
@@ -373,7 +347,6 @@ h4 {
   color: #ffffff;
 }
 h3 {
-  /* position: absolute; */
   width: 480px;
   height: 144px;
   margin: 120px auto 0 auto;
@@ -383,11 +356,12 @@ h3 {
   font-weight: 900;
   font-size: 120px;
   line-height: 120%;
-  /* identical to box height, or 144px */
 
   text-align: center;
 
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.75);
+  background-color: #121110;
+  color: #121110;
 }
 .cardList {
   display: flex;
@@ -446,7 +420,7 @@ h3 {
 }
 .moreProductBtn {
   margin: 48px auto 0;
-  width: 112px;
+  width: 140px;
   height: 24px;
 
   font-family: "Noto Sans TC";
@@ -459,6 +433,11 @@ h3 {
   text-align: center;
 
   color: rgba(255, 255, 255, 0.75);
+}
+.moreProductBtn img {
+  padding: 3px 4.03px;
+  width: 24px;
+  height: 24px;
 }
 .deckDescribe {
   margin: 264px 0 0 312px;
@@ -476,16 +455,14 @@ h3 {
 .deckDescribe p2 {
   box-sizing: border-box;
 
-  /* Auto layout */
-
-  padding-left: 15px;
+  padding-left: 14px;
 
   width: 306px;
   height: 90px;
 
-  font-family: "Noto Sans TC";
+  /* font-family: "Noto Sans TC";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400; */
   font-size: 20px;
   line-height: 150%;
 
@@ -502,7 +479,6 @@ h3 {
   font-weight: 900;
   font-size: 20px;
   line-height: 180%;
-  /* identical to box height, or 36px */
 
   color: #ffffff;
 }
@@ -530,7 +506,6 @@ h3 {
   font-weight: 700;
   font-size: 20px;
   line-height: 180%;
-  /* identical to box height, or 36px */
 
   color: #ff6915;
 }
@@ -646,10 +621,6 @@ h3 {
   height: 942px;
   margin-top: 759px;
 }
-.newsCards {
-  margin-top: 100px;
-  margin-left: 312px;
-}
 .newsImgItem {
   position: relative;
 }
@@ -697,9 +668,16 @@ h3 {
   color: rgba(255, 255, 255, 0.75);
 }
 .newsCards {
+  margin-top: 100px;
+  margin-left: 312px;
   width: 1296px;
   height: 334px;
-  margin-left: 312px;
+}
+.newsCard:hover .newsCardClass {
+  color: #ffdbc7;
+}
+.newsCard:hover .newsCardTitle {
+  color: #ff6915;
 }
 .newsCard {
   position: relative;
@@ -801,8 +779,7 @@ h3 {
 
   width: 1296px;
   height: 363px;
-  margin-left: 312px;
-  margin-top: 160px;
+  margin: 160px 0 160px 312px;
 
   background: #1c1a19;
   border-radius: 24px;
@@ -856,46 +833,5 @@ h3 {
 .officialYT {
   width: 432px;
   height: 100px;
-}
-.footer {
-  padding: 16px 312px;
-
-  height: 69px;
-  margin-top: 160px;
-
-  background: #000000;
-}
-.footerText {
-  width: 310px;
-  height: 25px;
-
-  font-family: "Noto Sans TC";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 180%;
-
-  color: rgba(255, 255, 255, 0.75);
-}
-.footerBtn {
-  padding: 4px 12px;
-
-  width: 88px;
-  height: 37px;
-
-  background: #1c1a19;
-  border-radius: 4px;
-}
-.footerBtn p {
-  width: 64px;
-  height: 29px;
-
-  font-family: "Noto Sans TC";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 180%;
-
-  color: #ff6915;
 }
 </style>

@@ -83,11 +83,24 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+@font-face{
+  font-family: 'Noto Sans TC';
+  src: url('../src/assets/fonts/Noto_Serif_TC/NotoSansTC-Black.otf');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: 'Noto Serif TC';
+  src: url('../src/assets/fonts/NotoSerifTC-Black.otf');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
 
 #app {
   max-width: 1920px;
   margin: 0 auto;
-  /* padding: 2rem; */
   text-align: center;
   background-color: #121110;
 }
