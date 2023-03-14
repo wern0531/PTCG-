@@ -54,7 +54,7 @@
                 <div class="pb-3 text-start text-white">
                   $NT{{ product.price }}
                 </div>
-                <button class="btn"><p>加入購物車</p></button>
+                <button class="btn" @click="addToCart(product.id)"><p>加入購物車</p></button>
               </div>
             </div>
           </div>
@@ -109,13 +109,23 @@ export default {
           this.productCategory.push(item)
         }
       })
+    },
+    addToCart (id) {
+      const data = {
+        product_id: id,
+        qty: 1
+      }
+      this.$http
+        .post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, { data })
+        .then((res) => {
+          console.log(res)
+        })
     }
   },
   components: {
     Pagination
   },
   mounted () {
-    console.log(this.$route.params)
     this.category = this.$route.params.category
     this.getProducts(this.category)
   }

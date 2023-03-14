@@ -25,7 +25,21 @@ const routes = [
       },
       {
         path: 'cart',
-        component: () => import('../views/CartView.vue')
+        component: () => import('../views/CartView.vue'),
+        children: [
+          {
+            path: 'information',
+            component: () => import('../views/InformationView.vue')
+          },
+          {
+            path: 'checkOrder',
+            component: () => import('../views/CheckOrderView.vue')
+          },
+          {
+            path: 'completeOrder',
+            component: () => import('../views/CompleteOrderView.vue')
+          }
+        ]
       }
     ]
   }
