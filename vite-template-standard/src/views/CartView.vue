@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row my-5 align-items-stretch">
       <div class="col-lg-3">
-        <div class=""><img src="../assets/image/town_league.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="../assets/image/town_league.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div><img src="../assets/image/regional_league.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="../assets/image/regional_league.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/information'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div><img src="../assets/image/championships.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="../assets/image/championships.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': isCurrentPath('/cart/checkOrder')}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div><img class="mb-2" src="../assets/image/wcs.png" alt=""></div>
+        <div class="d-none d-lg-block"><img class="mb-2" src="../assets/image/wcs.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/completeOrder'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"

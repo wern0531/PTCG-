@@ -110,10 +110,10 @@ export default {
           this.pagination = res.data.pagination
           if (category === '全部商品') {
             this.productCategory = this.products
+            this.isLoading = false
           } else {
             this.getCategory(category)
           }
-          this.isLoading = false
         })
     },
     getCategory (category) {
@@ -127,7 +127,7 @@ export default {
               this.productCategory.push(item)
             }
           })
-          console.log('productCategory', this.productCategory)
+          this.isLoading = false
         })
     }
   },
