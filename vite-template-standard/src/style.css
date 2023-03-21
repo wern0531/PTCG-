@@ -104,4 +104,9 @@ button:focus-visible {
   text-align: center;
   background-color: #121110;
 }
+@media (max-width: 768px) {
+  #app {
+    width: 375px;
+  }
+}
 

@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <div class="row my-3 align-items-stretch">
-      <div class="col-3">
-        <div class="step" :class="{'nowStep': currentPath === '/cart'}">
+    <div class="row my-5 align-items-stretch">
+      <div class="col-lg-3">
+        <div class=""><img src="../assets/image/town_league.png" alt=""></div>
+        <div class="step mt-3" :class="{'nowStep': currentPath === '/cart'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
           >
@@ -10,8 +11,9 @@
           </div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="step" :class="{'nowStep': currentPath === '/cart/information'}">
+      <div class="col-lg-3">
+        <div><img src="../assets/image/regional_league.png" alt=""></div>
+        <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/information'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
           >
@@ -19,8 +21,9 @@
           </div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="step" :class="{'nowStep': currentPath === '/cart/checkOrder'}">
+      <div class="col-lg-3">
+        <div><img src="../assets/image/championships.png" alt=""></div>
+        <div class="step mt-3" :class="{'nowStep': isCurrentPath('/cart/checkOrder')}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
           >
@@ -28,8 +31,9 @@
           </div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="step" :class="{'nowStep': currentPath === '/cart/completeOrder'}">
+      <div class="col-lg-3">
+        <div><img class="mb-2" src="../assets/image/wcs.png" alt=""></div>
+        <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/completeOrder'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
           >
@@ -39,15 +43,15 @@
       </div>
     </div>
     <div v-if="currentPath === '/cart'">
-        <div class="" v-for="cart in carts" :key="cart.id">
+        <div class="" v-for="cart in cartsData" :key="cart.id">
       <div
-        class="row p-3 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
+        class="cartItem row p-3 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
       >
-        <div class="col-2">
+        <div class="col-lg-2">
           <img style="width: 100px" :src="cart.product.imageUrl" alt="" />
         </div>
-        <div class="col-3">{{ cart.product.title }}</div>
-        <div class="col-2">
+        <div class="mt-2 mt-lg-0 col-lg-3">{{ cart.product.title }}</div>
+        <div class="mt-2 mt-lg-0 col-lg-2">
           <div class="input-group">
             <button
               class="btn btn-outline-secondary"
@@ -74,31 +78,39 @@
             </button>
           </div>
         </div>
-        <div class="col-3">$NT{{ cart.total }}</div>
-        <div class="col-2 delBtn">
+        <div class="mt-2 mt-lg-0 col-lg-3">$NT{{ cart.total }}</div>
+        <div class="mt-2 mt-lg-0 col-lg-2 delBtn" @click="delCart(cart.id, cart.product.title)">
           <span type="button" class="material-symbols-outlined"> delete </span>
         </div>
       </div>
     </div>
-    <div class="mt-3">
-      <div class="row d-flex align-items-center">
-        <div class="col-2">
-          <button type="button" class="btn text-myColor">繼續選購</button>
+
+      <div class="mt-3 row d-flex align-items-center">
+        <div class="col-lg-2">
+          <router-link type="button" class="btn d-flex btn-myBgMain" :to="'/products/全部商品'">
+            <div class="material-symbols-outlined">arrow_back</div>
+            <div>繼續選購</div>
+          </router-link>
         </div>
-        <div class="col-3 ms-auto">
-          總計: $NT{{ calculateFinalTotal(carts) }}
+        <div class="col-lg-5 d-flex ms-auto align-items-center">
+          <div class="col-lg-6">
+          總計: $NT{{ calculateFinalTotal(cartsData) }}
         </div>
-        <div class="col-2">
-            <button type="button" class="btn text-myColor" @click="nextStep">確認訂單</button>
+        <div class="col-lg-4 ms-auto">
+            <button type="button" class="btn text-myColor border-myColor btn-hover" @click="nextStep">確認訂單</button>
         </div>
+        </div>
+
       </div>
-    </div>
+
     </div>
     <RouterView></RouterView>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import { cartStore } from '../../src/stores/cart'
 import { RouterView } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
@@ -111,12 +123,7 @@ export default {
     }
   },
   methods: {
-    getCarts () {
-      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/cart`).then((res) => {
-        this.carts = res.data.data.carts
-        console.log(this.carts)
-      })
-    },
+    ...mapActions(cartStore, ['getCarts', 'delCart']),
     updateQty (productId, qty, id, status) {
       let data = {}
       if (status === 'add') {
@@ -141,11 +148,20 @@ export default {
           alert(err.response.data.message)
         })
     },
-    calculateFinalTotal (carts) {
-      return carts.reduce((acc, cur) => acc + cur.total, 0)
+    calculateFinalTotal (cartsData) {
+      return cartsData.reduce((acc, cur) => acc + cur.total, 0)
     },
     nextStep () {
       this.$router.push('/cart/information')
+    },
+    isCurrentPath (path) { // 確認當前路徑是否包含path,是的話就回傳True
+      return this.currentPath.includes(path)
+    }
+  },
+  computed: {
+    cartsData () {
+      const store = this.$pinia.state.value
+      return store.cart.carts
     }
   },
   watch: {
@@ -158,7 +174,6 @@ export default {
   },
   mounted () {
     this.getCarts()
-    console.log(this.carts)
   }
 }
 </script>
@@ -183,18 +198,24 @@ export default {
 .nowStep{
     background-color: #ff6915;
 }
-.btn {
-  box-sizing: border-box;
-  padding: 8px;
-
-  background-color: #121110;
-  border: 1px solid #ff6915;
-  border-radius: 8px;
-}
-.btn:hover {
+.btn-hover:hover {
   background-color: #ffdbc7;
 }
 .delBtn:hover {
   color: red;
+}
+@media (max-width: 768px){
+  .container{
+    width: 375px;
+  }
+  .step{
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .cartItem{
+    display: flex;
+    flex-flow: column;
+  }
+
 }
 </style>

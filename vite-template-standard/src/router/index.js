@@ -16,11 +16,15 @@ const routes = [
         component: () => import('../views/ProductsView.vue')
       },
       {
+        path: 'product/:id',
+        component: () => import('../views/ProductView.vue')
+      },
+      {
         path: 'news',
         component: () => import('../views/NewsView.vue')
       },
       {
-        path: 'deck',
+        path: 'deck/:name',
         component: () => import('../views/DeckView.vue')
       },
       {
@@ -32,7 +36,7 @@ const routes = [
             component: () => import('../views/InformationView.vue')
           },
           {
-            path: 'checkOrder',
+            path: 'checkOrder/:orderId',
             component: () => import('../views/CheckOrderView.vue')
           },
           {
@@ -40,6 +44,28 @@ const routes = [
             component: () => import('../views/CompleteOrderView.vue')
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: () => import('../views/LoginView.vue')
+  },
+  {
+    path: '/admin',
+    component: () => import('../views/AdminView.vue'),
+    children: [
+      {
+        path: 'products',
+        component: () => import('../views/admin/AdminProducts.vue')
+      },
+      {
+        path: 'orders',
+        component: () => import('../views/admin/AdminOrders.vue')
+      },
+      {
+        path: 'articles',
+        component: () => import('../views/admin/AdminArticles.vue')
       }
     ]
   }

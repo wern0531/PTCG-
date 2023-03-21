@@ -1,11 +1,39 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav ref="navbar" class="navbar myNavbar navbar-expand-lg bg-myBgMain">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"
         ><img src="../assets/image/logo.png" alt=""
       /></a>
+      <div class="d-lg-none ms-auto">
+        <router-link
+          v-if="cartsData.length > 0"
+          to="/cart"
+          type="button"
+          class="nav-link d-flex align-items-center navbarImg"
+        >
+          <div class="shoppingCart position-relative">
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >{{ getCartNum }}</span
+            >
+          </div>
+        </router-link>
+        <button
+          v-else
+          type="button"
+          class="btn nav-link d-flex align-items-center navbarImg"
+          @click="noCarts"
+        >
+          <div class="shoppingCart position-relative">
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >{{ getCartNum }}</span
+            >
+          </div>
+        </button>
+      </div>
       <button
-        class="navbar-toggler"
+        class="navbar-toggler d-flex justify-content-center align-items-center bg-myBgMain menu"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNavAltMarkup"
@@ -13,71 +41,90 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <div
+          class="meunIcon d-flex justify-content-center align-items-center"
+        ></div>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <router-link
-            to="/home"
-            active-class="active-link"
-            class="nav-link active navbarHome"
-            aria-current="page"
-            href="#"
-            ><span>首頁</span></router-link
-          >
-          <router-link
-            to="/products/全部商品"
-            active-class="active-link"
-            class="nav-link navbarText"
-            href="#"
-            ><span>商品列表</span></router-link
-          >
-          <router-link
-            to="/news"
-            active-class="active-link"
-            class="nav-link navbarText"
-            href="#"
-            ><span>最新消息</span></router-link
-          >
-          <router-link
-            to="/deck"
-            active-class="active-link"
-            class="nav-link navbarText"
-            href="#"
-            ><span>牌組介紹</span></router-link
-          >
-          <!-- <router-link
-            to="/cart"
-            active-class="active-link"
-            class="nav-link d-flex align-items-center navbarImg"
-            href="#"
-            ><img
-              class="shoppingCart"
-              src="../assets/image/shopping_cart.svg"
-              alt=""
-          /></router-link> -->
-          <div
-            type="button"
-            @click="opencheckCartsModal"
-            class="nav-link d-flex align-items-center navbarImg"
-          >
-            <img
-              class="shoppingCart"
-              src="../assets/image/shopping_cart.svg"
-              alt=""
-            />
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link
+              to="/home"
+              active-class="active-link"
+              class="nav-link active navbarHome"
+              aria-current="page"
+              href="#"
+              ><span>首頁</span></router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              to="/products/全部商品"
+              active-class="active-link"
+              class="nav-link navbarText"
+              href="#"
+              ><span>商品列表</span></router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              to="/news"
+              active-class="active-link"
+              class="nav-link navbarText"
+              href="#"
+              ><span>最新消息</span></router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              to="/deck/夢幻Vmax"
+              active-class="active-link"
+              class="nav-link navbarText"
+              href="#"
+              ><span>牌組介紹</span></router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="d-none d-lg-block">
+        <router-link
+          v-if="cartsData.length > 0"
+          to="/cart"
+          type="button"
+          class="nav-link d-flex align-items-center navbarImg"
+        >
+          <div class="shoppingCart position-relative">
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >{{ getCartNum }}</span
+            >
           </div>
-        </div>
+        </router-link>
+        <button
+          v-else
+          type="button"
+          class="btn nav-link d-flex align-items-center navbarImg"
+          @click="noCarts"
+        >
+          <div class="shoppingCart position-relative">
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >{{ getCartNum }}</span
+            >
+          </div>
+        </button>
       </div>
     </div>
   </nav>
   <RouterView></RouterView>
-  <div class="footer d-flex justify-content-between align-items-center">
+  <div class="footer d-flex justify-content-center justify-content-lg-between align-items-center">
     <div class="footerText">©2023 PTCG 本網站為個人作品使用，非商業用途</div>
-    <button type="button" class="footerBtn"><p>後台登入</p></button>
+    <button type="button" class="footerBtn d-none d-lg-block" @click="toAdmin">
+      <p>後台登入</p>
+    </button>
   </div>
   <!-- 購物車modal -->
-  <div
+  <!-- <div
     class="modal fade"
     id="checkCardModal"
     ref="checkCardModal"
@@ -97,40 +144,34 @@
         </div>
         <div class="modal-body">
           <table class="table text-white text-center">
-            <thead class="row">
+            <thead class="row mb-3">
               <th class="col-5">商品</th>
               <th class="col-3">數量</th>
-              <th class="col-2">價格</th>
-              <th class="col-2">刪除</th>
+              <th class="col-3">價格</th>
+              <th class="col-1"></th>
             </thead>
-            <tbody class="row">
-              <tr class="" v-for="cart in carts" :key="cart.id">
+            <tbody>
+              <tr class="row" v-for="cart in cartsData" :key="cart.id">
                 <td class="col-5 align-middle text-center">
                   {{ cart.product.title }}
                 </td>
-                <td class="col-3 align-middle text-center align-items-center">
-                  <div class="d-flex justify-content-center">
-                    <div class="input-group input-group-sm">
-                      <div class="input-group mb-3">
-                        <input
-                          min="1"
-                          type="number"
-                          class="form-control"
-                          v-model.number="cart.qty"
-                          :disabled="cart.product.id === loadingItem"
-                          @change="
-                            updateQty(cart.product_id, cart.qty, cart.id)
-                          "
-                        />
-                        <span class="input-group-text" id="basic-addon2">{{
-                          cart.product.unit
-                        }}</span>
-                      </div>
-                    </div>
+                <td class="col-3 align-middle text-center">
+                  {{ cart.qty }}
+                </td>
+                <td class="col-3 align-middle text-center">$NT{{ cart.total }}</td>
+                <td class="col-1 align-middle text-center">
+                  <div
+                    class=" mx-auto delBtn"
+                    @click="delCart(cart.id, cart.product.title)"
+                  >
+                    <span
+                      type="button"
+                      class="text-center material-symbols-outlined"
+                    >
+                      delete
+                    </span>
                   </div>
                 </td>
-                <td class="col-2 align-middle text-center">{{ cart.total }}</td>
-                <td class="col-2 align-middle text-center"></td>
               </tr>
             </tbody>
           </table>
@@ -145,19 +186,22 @@
           </button>
           <router-link
             class="btn btn-myColor ms-auto"
-            to="/cart"
-            @click="delCheckCartsModal"
+            v-if="cartsData.length > 0"
+            :to="cart"
             >前往結帳</router-link
           >
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import { Modal } from 'bootstrap'
+import { mapActions, mapState } from 'pinia'
+import { cartStore } from '../../src/stores/cart'
+// import { Modal } from 'bootstrap'
 import { RouterView } from 'vue-router'
+import Swal from 'sweetalert2'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 
@@ -166,16 +210,24 @@ export default {
     return {
       isLoading: false,
       checkCardModal: '',
-      carts: [],
+
       loadingItem: ''
     }
   },
+  computed: {
+    ...mapState(cartStore, ['getCartNum', 'carts']),
+    cartsData () {
+      return this.carts || []
+    }
+  },
   methods: {
-    getCarts () {
-      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/cart`).then((res) => {
-        this.carts = res.data.data.carts
-        console.log(this.carts)
-      })
+    ...mapActions(cartStore, ['getCarts', 'delCart']),
+    handleScroll () {
+      if (window.pageYOffset > 710) {
+        this.$refs.navbar.classList.remove('bg-opacity-50')
+      } else {
+        this.$refs.navbar.classList.add('bg-opacity-50')
+      }
     },
     updateQty (productId, qty, id) {
       const data = {
@@ -193,14 +245,34 @@ export default {
           alert(err.response.data.message)
         })
     },
-    opencheckCartsModal () {
-      this.getCarts()
-      this.checkCardModal.show()
-      console.log(this.carts)
+    noCarts () {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: '您的購物車是空的唷~'
+      })
     },
-    delCheckCartsModal () {
-      this.checkCardModal.hide()
+    toAdmin () {
+      this.$router.push('login')
     }
+    // opencheckCartsModal () {
+    //   this.getCarts()
+    //   const store = this.$pinia.state.value
+    //   this.carts = store.cart.carts
+    //   if (this.carts.length === 0) {
+    //     Swal.fire({
+    //       icon: 'warning',
+    //       title: 'Oops...',
+    //       text: '您的購物車是空的唷~'
+    //     })
+    //   } else {
+    //     this.checkCardModal.show()
+    //     console.log(this.carts)
+    //   }
+    // },
+    // delCheckCartsModal () {
+    //   this.checkCardModal.hide()
+    // },
   },
   components: {
     RouterView
@@ -211,15 +283,20 @@ export default {
     }
   },
   mounted () {
-    this.checkCardModal = new Modal(this.$refs.checkCardModal, {
-      keyboard: false
-    })
+    this.getCarts()
+    // if (this.$route.path === '/home') {
+    //   window.addEventListener('scroll', this.handleScroll)
+    // }
+    // this.checkCardModal = new Modal(this.$refs.checkCardModal, {
+    //   keyboard: false
+    // })
   }
 }
 </script>
 
 <style scoped>
-.navbar {
+.myNavbar {
+  box-sizing: border-box;
   padding: 0px 312px;
   height: 63px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.48);
@@ -262,19 +339,25 @@ export default {
 
   color: #ffffff;
 }
-.navbarText:hover,
-.navbarHome:hover {
-  color: #ff6915;
+.navbarText span:hover,
+.navbarHome span:hover {
+  color: #ff6915 !important;
 }
 .navbarImg {
-  width: 32px;
+  width: 38px;
   height: 63px;
 
   margin-left: 24px;
 }
 .shoppingCart {
+  background-image: url(../assets/image/shopping_cart.svg);
   width: 24px;
   height: 24px;
+  transition: transform 0.2s ease-in-out;
+  background-repeat: no-repeat;
+}
+.shoppingCart:hover {
+  transform: scale(1.4);
 }
 .active-link {
   border-top: 4px solid #ff6915;
@@ -318,5 +401,54 @@ export default {
   line-height: 180%;
 
   color: #ff6915;
+}
+
+.delBtn:hover {
+  color: red;
+}
+
+/* rwd */
+@media (max-width: 992px) {
+  .myNavbar {
+    padding: 0px;
+    height: auto;
+  }
+  .menu {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu .meunIcon {
+    background: url(../assets/image/menu.png);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease-in-out;
+  }
+  .meunIcon:hover {
+    transform: scale(1.6);
+  }
+  .navbarHome,
+  .navbarText {
+    background: #1c1a19;
+    width: 100%;
+    margin: 0px;
+    height: 69px;
+  }
+  .navbarText:hover,
+  .navbarHome:hover {
+    color: #ffffff;
+    background: #ff6915;
+  }
+  .navbarText span:hover,
+  .navbarHome span:hover {
+    color: #ffffff !important;
+  }
+  .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 12px;
+  }
 }
 </style>

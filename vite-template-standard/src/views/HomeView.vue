@@ -69,14 +69,18 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <div class="mainText text-start">
-    <h1>成為最強的<br />寶可夢訓練家吧!</h1>
-    <h4>
+  <div class="mainText d-flex align-items-md-center text-md-start">
+    <h1 class="myh1 border-end border-md border-white" data-aos="fade-right">
+      成為最強的<br />寶可夢訓練家吧!
+    </h1>
+    <div class="myh4">
       不管你是牌組裡缺了一張強力單卡、懶得收牌想要一副現成的主流牌、羨慕對手美美的卡套、或者單純想當個收藏家，這裡通通可以滿足你的需求。
-    </h4>
+    </div>
   </div>
-  <h3>商品列表</h3>
-  <div class="cardList container d-flex justify-content-between">
+  <div class="myh3" data-aos="fade-down">商品列表</div>
+  <div
+    class="cardList container d-flex flex-column flex-md-row justify-content-between align-items-center"
+  >
     <div class="card" type="button" @click="toGetCategory('單卡')">
       <img src="../assets/image/product1.png" class="card-img-top" alt="..." />
       <div class="card-body">
@@ -103,82 +107,251 @@
     </div>
   </div>
   <div
-    class="moreProductBtn d-flex"
+    class="moreProductBtn d-flex align-items-center justify-content-center"
     type="button"
     @click="toGetCategory('全部商品')"
   >
     <img src="../assets/image/pan_tool_alt.png" alt="" />
-    <p>選擇以查看更多</p>
+    <div>選擇以查看更多</div>
   </div>
-  <div class="d-flex flex-row">
-    <div class="deckDescribe text-start">
-      <h2>牌組構築</h2>
-      <p2>
+  <div class="deckWrap d-flex flex-column flex-md-row justify-content-start">
+    <div
+      class="deckDescribe d-flex flex-column align-items-center align-items-md-start"
+      data-aos="fade-right"
+    >
+      <h2 class="myh2">牌組構築</h2>
+      <p class="deckDescribeP1 text-start">
         想要玩主流牌但不知道該怎麼組?<br />
         組好牌卻不知道該怎麼運作?<br />
         對於環境中的牌不懂得如何應對?
-      </p2>
-      <p3>這裡提供最完整的教學資訊!</p3>
+      </p>
+      <p class="deckDescribeP2">這裡提供最完整的教學資訊!</p>
       <button><p>查看教學</p></button>
     </div>
-    <div class="deckcontent">
-      <h3>熱門牌組</h3>
-      <div class="deckCardBG">
-        <div class="deckAll">
-          <div class="deckGroup1 d-flex justify-content-between">
-            <div class="deckCard" style="">
-              <div class="deckName">夢幻Vmax</div>
-              <div class="deckList d-flex justify-content-between flex-column">
-                <span>牌組強度</span>
-                <span>操作難度</span>
-                <span>構築價格</span>
+    <div class="deckcontent d-flex flex-column align-items-center">
+      <div class="myh3" data-aos="fade-down">熱門牌組</div>
+
+      <div class="deckAll">
+        <div
+          class="deckGroup1 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <div
+            class="deckCard deck1"
+            type="button"
+            @click="todeck('夢幻Vmax')"
+            style=""
+          >
+            <div class="deckName text-start">夢幻Vmax</div>
+            <div class="deckList d-flex justify-content-between flex-column">
+              <div class="d-flex">
+                <div class="d-flex text-white">牌組強度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck1[0],
+                      'fa-regular fa-star': index > deck1[0],
+                    }"
+                  ></i>
+                </div>
               </div>
-            </div>
-            <div class="deckCard" style="">
-              <div class="deckName">夢幻Vmax</div>
-              <div class="deckList d-flex justify-content-between flex-column">
-                <span>牌組強度</span>
-                <span>操作難度</span>
-                <span>構築價格</span>
+              <div class="d-flex">
+                <div class="d-flex text-white">操作難度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck1[1],
+                      'fa-regular fa-star': index > deck1[1],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">構築價格</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck1[2],
+                      'fa-regular fa-star': index > deck1[2],
+                    }"
+                  ></i>
+                </div>
               </div>
             </div>
           </div>
-          <div class="deckGroup2 d-flex justify-content-between">
-            <div class="deckCard" style="">
-              <div class="deckName">夢幻Vmax</div>
-              <div class="deckList d-flex justify-content-between flex-column">
-                <span>牌組強度</span>
-                <span>操作難度</span>
-                <span>構築價格</span>
+          <div
+            class="deckCard deck2"
+            type="button"
+            @click="todeck('索羅亞克Vstar')"
+          >
+            <div class="deckName text-start">索羅亞克Vstar</div>
+            <div class="deckList d-flex justify-content-between flex-column">
+              <div class="d-flex">
+                <div class="d-flex text-white">牌組強度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck2[0],
+                      'fa-regular fa-star': index > deck2[0],
+                    }"
+                  ></i>
+                </div>
               </div>
-            </div>
-            <div class="deckCard" style="">
-              <div class="deckName">夢幻Vmax</div>
-              <div class="deckList d-flex justify-content-between flex-column">
-                <span>牌組強度</span>
-                <span>操作難度</span>
-                <span>構築價格</span>
+              <div class="d-flex">
+                <div class="d-flex text-white">操作難度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck2[1],
+                      'fa-regular fa-star': index > deck2[1],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">構築價格</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck2[2],
+                      'fa-regular fa-star': index > deck2[2],
+                    }"
+                  ></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="moreDeck">更多牌組</div>
+        <div
+          class="deckGroup2 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <div
+            class="deckCard deck3"
+            type="button"
+            @click="todeck('放逐鬼龍')"
+            style=""
+          >
+            <div class="deckName text-start">放逐鬼龍</div>
+            <div class="deckList d-flex justify-content-between flex-column">
+              <div class="d-flex">
+                <div class="d-flex text-white">牌組強度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck3[0],
+                      'fa-regular fa-star': index > deck3[0],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">操作難度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck3[1],
+                      'fa-regular fa-star': index > deck3[1],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">構築價格</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck3[2],
+                      'fa-regular fa-star': index > deck3[2],
+                    }"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="deckCard deck4"
+            type="button"
+            @click="todeck('鳳王V')"
+            style=""
+          >
+            <div class="deckName text-start">鳳王V</div>
+            <div class="deckList d-flex justify-content-between flex-column">
+              <div class="d-flex">
+                <div class="d-flex text-white">牌組強度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck4[0],
+                      'fa-regular fa-star': index > deck4[0],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">操作難度</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck4[1],
+                      'fa-regular fa-star': index > deck4[1],
+                    }"
+                  ></i>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex text-white">構築價格</div>
+                <div class="d-flex align-items-center text-white ms-3">
+                  <i
+                    v-for="index in 5"
+                    :key="index"
+                    :class="{
+                      'fa-solid fa-star': index <= deck4[2],
+                      'fa-regular fa-star': index > deck4[2],
+                    }"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="moreDeck">更多牌組</div>
     </div>
   </div>
-  <div class="news">
+  <div class="news" data-aos="fade-up">
     <div class="newsImgItem">
       <img class="newsImg" src="../assets/image/image34.png" alt="" />
-      <div class="newsImgText">圖為2022台北聯盟賽現場</div>
+      <div class="newsImgText d-none d-md-block">圖為2022台北聯盟賽現場</div>
     </div>
-    <div class="newsText">
-      <h2>最新消息</h2>
+    <div class="newsText d-flex flex-column align-items-center align-items-md-start" data-aos="fade-right">
+      <h2 class="myh2">最新消息</h2>
       <span
-        >官方商品發售消息， 大大小小<br />
-        比賽資訊， 一個個都別錯過！</span
+        >官方商品發售消息， 大大小小<br class="d-none d-md-block"/>
+        比賽資訊，一個個都別錯過！</span
       >
     </div>
-    <div class="d-flex justify-content-between newsCards">
+    <div class="d-flex flex-column flex-md-row justify-content-between newsCards">
       <div class="newsCard">
         <img
           src="../assets/image/SV1_TWHK_THUMBNAIL_before.png"
@@ -226,39 +399,55 @@
     </div>
     <button class="newsBtn" type="button"><span>更多消息</span></button>
   </div>
-  <div class="official">
+  <div class="official " data-aos="fade-up">
     <div class="officialText">
       <p>官方頻道</p>
       <div class="border"></div>
     </div>
-    <div class="officialItem d-flex">
-      <div class="officialWeb">
-        <img
-          style="width: 195px; height: 100px"
-          src="../assets/image/ptcg.png"
-          alt=""
-        />
-      </div>
-      <div class="officialFB d-flex justify-content-center align-items-center">
-        <img
-          style="width: 228px; height: 46px"
-          src="../assets/image/fb.png"
-          alt=""
-        />
-      </div>
-      <div class="officialYT d-flex justify-content-center align-items-center">
-        <img
-          style="width: 240px; height: 54px"
-          src="../assets/image/yt.png"
-          alt=""
-        />
-      </div>
+    <div class="officialItem d-flex flex-column flex-md-row">
+      <a href="https://asia.pokemon-card.com/tw/"
+        ><div class="officialWeb">
+          <img
+            style="width: 195px; height: 100px"
+            src="../assets/image/ptcg.png"
+            alt=""
+          /></div
+      ></a>
+
+      <a href="https://www.facebook.com/Pokemon.TCG.Official.Taiwan"
+        ><div
+          class="officialFB d-flex justify-content-center align-items-center"
+        >
+          <img
+            style="width: 228px; height: 46px"
+            src="../assets/image/fb.png"
+            alt=""
+          /></div
+      ></a>
+      <a href="https://www.youtube.com/@pokemontcgtw"
+        ><div
+          class="officialYT d-flex justify-content-center align-items-center"
+        >
+          <img
+            style="width: 240px; height: 54px"
+            src="../assets/image/yt.png"
+            alt=""
+          /></div
+      ></a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      deck1: [5, 3, 4],
+      deck2: [4, 2, 2],
+      deck3: [5, 5, 4],
+      deck4: [3, 2, 2]
+    }
+  },
   methods: {
     toGetCategory (category) {
       this.$router.push({
@@ -267,6 +456,9 @@ export default {
           category
         }
       })
+    },
+    todeck (name) {
+      this.$router.push(`/deck/${name}`)
     }
   },
   components: {}
@@ -288,37 +480,30 @@ export default {
   background-color: #ff6915;
 }
 .mainText {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 24px;
+  padding: 0 80px;
 
-  /* position: absolute; */
   width: 1296px;
   height: 192px;
   margin: 80px 312px 0 312px;
 }
-h1 {
-  padding: 0 80px;
-
+.myh1 {
   width: 636px;
   height: 192px;
 
-  border-right: 1px solid #ffffff;
+  /* border-right: 1px solid #ffffff; */
 
   font-family: "Noto Sans TC";
   font-style: normal;
   font-weight: 900;
   font-size: 64px;
   line-height: 150%;
-  /* identical to box height, or 96px */
 
   color: #ff6915;
 }
-h2 {
+.myh2 {
   width: 320px;
   height: 96px;
+  margin-bottom: 32px;
 
   font-family: "Noto Sans TC";
   font-style: normal;
@@ -331,7 +516,7 @@ h2 {
 
   color: #ffffff;
 }
-h4 {
+.myh4 {
   margin-left: 50px;
 
   width: 572px;
@@ -346,7 +531,7 @@ h4 {
 
   color: #ffffff;
 }
-h3 {
+.myh3 {
   width: 480px;
   height: 144px;
   margin: 120px auto 0 auto;
@@ -364,13 +549,9 @@ h3 {
   color: #121110;
 }
 .cardList {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 0px;
   gap: 24px;
 
-  /* position: absolute; */
   width: 1295px;
   height: 368px;
   margin: -40px 312px 0 312px;
@@ -428,7 +609,6 @@ h3 {
   font-weight: 900;
   font-size: 16px;
   line-height: 150%;
-  /* identical to box height, or 24px */
 
   text-align: center;
 
@@ -439,23 +619,20 @@ h3 {
   width: 24px;
   height: 24px;
 }
-.deckDescribe {
+.deckWrap {
   margin: 264px 0 0 312px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+}
+.deckDescribe {
   padding: 32px;
-  gap: 32px;
 
-  position: absolute;
   width: 416px;
   height: 434px;
 }
-.deckDescribe p2 {
+.deckDescribeP1 {
   box-sizing: border-box;
 
   padding-left: 14px;
+  margin-bottom: 32px;
 
   width: 306px;
   height: 90px;
@@ -470,9 +647,11 @@ h3 {
 
   border-left: 2px solid #ff6915;
 }
-.deckDescribe p3 {
+.deckDescribeP2 {
   width: 248px;
   height: 36px;
+
+  margin-bottom: 32px;
 
   font-family: "Noto Sans TC";
   font-style: normal;
@@ -509,53 +688,57 @@ h3 {
 
   color: #ff6915;
 }
-.deckcontent h3 {
-  margin-top: 160px;
-  margin-left: 940px;
-}
-.deckCardBG {
-  position: absolute;
+.deckcontent {
+  margin: 64px 0 0 24px;
+
+  padding: 0 48px;
 
   width: 855px;
   height: 462px;
-  margin-left: 752px;
-  margin-top: 24px;
-
   background-color: #0a0a09;
 }
+.deckcontent .myh3 {
+  margin: -168px auto 0;
+}
+
 .deckAll {
   position: relative;
-
-  margin-top: -64px;
+  margin: -64px auto 0;
 }
 .deckGroup1 {
   width: 760px;
 
-  margin-left: 48px;
   margin-bottom: 24px;
 }
 .deckGroup2 {
   width: 760px;
-
-  margin-left: 48px;
 }
 .deckcontent .deckCard {
   padding: 32px;
-  gap: 16px;
 
   width: 368px;
   height: 203px;
 
   border: 1px solid #333333;
-  /* shadow */
-  background: url("../assets/image/deck1.png"), #1c1a19;
+
   background-position: right;
   background-repeat: no-repeat;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.48);
   border-radius: 16px;
 }
+.deck1 {
+  background: url("../assets/image/deck1.png"), #1c1a19;
+}
+.deck2 {
+  background: url("../assets/image/deck3.png"), #1c1a19;
+}
+.deck3 {
+  background: url("../assets/image/deck2.png"), #1c1a19;
+}
+.deck4 {
+  background: url("../assets/image/deck4.png"), #1c1a19;
+}
 .deckcontent .deckName {
-  width: 135px;
   height: 34px;
 
   font-family: "Noto Sans TC";
@@ -563,7 +746,6 @@ h3 {
   font-weight: 900;
   font-size: 28px;
   line-height: 120%;
-  /* identical to box height, or 34px */
 
   text-align: center;
 
@@ -584,7 +766,6 @@ h3 {
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  /* identical to box height, or 27px */
 
   color: rgba(255, 255, 255, 0.75);
 }
@@ -833,5 +1014,218 @@ h3 {
 .officialYT {
   width: 432px;
   height: 100px;
+}
+
+/* rwd */
+@media (max-width: 768px) {
+  .mainText {
+    width: 351px;
+    height: 288px;
+    margin: 40px auto 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .myh1 {
+    width: 351px;
+    height: 120px;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  .myh4 {
+    margin: 0 auto;
+    width: 351px;
+    height: 144px;
+
+    font-size: 20px;
+    line-height: 180%;
+
+    text-align: center;
+  }
+  .myh3 {
+    width: 240px;
+    height: 72px;
+    margin: 80px auto 0;
+
+    font-size: 60px;
+  }
+  .cardList {
+    width: 342px;
+    height: 1544px;
+    margin: -16px auto 0;
+  }
+  .moreProductBtn {
+    margin: 64px auto 0;
+    width: 140px;
+    height: 29px;
+
+    line-height: 180%;
+  }
+  .deckWrap {
+    margin: 0;
+  }
+  .deckDescribe {
+    margin: 80px auto 0;
+    padding: 0;
+
+    position: none;
+    width: 346px;
+    height: 302px;
+  }
+  .myh2 {
+    width: 160px;
+    height: 48px;
+
+    font-size: 40px;
+  }
+  .deckDescribeP1 {
+    width: 277px;
+    height: 81px;
+
+    font-size: 18px;
+  }
+  .deckDescribeP2 {
+    width: 224px;
+    height: 32px;
+
+    font-size: 18px;
+  }
+  .deckDescribe button {
+    width: 160px;
+    height: 45px;
+  }
+  .deckDescribe button p {
+    width: 64px;
+    height: 29px;
+
+    font-size: 16px;
+  }
+  .deckcontent {
+    position: relative;
+    margin: 597px auto 0;
+    width: 351px;
+    height: 932px;
+  }
+  .deckcontent .myh3{
+  margin: -120px auto 0;
+}
+  .deckAll {
+    position: absolute;
+    margin: -64px auto 0;
+  }
+  .deckGroup1 {
+  width: 319px;
+  height: 430px;
+
+  margin-bottom: 24px;
+}
+.deckGroup2 {
+  width: 319px;
+  height: 430px;
+}
+  .deckcontent .deckCard {
+  width: 319px;
+  height: 203px;
+
+  background-position: right;
+  }
+  .moreDeck {
+  position: absolute;
+  margin: 844px auto 0 auto;
+
+}
+  .news {
+  /* position: relative; */
+  background-color: #0a0a09;
+  background: linear-gradient(
+    90deg,
+    #0a0a09 0%,
+    rgba(10, 10, 9, 0.5) 47.4%,
+    rgba(255, 105, 21, 0.08) 100%
+  );
+  width: 375px;
+  height: 1449px;
+  margin: 120px auto 0;
+}
+.newsImgItem {
+  position: absolute;
+  width: 374.95px;
+height: 249.63px;
+}
+.newsImg {
+  position: absolute;
+  top: 22.62px;
+  /* right: 107.5; */
+  width: 375px;
+  height: 215px;
+}
+.newsText {
+  padding: 64px 48px 0px;
+
+  width: 351px;
+  height: 208px;
+  margin: 0 12px;
+}
+.newsText .myh2 {
+  width: 160px;
+  height:48px;
+  margin-bottom: 16px;
+
+  font-size: 40px;
+}
+.newsText span {
+  width: 351px;
+  height: 60px;
+
+  font-size: 20px;
+}
+.newsCards {
+  margin: 61px auto 0;
+  width: 351px;
+  height: 1113px;
+}
+.newsCard {
+  position: relative;
+  z-index: 1;
+
+  padding: 0;
+  margin-bottom: 24px;
+
+  width: 351px;
+  height: 354px;
+}
+.newsCardImg {
+  width: 351px;
+  height: 226px;
+}
+.official {
+  padding: 48px 0;
+
+  width: 351px;
+  height: 539px;
+  margin: 80px auto 0;
+
+}
+.officialText {
+  width: 96px;
+  height: 63px;
+
+  margin: 0 auto 48px;
+}
+.officialItem {
+  margin: 0;
+  height: 332px;
+}
+.officialWeb ,
+.officialFB,
+.officialYT
+{
+  width: 351px;
+  height: 100px;
+
+  border-right: none;
+}
 }
 </style>
