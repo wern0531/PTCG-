@@ -1138,7 +1138,7 @@ height: 249.63px;
 }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .mainText {
     width: 351px;
     height: 288px;
