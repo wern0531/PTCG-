@@ -120,7 +120,7 @@ export default {
   width: 900px;
 }
 
-@media (max-width: 992px){
+@media (max-width: 991.5px){
   h1{
     padding: 0;
   }

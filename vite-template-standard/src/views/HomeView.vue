@@ -1023,7 +1023,7 @@ export default {
 }
 
 /* rwd */
-@media (max-width: 1399px){
+@media (max-width: 1399.5px){
   .deckWrap{
     margin: 40px auto 0px;
   }
@@ -1138,7 +1138,7 @@ height: 249.63px;
 }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991.5px) {
   .mainText {
     width: 351px;
     height: 288px;

@@ -408,7 +408,7 @@ export default {
 }
 
 /* rwd */
-@media (max-width: 992px) {
+@media (max-width: 991.5px) {
   .myNavbar {
     padding: 0px;
     height: auto;

@@ -216,7 +216,7 @@ export default {
 .hover-pointer:hover {
   cursor: zoom-in;
 }
-@media (max-width: 991px){
+@media (max-width: 991.5px){
   .productBtnList {
     width: 350px;
   margin: 0 auto;
