@@ -69,8 +69,8 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <div class="mainText d-flex align-items-md-center text-md-start">
-    <h1 class="myh1 border-end border-md border-white" data-aos="fade-right">
+  <div class="mainText d-flex justify-content-lg-center align-items-lg-center text-lg-start">
+    <h1 class="myh1 border-end border-lg border-white" data-aos="fade-right">
       成為最強的<br />寶可夢訓練家吧!
     </h1>
     <div class="myh4">
@@ -79,7 +79,7 @@
   </div>
   <div class="myh3" data-aos="fade-down">商品列表</div>
   <div
-    class="cardList container d-flex flex-column flex-md-row justify-content-between align-items-center"
+    class="cardList container d-flex flex-column flex-lg-row justify-content-between align-items-center"
   >
     <div class="card" type="button" @click="toGetCategory('單卡')">
       <img src="../assets/image/product1.png" class="card-img-top" alt="..." />
@@ -114,9 +114,9 @@
     <img src="../assets/image/pan_tool_alt.png" alt="" />
     <div>選擇以查看更多</div>
   </div>
-  <div class="deckWrap d-flex flex-column flex-md-row justify-content-start">
+  <div class="deckWrap d-flex flex-column flex-xxl-row justify-content-center">
     <div
-      class="deckDescribe d-flex flex-column align-items-center align-items-md-start"
+      class="deckDescribe d-flex flex-column align-items-center align-items-xxl-start"
       data-aos="fade-right"
     >
       <h2 class="myh2">牌組構築</h2>
@@ -133,7 +133,7 @@
 
       <div class="deckAll">
         <div
-          class="deckGroup1 d-flex flex-column flex-md-row justify-content-between"
+          class="deckGroup1 d-flex flex-column flex-lg-row justify-content-between"
         >
           <div
             class="deckCard deck1"
@@ -234,7 +234,7 @@
           </div>
         </div>
         <div
-          class="deckGroup2 d-flex flex-column flex-md-row justify-content-between"
+          class="deckGroup2 d-flex flex-column flex-lg-row justify-content-between"
         >
           <div
             class="deckCard deck3"
@@ -342,16 +342,16 @@
   <div class="news" data-aos="fade-up">
     <div class="newsImgItem">
       <img class="newsImg" src="../assets/image/image34.png" alt="" />
-      <div class="newsImgText d-none d-md-block">圖為2022台北聯盟賽現場</div>
+      <div class="newsImgText d-none d-xxl-block">圖為2022台北聯盟賽現場</div>
     </div>
-    <div class="newsText d-flex flex-column align-items-center align-items-md-start" data-aos="fade-right">
+    <div class="newsText d-flex flex-column align-items-center align-items-xxl-start" data-aos="fade-right">
       <h2 class="myh2">最新消息</h2>
       <span
-        >官方商品發售消息， 大大小小<br class="d-none d-md-block"/>
+        >官方商品發售消息， 大大小小
         比賽資訊，一個個都別錯過！</span
       >
     </div>
-    <div class="d-flex flex-column flex-md-row justify-content-between newsCards">
+    <div class="d-flex flex-column flex-xxl-row justify-content-between newsCards">
       <div class="newsCard">
         <img
           src="../assets/image/SV1_TWHK_THUMBNAIL_before.png"
@@ -397,14 +397,14 @@
         </div>
       </div>
     </div>
-    <button class="newsBtn" type="button"><span>更多消息</span></button>
+    <button class="newsBtn" type="button" @click="toNews"><span>更多消息</span></button>
   </div>
   <div class="official " data-aos="fade-up">
     <div class="officialText">
       <p>官方頻道</p>
       <div class="border"></div>
     </div>
-    <div class="officialItem d-flex flex-column flex-md-row">
+    <div class="officialItem d-flex flex-column flex-lg-row">
       <a href="https://asia.pokemon-card.com/tw/"
         ><div class="officialWeb">
           <img
@@ -459,6 +459,9 @@ export default {
     },
     todeck (name) {
       this.$router.push(`/deck/${name}`)
+    },
+    toNews () {
+      this.$router.push('/news')
     }
   },
   components: {}
@@ -482,9 +485,9 @@ export default {
 .mainText {
   padding: 0 80px;
 
-  width: 1296px;
+  /* width: 1296px; */
   height: 192px;
-  margin: 80px 312px 0 312px;
+  margin: 80px auto 0 ;
 }
 .myh1 {
   width: 636px;
@@ -552,9 +555,9 @@ export default {
   padding: 0px;
   gap: 24px;
 
-  width: 1295px;
+  /* width: 1295px; */
   height: 368px;
-  margin: -40px 312px 0 312px;
+  margin: -40px auto 0;
 }
 .card {
   box-sizing: border-box;
@@ -620,7 +623,7 @@ export default {
   height: 24px;
 }
 .deckWrap {
-  margin: 264px 0 0 312px;
+  margin: 264px auto 160px ;
 }
 .deckDescribe {
   padding: 32px;
@@ -798,9 +801,8 @@ export default {
     rgba(10, 10, 9, 0.5) 47.4%,
     rgba(255, 105, 21, 0.08) 100%
   );
-  width: 1920px;
+  /* width: 1920px; */
   height: 942px;
-  margin-top: 759px;
 }
 .newsImgItem {
   position: relative;
@@ -809,14 +811,16 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  width: 960px;
+  width: 50%;
   height: 551px;
 }
 .newsImgText {
   position: absolute;
-  margin-top: 64px;
-  margin-left: 1377px;
-  z-index: 1;
+  /* margin-top: 64px;
+  margin-right: 360px; */
+  top: 64px;
+  right: 20%;
+  /* z-index: 1; */
   width: 183px;
   height: 29px;
 
@@ -831,12 +835,14 @@ export default {
 .newsText {
   padding: 64px 48px 0px;
 
-  width: 636px;
+  width: 35%;
   height: 316px;
-  margin-left: 312px;
+  margin-left: 16%;
 }
 .newsText span {
-  width: 540px;
+  display: block;
+  text-align: left;
+  /* width: 540px; */
   height: 120px;
 
   font-family: "Noto Sans TC";
@@ -849,8 +855,8 @@ export default {
   color: rgba(255, 255, 255, 0.75);
 }
 .newsCards {
-  margin-top: 100px;
-  margin-left: 312px;
+  margin: 100px auto;
+
   width: 1296px;
   height: 334px;
 }
@@ -934,7 +940,7 @@ export default {
 
   width: 176px;
   height: 52px;
-  margin: 80px auto 0 auto;
+  margin: 0 auto;
 
   border: 1px solid #ff6915;
   border-radius: 8px;
@@ -960,7 +966,7 @@ export default {
 
   width: 1296px;
   height: 363px;
-  margin: 160px 0 160px 312px;
+  margin: 160px auto 160px ;
 
   background: #1c1a19;
   border-radius: 24px;
@@ -969,7 +975,7 @@ export default {
   width: 96px;
   height: 63px;
 
-  margin-left: 600px;
+  margin: 0 auto;
 }
 .officialText p {
   width: 96px;
@@ -992,7 +998,7 @@ export default {
   background: #ff6915;
 }
 .officialItem {
-  margin-top: 40px;
+  margin: 40px auto 0;
   height: 100px;
 }
 .officialWeb {
@@ -1017,7 +1023,122 @@ export default {
 }
 
 /* rwd */
-@media (max-width: 768px) {
+@media (max-width: 1399px){
+  .deckWrap{
+    margin: 40px auto 0px;
+  }
+  .deckDescribe {
+    margin: 0 auto 0;
+    padding: 0;
+
+    position: none;
+    width: 346px;
+    height: 302px;
+  }
+  .deckcontent {
+  margin: 300px auto 0 ;
+
+  padding: 0 48px;
+
+  width: 855px;
+  height: 462px;
+  background-color: #0a0a09;
+}
+.news {
+  /* position: relative; */
+  background-color: #0a0a09;
+  background: linear-gradient(
+    90deg,
+    #0a0a09 0%,
+    rgba(10, 10, 9, 0.5) 47.4%,
+    rgba(255, 105, 21, 0.08) 100%
+  );
+  width: 800px;
+  height: 1500px;
+  margin: 120px auto 0;
+}
+.newsImgItem {
+  position: absolute;
+  width: 800px;
+height: 249.63px;
+}
+.newsImg {
+  position: absolute;
+  top: 22.62px;
+  /* right: 107.5; */
+  width: 375px;
+  height: 215px;
+}
+.newsText {
+  padding: 64px 48px 0px;
+
+  width: 351px;
+  height: 208px;
+  margin: 0 12px;
+}
+.newsText .myh2 {
+  width: 160px;
+  height:48px;
+  margin-bottom: 16px;
+
+  font-size: 40px;
+}
+.newsText span {
+  display: inline;
+  height: 60px;
+
+  font-size: 20px;
+}
+.newsCards {
+  margin: 61px auto 0;
+  width: 351px;
+  height: 1113px;
+}
+.newsCard {
+  position: relative;
+  z-index: 1;
+
+  padding: 0;
+  margin-bottom: 24px;
+
+  width: 351px;
+  heignoneht: 354px;
+}
+.newsCardImg {
+  width: 351px;
+  height: 226px;
+}
+.newsBtn{
+  margin-top: 25px;
+}
+.official {
+  padding: 48px 0;
+
+  width: 90vw;
+  margin: 80px auto 0;
+
+}
+.officialText {
+  width: 96px;
+  height: 63px;
+
+  margin: 0 auto 48px;
+}
+.officialItem {
+  margin: 0 auto;
+}
+.officialWeb ,
+.officialFB,
+.officialYT
+{
+  width: 30vw;
+  height: 100px;
+
+  border-right: none;
+}
+}
+
+@media (max-width: 992px) {
   .mainText {
     width: 351px;
     height: 288px;
@@ -1104,7 +1225,7 @@ export default {
   }
   .deckcontent {
     position: relative;
-    margin: 597px auto 0;
+    margin: 200px auto 0;
     width: 351px;
     height: 932px;
   }
@@ -1200,11 +1321,14 @@ height: 249.63px;
   width: 351px;
   height: 226px;
 }
+.newsBtn{
+  margin-top: 10px;
+}
 .official {
   padding: 48px 0;
 
   width: 351px;
-  height: 539px;
+  height: 500px;
   margin: 80px auto 0;
 
 }
@@ -1216,7 +1340,6 @@ height: 249.63px;
 }
 .officialItem {
   margin: 0;
-  height: 332px;
 }
 .officialWeb ,
 .officialFB,

@@ -1,17 +1,19 @@
 <template>
   <div class="container">
     <h1>感謝您的購買</h1>
-    <div class="d-flex align-items-center my-3 text-start">
+    <div class="d-flex flex-column flex-md-row align-items-center my-3 text-start">
       <div>
         訂單編號
         {{ orderId }}
       </div>
-      <router-link
+
+        <router-link
         type="button"
-        class="ms-auto btn text-myColor btn-myBgMain border-myColor"
+        class="mt-2 mt-md-0 ms-md-auto btn text-myColor btn-myBgMain border-myColor"
         :to="'/products/全部商品'"
-        >還想再買</router-link
+        >好想再買喔!!</router-link
       >
+
     </div>
     <div>
       <h2>訂單資訊</h2>

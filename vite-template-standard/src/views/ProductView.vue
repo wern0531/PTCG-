@@ -5,9 +5,9 @@
     </div>
   </LoadingItem>
   <div class="container pt-5">
-    <div class="pt-5 d-flex align-items-center">
+    <div class="pt-5 d-flex flex-column flex-lg-row align-items-center">
       <div class="mainImg">
-        <img class="w-100" :src="product.imageUrl" alt="" />
+        <img style="width: 100%;" :src="product.imageUrl" alt="" />
       </div>
       <div class="ms-5 text-start">
         <h1>{{ product.title }}</h1>
@@ -21,7 +21,7 @@
           <div class="col-8">{{product.description}}</div>
         </div>
         <div class="row mt-4 align-items-end">
-          <div class="col-6">
+          <div class="col-5 col-lg-6">
             <div class="input-group">
               <button
                 class="btn btn-outline-secondary"
@@ -48,7 +48,7 @@
               </button>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-5 col-lg-4">
             <button class="btn btn-myBgMain text-myColor border-myColor" @click="addToCart(product.id, product.title)">
               加入購物車
             </button>
@@ -63,9 +63,9 @@
             <div class="minImg"><img class="w-100" :src="product.imageUrl" alt=""></div>
         </div> -->
     <div class="my-4 text-center">選購更多{{product.category}}</div>
-    <div class="row d-flex">
+    <div class="row d-flex flex-column flex-lg-row align-items-center">
       <div
-        class="col-3 moreImg"
+        class="col-lg-3 moreImg"
         v-for="product in filteredProducts"
         :key="product.id"
       >
@@ -164,5 +164,16 @@ margin-top: 4px;
   width: 25%;
   box-sizing: border-box;
   padding: 5px;
+}
+@media (max-width: 992px){
+  .container{
+    width: 375px;
+  }
+  .mainImg {
+  width: 350px;
+}
+.moreImg {
+  width: 350px;
+}
 }
 </style>

@@ -119,7 +119,7 @@
   <RouterView></RouterView>
   <div class="footer d-flex justify-content-center justify-content-lg-between align-items-center">
     <div class="footerText">©2023 PTCG 本網站為個人作品使用，非商業用途</div>
-    <button type="button" class="footerBtn d-none d-lg-block" @click="toAdmin">
+    <button type="button" class="footerBtn d-none d-xxl-block" @click="toAdmin">
       <p>後台登入</p>
     </button>
   </div>
