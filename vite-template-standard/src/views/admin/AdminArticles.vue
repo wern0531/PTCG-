@@ -194,7 +194,7 @@
         </div>
       </div>
     </div>
-    <pagination v-if="pagination>1" :pages="pagination" @emit-pages="getArticles"></pagination>
+    <Pagination v-if="pagination>1" :pages="pagination" @emit-pages="getArticles"></Pagination>
   </div>
   <!-- 刪除牌組 -->
   <div

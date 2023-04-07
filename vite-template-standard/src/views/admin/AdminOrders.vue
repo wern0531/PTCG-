@@ -62,7 +62,7 @@
         </tr>
       </tbody>
     </table>
-    <pagination :pages="pagination" @emit-pages="getOrders"></pagination>
+    <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
   </div>
   <!-- 檢視model -->
   <div

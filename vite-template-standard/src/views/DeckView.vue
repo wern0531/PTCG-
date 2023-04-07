@@ -115,6 +115,7 @@ export default {
 <style scoped>
 .container{
     width: 900px;
+    min-height: 100vh;
 }
 .deckImg{
   width: 600px;

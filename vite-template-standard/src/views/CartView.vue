@@ -181,6 +181,7 @@ export default {
 <style scoped>
 .container {
   width: 900px;
+  min-height: 100vh;
   color: white;
 }
 .step {

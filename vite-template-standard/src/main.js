@@ -17,9 +17,10 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
-import './style.css'
 import App from './App.vue'
 import router from './router'
+
+import './assets/all.scss'
 
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule])

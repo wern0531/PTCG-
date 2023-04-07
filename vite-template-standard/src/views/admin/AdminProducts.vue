@@ -47,7 +47,7 @@
         </tr>
       </tbody>
     </table>
-    <pagination :pages="pagination" @emit-pages="getProducts"></pagination>
+    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
   </div>
   <!-- Modal -->
   <!-- 新增商品 -->
