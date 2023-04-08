@@ -111,6 +111,7 @@
 import { mapActions } from 'pinia'
 import { cartStore } from '../../src/stores/cart'
 import { RouterView } from 'vue-router'
+import Swal from 'sweetalert2'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
@@ -166,6 +167,17 @@ export default {
   watch: {
     $route: function (to, from) {
       this.currentPath = to.path
+    },
+    cartsData: function (arr) {
+      if (arr.length === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: '您的購物車空啦~來去看看其他商品吧!!'
+        }).then(() => {
+          this.$router.push('/products/全部商品')
+        })
+      }
     }
   },
   components: {
