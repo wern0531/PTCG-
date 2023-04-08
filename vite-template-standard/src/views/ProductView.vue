@@ -7,18 +7,18 @@
   <div class="container pt-5">
     <div class="pt-5 d-flex flex-column flex-lg-row align-items-center">
       <div class="mainImg">
-        <img style="width: 100%;" :src="product.imageUrl" alt="" />
+        <img style="width: 100%" :src="product.imageUrl" alt="" />
       </div>
       <div class="ms-5 text-start">
         <h1>{{ product.title }}</h1>
-        <div class="my-4">$NT{{ product.price }}</div>
+        <div class="my-4">NT$ {{ product.price }}</div>
         <div class="row mb-4">
           <div class="col-4">商品說明:</div>
-          <div class="col-8">{{product.content}}</div>
+          <div class="col-8">{{ product.content }}</div>
         </div>
         <div class="row">
           <div class="col-4">商品描述:</div>
-          <div class="col-8">{{product.description}}</div>
+          <div class="col-8">{{ product.description }}</div>
         </div>
         <div class="row mt-4 align-items-end">
           <div class="col-5 col-lg-6">
@@ -49,20 +49,22 @@
             </div>
           </div>
           <div class="col-5 col-lg-4">
-            <button class="btn btn-myBgMain text-myColor border-myColor" @click="addToCart(product.id, product.title)">
+            <button
+              class="btn btn-myBgMain text-myColor border-myColor"
+              @click="addToCart(product.id, product.title)"
+            >
               加入購物車
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="d-flex">
-            <div class="minImg"><img class="w-100" :src="product.imageUrl" alt=""></div>
-            <div class="minImg"><img class="w-100" :src="product.imageUrl" alt=""></div>
-            <div class="minImg"><img class="w-100" :src="product.imageUrl" alt=""></div>
-            <div class="minImg"><img class="w-100" :src="product.imageUrl" alt=""></div>
-        </div> -->
-    <div class="my-4 text-center">選購更多{{product.category}}</div>
+    <div class="text-start my-4">
+      本網站商品皆為正版<br />
+      為保障你我權益，貨到拆封請全程錄影<br />
+      商品於七日內附上影片方可退貨
+    </div>
+    <div class="my-4 text-center">選購更多{{ product.category }}</div>
     <div class="row d-flex flex-column flex-lg-row align-items-center">
       <div
         class="col-lg-3 moreImg"
@@ -73,7 +75,12 @@
           <img class="w-100" :src="product.imageUrl" alt="" />
         </router-link>
         <div class="mt-2">
-          <button class="btn btn-myBgMain text-myColor border-myColor" @click="addToCart(product.id,product.title)">加入購物車</button>
+          <button
+            class="btn btn-myBgMain text-myColor border-myColor"
+            @click="addToCart(product.id, product.title)"
+          >
+            加入購物車
+          </button>
         </div>
       </div>
     </div>
@@ -142,38 +149,32 @@ export default {
 <style scoped>
 .container {
   width: 900px;
-
   font-family: "Noto Sans TC";
   font-style: normal;
   font-weight: 900;
   font-size: 16px;
   line-height: 23px;
-
   color: #ffffff;
+  min-height: 100%;
+  flex-grow: 1;
 }
 .mainImg {
   width: 450px;
 }
-/* .minImg{
-width: 75px;
-box-sizing: border-box;
-padding: 1px;
-margin-top: 4px;
-} */
 .moreImg {
   width: 25%;
   box-sizing: border-box;
   padding: 5px;
 }
-@media (max-width: 992px){
-  .container{
+@media (max-width: 992px) {
+  .container {
     width: 375px;
   }
   .mainImg {
-  width: 350px;
-}
-.moreImg {
-  width: 350px;
-}
+    width: 350px;
+  }
+  .moreImg {
+    width: 350px;
+  }
 }
 </style>

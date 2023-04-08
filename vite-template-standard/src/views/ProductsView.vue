@@ -4,11 +4,6 @@
       <img src="../assets/image/pikachu_gif.gif" alt="" />
     </div>
   </LoadingItem>
-  <!-- <img
-    class="d-block w-100"
-    src="https://storage.googleapis.com/vue-course-api.appspot.com/wern/1676997146858.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=gbw08XkxL8gSSVkD2k2Dx6zl%2BCqCfBHn3PXdhQb6GBgke3r8XFYzr3at35VvA%2Fbf64WFwG6Hoztflt1lkIPz1PLhKaEeiyQXFJhI0WopbhvO8cozCBPESdXYPhnJqPNssLx7PH47YUWZUQ38tO8v3Q1iS6xG7x2nRAn8OCN3WaS3rgqFspRrTDyvz7jCxZJ1BJlbbcVFF5OJ9ITmsU3ovhAJrh0KVLMGOHzcU%2FwyBhsZ3WxJkUOuehJkOWYbTI%2F1PAjn9ejjz7QZTmQlmEOtVq8MEmQdsrHTnx5OgRKmf%2Bl1IxVwn9pdzAt3WGg2o7NVxQL3TL74TOjZDmA2i%2FIjFw%3D%3D"
-    alt=""
-  /> -->
   <div class="container">
     <div class="row d-flex flex-column flex-lg-row">
       <div class="col-lg-3">
@@ -42,7 +37,7 @@
             :key="product.id"
           >
             <div class="pt-3 card productCard">
-              <router-link :to="`/product/${product.id}`" class="hover-pointer">
+              <router-link :to="`/product/${product.id}`" class="hover-pointer text-decoration-none">
                 <div class="text-center">
                   <img
                     style="max-width: 70%; height: auto"
@@ -51,21 +46,21 @@
                     alt="..."
                   />
                 </div>
-              </router-link>
-              <div class="py-3" style="width: 176px; margin: 0 auto">
+                <div class="py-3" style="width: 176px; margin: 0 auto">
                 <div class="pb-3 text-start text-white">
                   {{ product.title }}
                 </div>
                 <div class="pb-3 text-start text-white">
-                  $NT{{ product.price }}
+                  NT$ {{ product.price }}
                 </div>
-                <button
+              </div>
+              <button
                   class="btn text-myColor productBtn"
-                  @click="addToCart(product.id, product.title)"
+                  @click.prevent="addToCart(product.id, product.title)"
                 >
                   <p>加入購物車</p>
                 </button>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -142,6 +137,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  min-height: 100%;
+  flex-grow: 1;
+}
 .loadingGif {
   width: 283px;
   height: 283px;
