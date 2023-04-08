@@ -41,7 +41,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon bg-white"></span>
+        <img class="d-flex" src="../assets/image/menu.png" alt="">
       </button>
       <div :class="{ hide: ishide }" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-lg-auto">
@@ -116,6 +116,7 @@
   </nav>
   <RouterView></RouterView>
   <div
+  :class="{'fixed-bottom' : isFixed}"
     class="footer my-footer d-flex justify-content-center justify-content-md-between align-items-center"
   >
     <div class="footerText">©2023 PTCG 本網站為個人作品使用，非商業用途</div>
@@ -143,7 +144,8 @@ export default {
       isLoading: false,
       checkCardModal: '',
       loadingItem: '',
-      ishide: false
+      ishide: false,
+      isFixed: true
     }
   },
   computed: {
@@ -189,6 +191,18 @@ export default {
     },
     hideMenu () {
       this.ishide = !this.ishide
+    },
+    checkScreenHeight () {
+      const screenHeight = window.screen.height
+      if (screenHeight > 1000) {
+        console.log(screenHeight)
+        this.isFixed = false
+      }
+    }
+  },
+  watch: {
+    $route (to, form) {
+      this.checkScreenHeight()
     }
   },
   components: {
@@ -201,6 +215,7 @@ export default {
   },
   mounted () {
     this.getCarts()
+    this.checkScreenHeight()
   }
 }
 </script>
@@ -228,10 +243,7 @@ export default {
   border-top: 4px solid #ff6915;
 }
 .my-footer {
-  position: fixed;
-  bottom: 0;
   padding: 16px 16.25%;
-  width: 100%;
   height: 69px;
   background: #000000;
 }

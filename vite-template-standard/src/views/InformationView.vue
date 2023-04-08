@@ -2,14 +2,14 @@
   <div class="my-5 row justify-content-center">
     <v-form ref="form" class="col-md-6" v-slot="{ errors }" @submit="onSubmit">
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
+        <label for="email" class="form-label d-flex">Email*</label>
         <v-field
           id="email"
           name="email"
           type="email"
           class="form-control"
           :class="{ 'is-invalid': errors['email'] }"
-          placeholder="請輸入 Email"
+          placeholder="請輸入 Email, 例:abc@def.com"
           rules="email|required"
           v-model="user.email"
         ></v-field>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="name" class="form-label">收件人姓名</label>
+        <label for="name" class="form-label d-flex">收件人姓名*</label>
         <v-field
           id="name"
           name="姓名"
@@ -32,14 +32,14 @@
       </div>
 
       <div class="mb-3">
-        <label for="tel" class="form-label">收件人電話</label>
+        <label for="tel" class="form-label d-flex">收件人電話*</label>
         <v-field
           id="tel"
           name="電話"
-          type="text"
+          type="tel"
           class="form-control"
           :class="{ 'is-invalid': errors['電話'] }"
-          placeholder="請輸入電話"
+          placeholder="請輸入電話,例:0912345678"
           :rules="isPhone"
           v-model="user.tel"
         ></v-field>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="address" class="form-label">收件人地址</label>
+        <label for="address" class="form-label d-flex">收件人地址*</label>
         <v-field
           id="address"
           name="地址"
@@ -62,7 +62,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="message" class="form-label">留言</label>
+        <label for="message" class="form-label d-flex">留言</label>
         <textarea
           id="message"
           class="form-control"
@@ -73,10 +73,10 @@
       </div>
       <div class="d-flex justify-content-between">
         <div>
-          <button class="d-flex btn btn-myBgMain">
+          <router-link to="/cart" class="d-flex btn btn-myBgMain">
           <div class="material-symbols-outlined">arrow_back</div>
           <div>回購物車</div>
-        </button>
+          </router-link>
         </div>
         <button
           type="submit"
@@ -120,7 +120,6 @@ export default {
         user: this.user,
         message: this.message
       }
-
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
         .then((res) => {

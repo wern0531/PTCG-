@@ -43,9 +43,9 @@
       </div>
     </div>
     <div v-if="currentPath === '/cart'">
-        <div class="" v-for="cart in cartsData" :key="cart.id">
+    <div class="" v-for="cart in cartsData" :key="cart.id">
       <div
-        class="cartItem row p-3 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
+        class="row p-3 mx-0 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
       >
         <div class="col-lg-2">
           <img style="width: 100px" :src="cart.product.imageUrl" alt="" />
@@ -84,8 +84,7 @@
         </div>
       </div>
     </div>
-
-      <div class="mt-3 row d-flex align-items-center">
+      <div class="mt-3 mx-0 row d-flex align-items-center">
         <div class="col-lg-2">
           <router-link type="button" class="btn d-flex btn-myBgMain" :to="'/products/全部商品'">
             <div class="material-symbols-outlined">arrow_back</div>
@@ -180,19 +179,15 @@ export default {
 
 <style scoped>
 .container {
-  width: 900px;
-  min-height: 100vh;
+  max-width: 900px;
+  /* min-height: 100vh; */
   color: white;
 }
 .step {
-  width: 100px;
   height: 40px;
-
   margin: auto;
-
   display: flex;
   justify-content: center;
-
   border: 1px solid #ff6915;
   border-radius: 8px;
 }
@@ -205,18 +200,10 @@ export default {
 .delBtn:hover {
   color: red;
 }
-@media (max-width: 768px){
-  .container{
-    width: 375px;
-  }
+@media (max-width: 991.5px){
   .step{
-    width: 100%;
+    width: 50%;
     margin-bottom: 5px;
   }
-  .cartItem{
-    display: flex;
-    flex-flow: column;
-  }
-
 }
 </style>

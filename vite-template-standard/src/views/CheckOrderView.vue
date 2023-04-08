@@ -1,5 +1,7 @@
 <template>
-  <div class="container my-5 row justify-content-center">
+  <div>訂單資訊</div>
+  <hr>
+  <div class="container justify-content-center">
     <div class="row">
       <div class="col-lg-6">
         <div class="row">
@@ -31,8 +33,8 @@
       <div class="col-lg-6 mt-5 mt-lg-0">
         <div>
           <div class="row">
-            <div class="col-5 ms-auto">品名</div>
-            <div class="col-2">數量</div>
+            <div class="col-4 ms-auto">品名</div>
+            <div class="col-3">數量</div>
             <div class="col-2">單價</div>
           </div>
         </div>
@@ -42,10 +44,10 @@
             <div class="col-3">
               <img style="width: 60px" :src="item.product.imageUrl" alt="" />
             </div>
-            <div class="col-5 d-flex align-items-center justify-content-center">
+            <div class="col-4 d-flex align-items-center justify-content-center">
               {{ item.product.title }}
             </div>
-            <div class="col-2 d-flex align-items-center justify-content-center">
+            <div class="col-3 d-flex align-items-center justify-content-center">
               {{ item.qty }}/{{ item.product.unit }}
             </div>
             <div class="col-2 d-flex align-items-center justify-content-center">
@@ -54,7 +56,7 @@
           </div>
           <hr />
           <div class="row">
-            <div class="col-2 ms-auto">總計:</div>
+            <div class="col-3 ms-auto">總計:</div>
             <div class="col-2 d-flex align-items-center justify-content-center">
               $NT{{ order.total }}
             </div>
@@ -132,8 +134,7 @@ export default {
 
 <style scoped>
 .container {
-  width: 900px;
-
+  max-width: 900px;
   font-weight: 900;
   font-size: 16px;
   line-height: 23px;
@@ -144,10 +145,9 @@ export default {
 }
 @media (max-width: 768px) {
   .container {
-    width: 375px;
+    /* width: 375px; */
     font-weight: 700;
     font-size: 14px;
-    line-height: 23px;
   }
 }
 </style>
