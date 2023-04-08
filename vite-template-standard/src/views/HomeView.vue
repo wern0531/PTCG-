@@ -191,11 +191,8 @@
           <p class="deckDescribeP2 text-center text-lg-start text-white">
             這裡提供最完整的教學資訊!
           </p>
-          <button
-            class="py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor"
-          >
-            查看教學
-          </button>
+          <router-link to="/deck/夢幻Vmax" class="btn py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor">
+            查看教學</router-link>
         </div>
       </div>
       <div class="col-12 col-lg-8 flex-column align-items-center">
@@ -465,11 +462,13 @@
       </div>
       <div class="row mt-5">
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <img
+          <router-link to="/news" >
+            <img
             src="../assets/image/SV1_TWHK_THUMBNAIL_before.png"
             class="newsCardImg w-100"
             alt="..."
           />
+          </router-link>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
             <p class="newsCardTitle text-white">朱&紫補充包發售</p>
@@ -477,7 +476,8 @@
           </div>
         </div>
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <div
+          <router-link to="/news">
+            <div
             class="d-flex justify-content-center align-items-center bg-white"
           >
             <img
@@ -487,14 +487,16 @@
               alt="..."
             />
           </div>
+          </router-link>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
-            <p class="newsCardTitl text-white">寶可夢造型卡套</p>
+            <p class="newsCardTitle text-white">寶可夢造型卡套</p>
             <p class="newsCardTime">預定發售日2023/03/03</p>
           </div>
         </div>
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <div
+          <router-link to="/news">
+            <div
             class="d-flex justify-content-center align-items-center"
             style="height: 206px; background: black"
           >
@@ -505,6 +507,7 @@
               alt="..."
             />
           </div>
+          </router-link>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;比賽&gt;</p>
             <p class="newsCardTitle text-white text-truncate">
@@ -781,10 +784,10 @@ export default {
   color: rgba(255, 255, 255, 0.75);
 }
 .newsCard:hover .newsCardClass {
-  color: #ffdbc7;
+  color: #ffdbc7 !important;
 }
 .newsCard:hover .newsCardTitle {
-  color: #ff6915;
+  color: #ff6915 !important;;
 }
 .newsCard {
   padding: 0px 48px;
