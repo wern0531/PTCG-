@@ -180,8 +180,9 @@ export default {
 <style scoped>
 .container {
   max-width: 900px;
-  /* min-height: 100vh; */
+  min-height: 100%;
   color: white;
+  flex-grow: 1;
 }
 .step {
   height: 40px;

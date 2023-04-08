@@ -49,7 +49,7 @@
             <router-link
               to="/home"
               active-class="active-link"
-              class="nav-link my-nav-item text-white bg-myBgCard active"
+              class="nav-link my-nav-item text-white active"
               aria-current="page"
               href="#"
               ><span>首頁</span></router-link
@@ -59,7 +59,7 @@
             <router-link
               to="/products/全部商品"
               active-class="active-link"
-              class="nav-link my-nav-item ms-lg-4 text-white bg-myBgCard"
+              class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
               ><span>商品列表</span></router-link
             >
@@ -68,7 +68,7 @@
             <router-link
               to="/news"
               active-class="active-link"
-              class="nav-link my-nav-item ms-lg-4 text-white bg-myBgCard"
+              class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
               ><span>最新消息</span></router-link
             >
@@ -77,7 +77,7 @@
             <router-link
               to="/deck/夢幻Vmax"
               active-class="active-link"
-              class="nav-link my-nav-item ms-lg-4 text-white bg-myBgCard"
+              class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
               ><span>牌組介紹</span></router-link
             >
@@ -241,11 +241,14 @@ export default {
 }
 .active-link {
   border-top: 4px solid #ff6915;
+  margin-top: -4px;
 }
 .my-footer {
   padding: 16px 16.25%;
   height: 69px;
   background: #000000;
+  flex-grow: 0;
+    flex-shrink: 0;
 }
 .footerText {
   font-weight: 500;

@@ -114,8 +114,8 @@ export default {
 
 <style scoped>
 .container{
-    width: 900px;
-    min-height: 100vh;
+    max-width: 900px;
+    flex-grow: 1;
 }
 .deckImg{
   width: 600px;
@@ -124,9 +124,6 @@ export default {
   transform: scale(1.15);
 }
 @media (max-width: 768px){
-  .container{
-    width: 375px;
-  }
   .deckImg{
     width: 343px;
   }
