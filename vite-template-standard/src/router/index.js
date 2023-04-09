@@ -21,7 +21,6 @@ const routes = [
       },
       {
         path: 'news',
-        redirect: '/home',
         component: () => import('../views/front/NewsView.vue')
       },
       {
