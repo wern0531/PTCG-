@@ -1,7 +1,7 @@
 <template>
   <LoadingItem :active="isLoading" :z-index="1060">
     <div class="loadingGif">
-      <img src="../assets/image/pikachu_gif.gif" alt="" />
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
   <div class="container">
@@ -37,7 +37,7 @@
             :key="product.id"
           >
             <div class="pt-3 card productCard">
-              <router-link :to="`/product/${product.id}`" class="hover-pointer text-decoration-none">
+              <RouterLink :to="`/product/${product.id}`" class="hover-pointer text-decoration-none">
                 <div class="text-center">
                   <img
                     style="max-width: 70%; height: auto"
@@ -60,7 +60,7 @@
                 >
                   <p>加入購物車</p>
                 </button>
-              </router-link>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -76,8 +76,9 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { cartStore } from '../../src/stores/cart'
-import Pagination from '../components/PaginationView.vue'
+import { cartStore } from '../../stores/cart'
+import Swal from 'sweetalert2'
+import Pagination from '../../components/PaginationView.vue'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 
@@ -109,13 +110,19 @@ export default {
           } else {
             this.getCategory(category)
           }
+        }).catch((err) => {
+          this.isLoading = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     },
     getCategory (category) {
       this.$http
         .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
         .then(res => {
-          console.log(res.data.products)
           this.productCategory = []
           res.data.products.forEach((item) => {
             if (item.category === category) {
@@ -123,6 +130,13 @@ export default {
             }
           })
           this.isLoading = false
+        }).catch((err) => {
+          this.isLoading = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     }
   },

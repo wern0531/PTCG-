@@ -7,11 +7,11 @@
         {{ orderId }}
       </div>
 
-        <router-link
+        <RouterLink
         type="button"
         class="mt-2 mt-md-0 ms-md-auto btn text-myColor btn-myBgMain border-myColor"
         :to="'/products/全部商品'"
-        >好想再買喔!!</router-link
+        >好想再買喔!!</RouterLink
       >
 
     </div>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   data () {
     return {
@@ -53,7 +55,8 @@ export default {
   mounted () {
     this.orderId = this.$route.query.orderId
     this.orderData = JSON.parse(this.$route.query.orderData)
-  }
+  },
+  components: { RouterLink }
 }
 </script>
 

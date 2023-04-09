@@ -77,7 +77,7 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { cartStore } from '../../src/stores/cart'
+import { cartStore } from '@/stores/cart'
 import Swal from 'sweetalert2'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -97,6 +97,12 @@ export default {
         .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${this.orderId}`)
         .then((res) => {
           this.order = res.data.order
+        }).catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     },
     payOrder () {
@@ -119,9 +125,13 @@ export default {
             }
           })
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false
-          this.$httpMessageState(error.response, '錯誤訊息')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     }
   },

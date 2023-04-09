@@ -32,21 +32,21 @@
         <img
           src="https://storage.googleapis.com/vue-course-api.appspot.com/wern/1676997146858.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=gbw08XkxL8gSSVkD2k2Dx6zl%2BCqCfBHn3PXdhQb6GBgke3r8XFYzr3at35VvA%2Fbf64WFwG6Hoztflt1lkIPz1PLhKaEeiyQXFJhI0WopbhvO8cozCBPESdXYPhnJqPNssLx7PH47YUWZUQ38tO8v3Q1iS6xG7x2nRAn8OCN3WaS3rgqFspRrTDyvz7jCxZJ1BJlbbcVFF5OJ9ITmsU3ovhAJrh0KVLMGOHzcU%2FwyBhsZ3WxJkUOuehJkOWYbTI%2F1PAjn9ejjz7QZTmQlmEOtVq8MEmQdsrHTnx5OgRKmf%2Bl1IxVwn9pdzAt3WGg2o7NVxQL3TL74TOjZDmA2i%2FIjFw%3D%3D"
           class="d-block w-100"
-          alt="..."
+          alt="寶可夢卡牌補充包思維激盪封面"
         />
       </div>
       <div class="carousel-item">
         <img
           src="https://storage.googleapis.com/vue-course-api.appspot.com/wern/1676997211541.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=crqqEVGKSmHLfipD0CYAx4qJgOKJOVWuZKPpv70a0NwQbmhX%2BXhzIvjuhZej1ygzdnAmDtH0X04xJRcTWyJEFmUF91H04b1KyL1QgqtKSzIiy536H1Kr35gobUL4TjkoaWBFcLmKJHqYEewyMagR5Rm%2FtntwzW9obA6YfzScVss9o4qF188FsIZc2LlIUx%2Fh2IcNkpSzs3YXpjHWPRs%2BlfU9zLfQ1W60OC58EPbe47o2wzDh3ZOq7XliDWDcTcQishrY6ZuxP0DdHt5rQ4CDT4DKNaCqYJeBGhg%2BUbGNWkX2prEaAIYYbB9Yelrv559dguQo93QepG%2BbRrkGhg6GzA%3D%3D"
           class="d-block w-100"
-          alt="..."
+          alt="寶可夢卡牌補充包天地萬物封面"
         />
       </div>
       <div class="carousel-item">
         <img
           src="https://storage.googleapis.com/vue-course-api.appspot.com/wern/1676997253280.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=O10Bx07BIRJV1JFWSgxWM6%2B0YZ%2FK2aprFXUbn38D2Sp0iWjVRLXZSVzKaV7en5DuGE%2F8TQLR5ITKu%2BYdciGMJHJPJMgdpJDIzs%2Fq6A9crD7fVkKBx4YEyTjB8br5Dbvs1UcaVrrPLwq%2B40y2FHbedA2XHzS8%2BPwTQO%2BGnSaDgenbtZBjN7bYkBdq1hSrsQ0N6bp3%2BrKcAm03aAJsc3fVWzK8Gn2NH2Y4otSyDj2DX%2B7VS3MpE7wzjl%2Fa%2Bx%2BqfvrPTHz0StzVVxAB8K5udCVNVSzwXeP2MKTZNtpF1hcUnFENNWPi9QofbZ9iCgOvU9auquo%2BPfTzPLek4sXFsge%2BIQ%3D%3D"
           class="d-block w-100"
-          alt="..."
+          alt="寶可夢卡牌補充包朱&紫封面"
         />
       </div>
     </div>
@@ -104,9 +104,9 @@
           @click="toGetCategory('單卡')"
         >
           <img
-            src="../assets/image/product1.png"
+            src="@/assets/image/product1.png"
             class="card-img-top"
-            alt="..."
+            alt="一張寶可夢卡片"
           />
           <div class="card-body">
             <p class="card-text mb-3 text-myColor">單卡</p>
@@ -120,9 +120,9 @@
           @click="toGetCategory('牌組')"
         >
           <img
-            src="../assets/image/product2.png"
+            src="@/assets/image/product2.png"
             class="card-img-top"
-            alt="..."
+            alt="寶可夢牌組"
           />
           <div class="card-body">
             <p class="card-text mb-3 text-myColor">牌組</p>
@@ -136,9 +136,9 @@
           @click="toGetCategory('禮盒')"
         >
           <img
-            src="../assets/image/product3.png"
+            src="@/assets/image/product3.png"
             class="card-img-top"
-            alt="..."
+            alt="寶可夢禮盒"
           />
           <div class="card-body">
             <p class="card-text mb-3 text-myColor">禮盒</p>
@@ -152,9 +152,9 @@
           @click="toGetCategory('周邊')"
         >
           <img
-            src="../assets/image/product4.png"
+            src="@/assets/image/product4.png"
             class="card-img-top"
-            alt="..."
+            alt="寶可夢周邊"
           />
           <div class="card-body">
             <p class="card-text mb-3 text-myColor">周邊</p>
@@ -167,7 +167,7 @@
       type="button"
       @click="toGetCategory('全部商品')"
     >
-      <img src="../assets/image/pan_tool_alt.png" alt="" />
+      <img src="@/assets/image/pan_tool_alt.png" alt="點選按鈕圖示" />
       <div>選擇以查看更多</div>
     </div>
   </div>
@@ -464,9 +464,9 @@
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
           <router-link to="/news" >
             <img
-            src="../assets/image/SV1_TWHK_THUMBNAIL_before.png"
+            src="@/assets/image/SV1_TWHK_THUMBNAIL_before.png"
             class="newsCardImg w-100"
-            alt="..."
+            alt="補充包封面"
           />
           </router-link>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
@@ -482,9 +482,9 @@
           >
             <img
               style="max-width: 206px; max-height: 206px"
-              src="../assets/image/tw_product_Deck_Shield_93431981.png"
+              src="@/assets/image/tw_product_Deck_Shield_93431981.png"
               class="newsCardImg"
-              alt="..."
+              alt="寶可夢造型卡套"
             />
           </div>
           </router-link>
@@ -502,9 +502,9 @@
           >
             <img
               style="max-width: 134px; max-height: 154px"
-              src="../assets/image/PTCGleague.png"
+              src="@/assets/image/PTCGleague.png"
               class="newsCardImg w-100"
-              alt="..."
+              alt="地區聯盟賽標示"
             />
           </div>
           </router-link>
@@ -538,8 +538,8 @@
           >
             <img
               style="width: 195px; height: 100px"
-              src="../assets/image/ptcg.png"
-              alt=""
+              src="@/assets/image/ptcg.png"
+              alt="寶可夢官方網站LOGO"
             /></a>
       </div>
       <div class="col-12 col-sm-8 col-lg-4 mx-auto mt-4 mt-lg-0 d-flex justify-content-center align-items-center officialFB">
@@ -547,8 +547,8 @@
           >
             <img
               style="width: 228px; height: 46px"
-              src="../assets/image/fb.png"
-              alt=""
+              src="@/assets/image/fb.png"
+              alt="寶可夢官方FB LOGO"
             />
         </a>
       </div>
@@ -557,8 +557,8 @@
           >
             <img
               style="width: 240px; height: 54px"
-              src="../assets/image/yt.png"
-              alt=""
+              src="@/assets/image/yt.png"
+              alt="寶可夢官方YT LOGO"
             /></a>
       </div>
     </div>
@@ -713,16 +713,16 @@ export default {
   border-radius: 16px;
 }
 .deck1 {
-  background: url("../assets/image/deck1.png"), #1c1a19;
+  background: url("@/assets/image/deck1.png"), #1c1a19;
 }
 .deck2 {
-  background: url("../assets/image/deck3.png"), #1c1a19;
+  background: url("@/assets/image/deck3.png"), #1c1a19;
 }
 .deck3 {
-  background: url("../assets/image/deck2.png"), #1c1a19;
+  background: url("@/assets/image/deck2.png"), #1c1a19;
 }
 .deck4 {
-  background: url("../assets/image/deck4.png"), #1c1a19;
+  background: url("@/assets/image/deck4.png"), #1c1a19;
 }
 .deckcontent .deckName {
   font-weight: 900;
@@ -756,7 +756,7 @@ export default {
       rgba(10, 10, 9, 0.5) 47.4%,
       rgba(255, 105, 21, 0.08) 100%
     ),
-    #0a0a09 url("../assets/image/image34.png") top right/50% no-repeat;
+    #0a0a09 url("@/assets/image/image34.png") top right/50% no-repeat;
 }
 
 .newsImgText {
@@ -894,7 +894,7 @@ export default {
 
   .newswrap {
     position: relative;
-    background: #0a0a09 url("../assets/image/image34.png") top/100% no-repeat;
+    background: #0a0a09 url("@/assets/image/image34.png") top/100% no-repeat;
   }
 
   .official {

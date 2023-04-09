@@ -8,51 +8,49 @@ const routes = [
     children: [
       {
         path: 'home',
-        component: () => import('../views/HomeView.vue')
+        component: () => import('../views/front/HomeView.vue')
       },
       {
         path: 'products/:category',
         name: 'products',
-        component: () => import('../views/ProductsView.vue')
+        component: () => import('../views/front/ProductsView.vue')
       },
       {
         path: 'product/:id',
-        component: () => import('../views/ProductView.vue')
+        component: () => import('../views/front/ProductView.vue')
       },
       {
-        path: 'news',
-        component: () => import('../views/NewsView.vue')
+        path: 'news/:pathNatch(.*)*',
+        redirect: '/home',
+        component: () => import('../views/front/NewsView.vue')
       },
       {
         path: 'deck/:name',
-        component: () => import('../views/DeckView.vue')
+        component: () => import('../views/front/DeckView.vue')
       },
       {
         path: 'cart',
-        component: () => import('../views/CartView.vue'),
+        component: () => import('../views/front/CartView.vue'),
         children: [
           {
             path: 'information',
-            component: () => import('../views/InformationView.vue')
+            component: () => import('../views/front/InformationView.vue')
           },
           {
             path: 'checkOrder/:orderId',
-            component: () => import('../views/CheckOrderView.vue')
+            component: () => import('../views/front/CheckOrderView.vue')
           },
           {
             path: 'completeOrder',
-            component: () => import('../views/CompleteOrderView.vue')
+            component: () => import('../views/front/CompleteOrderView.vue')
           }
         ]
       }
     ]
   },
   {
-    path: '/login',
-    component: () => import('../views/LoginView.vue')
-  },
-  {
     path: '/admin',
+    redirect: '/admin/products',
     component: () => import('../views/AdminView.vue'),
     children: [
       {
@@ -68,6 +66,14 @@ const routes = [
         component: () => import('../views/admin/AdminArticles.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('../views/front/LoginView.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 

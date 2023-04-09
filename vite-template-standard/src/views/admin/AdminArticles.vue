@@ -1,4 +1,9 @@
 <template>
+  <LoadingItem :active="isLoading" :z-index="1060">
+    <div class="loadingGif">
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
+    </div>
+  </LoadingItem>
   <div class="container">
     <div class="text-end mt-4">
       <button class="btn btn-primary" @click="openModel('add')">
@@ -196,7 +201,7 @@
     </div>
     <Pagination v-if="pagination>1" :pages="pagination" @emit-pages="getArticles"></Pagination>
   </div>
-  <!-- 刪除牌組 -->
+  <!-- 刪除文章 -->
   <div
     id="delProductModal"
     ref="delProductModal"
@@ -209,7 +214,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-danger text-white">
           <h5 id="delProductModalLabel" class="modal-title">
-            <span>刪除產品</span>
+            <span>刪除文章</span>
           </h5>
           <button
             type="button"
@@ -220,7 +225,7 @@
         </div>
         <div class="modal-body">
           是否刪除
-          <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
+          <strong class="text-danger">{{ nowArticle.tag }} / {{ nowArticle.title }}</strong> (刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
           <button
@@ -252,6 +257,7 @@ let delProductModal = ''
 export default {
   data () {
     return {
+      isLoading: false,
       articles: {},
       nowArticle: { tag: [''] },
       create_at: 0,
@@ -275,6 +281,7 @@ export default {
         .then((res) => {
           this.articles = res.data.articles
           this.pagination = res.data.pagination
+          this.isLoading = false
         })
         .catch((err) => {
           alert(err.response.data.message)
@@ -297,7 +304,6 @@ export default {
         productModal.show()
       } else if (status === 'del') {
         this.nowArticle = item
-        console.log(this.nowArticle)
         delProductModal.show()
       } else if (status === 'edit') {
         this.isAddArticle = false
@@ -360,6 +366,7 @@ export default {
     }
   },
   mounted () {
+    this.isLoading = true
     this.getArticles()
     productModal = new Modal(this.$refs.productModal, {
       keyboard: false

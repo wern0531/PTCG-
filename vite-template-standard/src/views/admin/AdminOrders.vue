@@ -1,4 +1,9 @@
 <template>
+  <LoadingItem :active="isLoading" :z-index="1060">
+    <div class="loadingGif">
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
+    </div>
+  </LoadingItem>
     <div class="container">
     <table class="table mt-4 text-white">
       <thead>
@@ -211,7 +216,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-danger text-white">
           <h5 id="delProductModalLabel" class="modal-title">
-            <span>刪除產品</span>
+            <span>刪除訂單</span>
           </h5>
           <button
             type="button"
@@ -221,8 +226,8 @@
           ></button>
         </div>
         <div class="modal-body">
-          是否刪除
-          <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
+          是否刪除訂單編號
+          <strong class="text-danger">{{ tempOrder.id }}</strong> (刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
           <button
@@ -252,6 +257,7 @@ let delOrderModal = ''
 export default {
   data () {
     return {
+      isLoading: false,
       orders: [],
       pagination: {},
       tempOrder: {}
@@ -276,10 +282,9 @@ export default {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/admin/orders?page=${page}`)
         .then((res) => {
-          console.log(res)
           this.orders = res.data.orders
           this.pagination = res.data.pagination
-          console.log(this.orders)
+          this.isLoading = false
         })
     },
     updatePaid (item) {
@@ -318,6 +323,7 @@ export default {
     Pagination
   },
   mounted () {
+    this.isLoading = true
     this.getOrders()
     orderModal = new Modal(this.$refs.orderModal, {
       keyboard: false

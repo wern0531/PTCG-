@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row my-5 align-items-stretch">
       <div class="col-lg-3">
-        <div class="d-none d-lg-block"><img src="../assets/image/town_league.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="@/assets/image/town_league.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div class="d-none d-lg-block"><img src="../assets/image/regional_league.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="@/assets/image/regional_league.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/information'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div class="d-none d-lg-block"><img src="../assets/image/championships.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="@/assets/image/championships.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': isCurrentPath('/cart/checkOrder')}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div class="d-none d-lg-block"><img class="mb-2" src="../assets/image/wcs.png" alt=""></div>
+        <div class="d-none d-lg-block"><img class="mb-2" src="@/assets/image/wcs.png" alt=""></div>
         <div class="step mt-3" :class="{'nowStep': currentPath === '/cart/completeOrder'}">
           <div
             class="d-flex align-items-center justify-content-center flex-column"
@@ -86,10 +86,10 @@
     </div>
       <div class="mt-3 mx-0 row d-flex align-items-center">
         <div class="col-lg-2">
-          <router-link type="button" class="btn d-flex btn-myBgMain" :to="'/products/全部商品'">
+          <RouterLink type="button" class="btn d-flex btn-myBgMain" :to="'/products/全部商品'">
             <div class="material-symbols-outlined">arrow_back</div>
             <div>繼續選購</div>
-          </router-link>
+          </RouterLink>
         </div>
         <div class="col-lg-5 d-flex ms-auto align-items-center">
           <div class="col-lg-6">
@@ -103,13 +103,13 @@
       </div>
 
     </div>
-    <RouterView></RouterView>
+    <RouterView/>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'pinia'
-import { cartStore } from '../../src/stores/cart'
+import { cartStore } from '@/stores/cart'
 import { RouterView } from 'vue-router'
 import Swal from 'sweetalert2'
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -145,7 +145,11 @@ export default {
           this.loadingItem = ''
         })
         .catch((err) => {
-          alert(err.response.data.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     },
     calculateFinalTotal (cartsData) {
@@ -169,7 +173,7 @@ export default {
       this.currentPath = to.path
     },
     cartsData: function (arr) {
-      if (arr.length === 0) {
+      if (this.$route.path === '/cart' && arr.length === 0) {
         Swal.fire({
           icon: 'warning',
           title: 'Oops...',

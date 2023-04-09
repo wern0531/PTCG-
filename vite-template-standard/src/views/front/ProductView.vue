@@ -1,7 +1,7 @@
 <template>
   <LoadingItem :active="isLoading" :z-index="1060">
     <div class="loadingGif">
-      <img src="../assets/image/pikachu_gif.gif" alt="" />
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
   <div class="container pt-5">
@@ -71,9 +71,9 @@
         v-for="product in filteredProducts"
         :key="product.id"
       >
-        <router-link :to="`/product/${product.id}`" class="hover-pointer">
+        <RouterLink :to="`/product/${product.id}`" class="hover-pointer">
           <img class="w-100" :src="product.imageUrl" alt="" />
-        </router-link>
+        </RouterLink>
         <div class="mt-2">
           <button
             class="btn btn-myBgMain text-myColor border-myColor"
@@ -89,7 +89,8 @@
 
 <script>
 import { mapActions } from 'pinia'
-import { cartStore } from '../../src/stores/cart'
+import { cartStore } from '@/stores/cart'
+import Swal from 'sweetalert2'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
@@ -114,6 +115,13 @@ export default {
           }
         })
         this.isLoading = false
+      }).catch((err) => {
+        this.isLoading = false
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err}.response.data.message`
+        })
       })
     },
     getProduct () {
@@ -125,6 +133,13 @@ export default {
           this.product = res.data.product
           this.category = this.product.category
           this.getProducts(this.category)
+        }).catch((err) => {
+          this.isLoading = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     }
   },

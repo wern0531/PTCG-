@@ -1,7 +1,7 @@
 <template>
   <LoadingItem :active="isLoading" :z-index="1060">
     <div class="loadingGif">
-      <img src="../assets/image/pikachu_gif.gif" alt="" />
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
   <div class="container mt-5">
@@ -105,6 +105,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data () {
@@ -140,7 +141,11 @@ export default {
           this.getArticle()
         })
         .catch((err) => {
-          alert(err.response.data.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     },
     getArticle () {
@@ -152,13 +157,16 @@ export default {
           this.isLoading = false
         })
         .catch((err) => {
-          alert(err.response.data.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     },
     getDeck (title) {
       this.isLoading = true
       this.title = title
-      // this.$route.params.name = this.title
       this.getArticles(false)
     }
   },

@@ -5,7 +5,7 @@
         <img src="../assets/image/logo.png" alt="" />
       </a>
       <button class="navbar-toggler ms-auto" type="button">
-        <router-link
+        <RouterLink
           v-if="cartsData.length > 0"
           to="/cart"
           type="button"
@@ -17,7 +17,7 @@
               >{{ getCartNum }}</span
             >
           </div>
-        </router-link>
+        </RouterLink>
         <button
           v-else
           type="button"
@@ -46,44 +46,44 @@
       <div :class="{ hide: ishide }" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-lg-auto">
           <li class="nav-item" @click="hideMenu">
-            <router-link
+            <RouterLink
               to="/home"
               active-class="active-link"
               class="nav-link my-nav-item text-white active"
               aria-current="page"
               href="#"
-              ><span>首頁</span></router-link
+              ><span>首頁</span></RouterLink
             >
           </li>
           <li class="nav-item" @click="hideMenu">
-            <router-link
+            <RouterLink
               to="/products/全部商品"
               active-class="active-link"
               class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
-              ><span>商品列表</span></router-link
+              ><span>商品列表</span></RouterLink
             >
           </li>
           <li class="nav-item" @click="hideMenu">
-            <router-link
+            <RouterLink
               to="/news"
               active-class="active-link"
               class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
-              ><span>最新消息</span></router-link
+              ><span>最新消息</span></RouterLink
             >
           </li>
           <li class="nav-item" @click="hideMenu">
-            <router-link
+            <RouterLink
               to="/deck/夢幻Vmax"
               active-class="active-link"
               class="nav-link my-nav-item ms-lg-4 text-white"
               href="#"
-              ><span>牌組介紹</span></router-link
+              ><span>牌組介紹</span></RouterLink
             >
           </li>
           <li class="nav-item d-none d-lg-block">
-            <router-link
+            <RouterLink
               v-if="cartsData.length > 0"
               to="/cart"
               type="button"
@@ -95,7 +95,7 @@
                   >{{ getCartNum }}</span
                 >
               </div>
-            </router-link>
+            </RouterLink>
             <button
               v-else
               type="button"
@@ -114,9 +114,8 @@
       </div>
     </div>
   </nav>
-  <RouterView></RouterView>
+  <RouterView/>
   <div
-  :class="{'fixed-bottom' : isFixed}"
     class="footer my-footer d-flex justify-content-center justify-content-md-between align-items-center"
   >
     <div class="footerText">©2023 PTCG 本網站為個人作品使用，非商業用途</div>
@@ -144,8 +143,7 @@ export default {
       isLoading: false,
       checkCardModal: '',
       loadingItem: '',
-      ishide: false,
-      isFixed: true
+      ishide: false
     }
   },
   computed: {
@@ -200,11 +198,6 @@ export default {
       }
     }
   },
-  watch: {
-    $route (to, form) {
-      this.checkScreenHeight()
-    }
-  },
   components: {
     RouterView
   },
@@ -215,7 +208,6 @@ export default {
   },
   mounted () {
     this.getCarts()
-    this.checkScreenHeight()
   }
 }
 </script>

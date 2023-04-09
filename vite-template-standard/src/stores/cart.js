@@ -17,7 +17,12 @@ export const cartStore = defineStore('cart', {
     getCarts () {
       axios.get(`${VITE_URL}v2/api/${VITE_PATH}/cart`).then((res) => {
         this.carts = res.data.data.carts
-        console.log(this.carts)
+      }).catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err}.response.data.message`
+        })
       })
     },
     addToCart (id, title) {
@@ -28,7 +33,6 @@ export const cartStore = defineStore('cart', {
       axios
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, { data })
         .then((res) => {
-          console.log(res)
           this.getCarts()
           Swal.fire({
             position: 'top-center',
@@ -36,6 +40,13 @@ export const cartStore = defineStore('cart', {
             title: `${title} 已成功選購`,
             showConfirmButton: false,
             timer: 1500
+          })
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
           })
         })
     },
@@ -53,7 +64,11 @@ export const cartStore = defineStore('cart', {
           })
         })
         .catch((err) => {
-          alert(err.response.data.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     }
 

@@ -73,10 +73,10 @@
       </div>
       <div class="d-flex justify-content-between">
         <div>
-          <router-link to="/cart" class="d-flex btn btn-myBgMain">
+          <RouterLink to="/cart" class="d-flex btn btn-myBgMain">
           <div class="material-symbols-outlined">arrow_back</div>
           <div>回購物車</div>
-          </router-link>
+          </RouterLink>
         </div>
         <button
           type="submit"
@@ -92,6 +92,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
@@ -136,10 +137,15 @@ export default {
           console.log(res)
         })
         .catch((err) => {
-          alert(err.response.data.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err}.response.data.message`
+          })
         })
     }
-  }
+  },
+  components: { RouterLink }
 }
 </script>
 

@@ -1,4 +1,9 @@
 <template>
+  <LoadingItem :active="isLoading" :z-index="1060">
+    <div class="loadingGif">
+      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
+    </div>
+  </LoadingItem>
     <div class="container">
     <div class="text-end mt-4">
       <button class="btn btn-primary" @click="openModel('add')">
@@ -193,7 +198,7 @@
                     min="0"
                     class="form-control"
                     placeholder="請輸入原價"
-                    v-model="nowProduct.origin_price"
+                    v-model.number="nowProduct.origin_price"
                   />
                 </div>
                 <div class="mb-3 col-md-6">
@@ -204,7 +209,7 @@
                     min="0"
                     class="form-control"
                     placeholder="請輸入售價"
-                    v-model="nowProduct.price"
+                    v-model.number="nowProduct.price"
                   />
                 </div>
               </div>
@@ -289,7 +294,7 @@
         </div>
         <div class="modal-body">
           是否刪除
-          <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
+          <strong class="text-danger">{{ nowProduct.title }}</strong> 商品(刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
           <button
@@ -320,6 +325,7 @@ let delProductModal = ''
 export default {
   data () {
     return {
+      isLoading: false,
       products: [],
       nowProduct: {},
       isAddProduct: true,
@@ -340,6 +346,7 @@ export default {
         .then((res) => {
           this.products = res.data.products
           this.pagination = res.data.pagination
+          this.isLoading = false
         })
         .catch((err) => {
           alert(err.response.data.message)
@@ -419,6 +426,7 @@ export default {
     }
   },
   mounted () {
+    this.isLoading = true
     this.getProducts()
     productModal = new Modal(this.$refs.productModal, {
       keyboard: false
