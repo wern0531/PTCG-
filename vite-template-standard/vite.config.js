@@ -13,8 +13,7 @@ export default defineConfig({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
     })
   ],
-  // base: '/PTCGTrainerWeb/',
-  base: process.env.NODE_ENV === 'production' ? '/production-sub-path/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/PTCGTrainerWeb/' : '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
