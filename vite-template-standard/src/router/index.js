@@ -20,7 +20,7 @@ const routes = [
         component: () => import('../views/front/ProductView.vue')
       },
       {
-        path: 'news/:pathNatch(.*)*',
+        path: 'news',
         redirect: '/home',
         component: () => import('../views/front/NewsView.vue')
       },
