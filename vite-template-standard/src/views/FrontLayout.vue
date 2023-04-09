@@ -185,7 +185,7 @@ export default {
       })
     },
     toAdmin () {
-      this.$router.push('login')
+      this.$router.push('/login')
     },
     hideMenu () {
       this.ishide = !this.ishide
