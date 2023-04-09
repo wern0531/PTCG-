@@ -7,7 +7,7 @@
     <a href="#" @click.prevent="logout">登出</a>
   </div>
   <hr />
-  <RouterView v-if="isCheck" />
+  <router-view v-if="isCheck"></router-view>
 </template>
 
 <script>
