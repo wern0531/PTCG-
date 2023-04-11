@@ -122,7 +122,8 @@ export default {
 
 <style scoped>
 .container {
-  width: 900px;
+  max-width: 900px;
+  flex-grow: 1;
 }
 
 @media (max-width: 991.5px){

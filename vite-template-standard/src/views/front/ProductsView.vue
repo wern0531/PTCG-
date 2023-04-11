@@ -110,15 +110,16 @@ export default {
           } else {
             this.getCategory(category)
           }
-        }).catch((err) => {
+        }).catch(() => {
           this.isLoading = false
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: 11
           })
         })
     },
+    // `${err.response.data.message}`
     getCategory (category) {
       this.$http
         .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
@@ -130,13 +131,13 @@ export default {
             }
           })
           this.isLoading = false
-        }).catch((err) => {
+        }).catch(() => {
           this.isLoading = false
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err}.response.data.message`
-          })
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Oops...',
+          //   text: 11
+          // })
         })
     }
   },

@@ -71,9 +71,11 @@
         v-for="product in filteredProducts"
         :key="product.id"
       >
-        <RouterLink :to="`/product/${product.id}`" class="hover-pointer">
+        <div class="hover" style="cursor:pointer;"
+        @click="changeProduct(product.id)">
           <img class="w-100" :src="product.imageUrl" alt="" />
-        </RouterLink>
+        </div>
+        <div class="mt-2">{{ product.title }}</div>
         <div class="mt-2">
           <button
             class="btn btn-myBgMain text-myColor border-myColor"
@@ -108,7 +110,7 @@ export default {
     ...mapActions(cartStore, ['addToCart']),
     getProducts (category) {
       this.products = []
-      this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products`).then((res) => {
+      this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`).then((res) => {
         res.data.products.forEach((item) => {
           if (item.category === category && item.id !== this.product.id) {
             this.products.push(item)
@@ -120,7 +122,7 @@ export default {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: `${err}.response.data.message`
+          text: `${err.response.data.message}`
         })
       })
     },
@@ -138,21 +140,19 @@ export default {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
+    },
+    changeProduct (id) {
+      this.$router.push(`/product/${id}`).then(() => {
+        this.getProduct()
+      })
     }
   },
   computed: {
     filteredProducts () {
       return this.products.slice(0, 4) // 取前四筆資料
-    }
-  },
-  watch: {
-    '$route.params': {
-      handler () {
-        this.getProduct()
-      }
     }
   },
   mounted () {
