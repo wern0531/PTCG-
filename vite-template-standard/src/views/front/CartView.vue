@@ -56,7 +56,7 @@
             <button
               class="btn btn-outline-secondary"
               type="button"
-              @click="updateQty(cart.product_id, cart.qty, cart.id, 'reduce')"
+              @click="cart.qty > 1 ? updateQty(cart.product_id, cart.qty, cart.id, 'reduce') : null"
               :disabled="cart.product.id === loadingItem"
             >
               -
