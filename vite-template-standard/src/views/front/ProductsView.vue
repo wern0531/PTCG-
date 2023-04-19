@@ -186,6 +186,7 @@ export default {
     Pagination
   },
   mounted () {
+    window.scrollTo(0, 0) // 將頁面捲動到頂部
     this.category = this.$route.params.category
     this.getProducts(undefined, this.category)
   }
