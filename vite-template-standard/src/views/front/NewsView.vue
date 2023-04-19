@@ -4,14 +4,13 @@
       <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
-  <div class="container text-white" v-if="isready">
-
-    <div class="row newsCardWrap" style="margin-top: 63px">
-      <h1 class="my-lg-3" >補充包資訊</h1>
+  <div class="container text-white">
+    <div class="row mx-0 newsCardWrap" style="margin-top: 63px">
+      <h1 class="my-lg-3" v-if="articles.pack.length>0">補充包資訊</h1>
       <div class="col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" v-for="item in articles.pack" :key="item.id">
         <img
           :src="item.image"
-          class="card-img-top"
+          class="card-img-top w-100"
           alt="..."
         />
         <div class="mt-1  text-white">
@@ -22,7 +21,7 @@
       </div>
     </div>
     <div class="row newsCardWrap">
-      <h1 class="my-lg-3">商品資訊</h1>
+      <h1 class="my-lg-3" v-if="articles.product.length>0">商品資訊</h1>
       <div class="row">
         <div class=" col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" style="width: 442px" v-for="item in articles.product" :key="item.id">
           <div
@@ -36,7 +35,6 @@
               alt="..."
             />
           </div>
-
           <div class="mt-1  text-white">
             <div class="text-start pb-1">&lt;{{item.tag}}&gt;</div>
             <div class="text-start pb-1">{{ item.title }}</div>
@@ -46,7 +44,7 @@
       </div>
     </div>
     <div class="row newsCardWrap">
-      <h1 class="my-lg-3">比賽資訊</h1>
+      <h1 class="my-lg-3" v-if="articles.game.length>0">比賽資訊</h1>
       <div class="row">
         <div class="col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" style="width: 442px" v-for="item in articles.game" :key="item.id">
           <div
@@ -78,7 +76,6 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data () {
     return {
-      isready: false,
       isLoading: false,
       articles: {
         pack: [],
@@ -101,14 +98,13 @@ export default {
               this.articles.game.push(item)
             }
           })
-          this.isready = true
           this.isLoading = false
         })
         .catch((err) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
     }

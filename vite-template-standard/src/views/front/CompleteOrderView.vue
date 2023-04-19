@@ -26,7 +26,7 @@
       <div v-for="item in orderData.products" :key="item.id">
         <div class="row">
           <div class="col-3">
-            <img style="max-width: 80px" :src="item.product.imageUrl" alt="" />
+            <img style="max-width: 80px" :src="item.product.imageUrl" alt="商品圖片" />
           </div>
           <div class="col-6 d-flex justify-content-center align-items-center">
             {{ item.product.title }}

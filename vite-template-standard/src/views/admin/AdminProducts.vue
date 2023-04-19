@@ -102,7 +102,7 @@
                   @change="uploadImg"
                 />
               </div>
-              <img class="img-fluid" :src="nowProduct.imageUrl" alt="" />
+              <img class="img-fluid" :src="nowProduct.imageUrl" alt="主要圖片" />
               <h3 class="mb-3">圖片集</h3>
               <div class="mt-2" v-if="Array.isArray(nowProduct.imagesUrl)">
                 <div
@@ -119,7 +119,7 @@
                       v-model="nowProduct.imagesUrl[key]"
                     />
                   </div>
-                  <img class="img-fluid" :src="img" alt="" />
+                  <img class="img-fluid" :src="img" alt="次要圖片" />
                 </div>
                 <div
                   v-if="
@@ -316,7 +316,7 @@
 
 <script>
 import { Modal } from 'bootstrap'
-import Pagination from '../../components/PaginationView.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 let productModal = ''

@@ -105,7 +105,7 @@
                   @change="uploadImg"
                 />
               </div>
-              <img class="img-fluid" :src="nowArticle.image" alt="" />
+              <img class="img-fluid" :src="nowArticle.image" alt="文章圖片" />
               <div class="mb-3">
                 <label for="author" class="form-label">作者</label>
                 <input
@@ -247,7 +247,7 @@
 
 <script>
 import { Modal } from 'bootstrap'
-import Pagination from '../../components/PaginationView.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 const { VITE_URL, VITE_PATH } = import.meta.env
 

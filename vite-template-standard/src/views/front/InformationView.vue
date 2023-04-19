@@ -124,23 +124,23 @@ export default {
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
         .then((res) => {
-          this.$router.push(`/cart/checkOrder/${res.data.orderId}`)
+          const id = res.data.orderId
           this.$refs.form.resetForm()
           this.isclick = false
           Swal.fire({
-            position: 'top-center',
             icon: 'success',
             title: '您的訂單已建立',
-            showConfirmButton: false,
+            showConfirmButton: true,
             timer: 1500
+          }).then(() => {
+            this.$router.push(`/cart/checkOrder/${id}`)
           })
-          console.log(res)
         })
         .catch((err) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
     }

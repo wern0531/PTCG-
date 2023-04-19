@@ -1,6 +1,7 @@
 <template>
   <!-- 主圖輪播 -->
-  <div
+
+    <div
     id="carouselExampleIndicators"
     class="carousel slide"
     data-bs-ride="carousel"
@@ -28,7 +29,7 @@
       ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item active w-100">
         <img
           src="https://storage.googleapis.com/vue-course-api.appspot.com/wern/1676997146858.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=gbw08XkxL8gSSVkD2k2Dx6zl%2BCqCfBHn3PXdhQb6GBgke3r8XFYzr3at35VvA%2Fbf64WFwG6Hoztflt1lkIPz1PLhKaEeiyQXFJhI0WopbhvO8cozCBPESdXYPhnJqPNssLx7PH47YUWZUQ38tO8v3Q1iS6xG7x2nRAn8OCN3WaS3rgqFspRrTDyvz7jCxZJ1BJlbbcVFF5OJ9ITmsU3ovhAJrh0KVLMGOHzcU%2FwyBhsZ3WxJkUOuehJkOWYbTI%2F1PAjn9ejjz7QZTmQlmEOtVq8MEmQdsrHTnx5OgRKmf%2Bl1IxVwn9pdzAt3WGg2o7NVxQL3TL74TOjZDmA2i%2FIjFw%3D%3D"
           class="d-block w-100"
@@ -69,6 +70,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+
   <!-- 上方標題 -->
   <div class="container mt-5">
     <div class="row mx-auto">
@@ -191,8 +193,8 @@
           <p class="deckDescribeP2 text-center text-lg-start text-white">
             這裡提供最完整的教學資訊!
           </p>
-          <router-link to="/deck/夢幻Vmax" class="btn py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor">
-            查看教學</router-link>
+          <RouterLink to="/deck/夢幻Vmax" class="btn py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor">
+            查看教學</RouterLink>
         </div>
       </div>
       <div class="col-12 col-lg-8 flex-column align-items-center">
@@ -462,13 +464,13 @@
       </div>
       <div class="row mt-5">
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <router-link to="/news" >
+          <RouterLink to="/news" >
             <img
             src="@/assets/image/SV1_TWHK_THUMBNAIL_before.png"
             class="newsCardImg w-100"
             alt="補充包封面"
           />
-          </router-link>
+          </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
             <p class="newsCardTitle text-white">朱&紫補充包發售</p>
@@ -476,7 +478,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <router-link to="/news">
+          <RouterLink to="/news">
             <div
             class="d-flex justify-content-center align-items-center bg-white"
           >
@@ -487,7 +489,7 @@
               alt="寶可夢造型卡套"
             />
           </div>
-          </router-link>
+          </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
             <p class="newsCardTitle text-white">寶可夢造型卡套</p>
@@ -495,7 +497,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
-          <router-link to="/news">
+          <RouterLink to="/news">
             <div
             class="d-flex justify-content-center align-items-center"
             style="height: 206px; background: black"
@@ -507,7 +509,7 @@
               alt="地區聯盟賽標示"
             />
           </div>
-          </router-link>
+          </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;比賽&gt;</p>
             <p class="newsCardTitle text-white text-truncate">
@@ -566,6 +568,8 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   data () {
     return {
@@ -591,7 +595,7 @@ export default {
       this.$router.push('/news')
     }
   },
-  components: {}
+  components: { RouterLink }
 }
 </script>
 

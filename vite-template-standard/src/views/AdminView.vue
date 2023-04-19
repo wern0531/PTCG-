@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex justify-content-center">
-    <router-link to="/admin/products">後臺產品列表</router-link> |
-    <router-link to="/admin/orders">後臺訂單列表</router-link> |
-    <router-link to="/admin/articles">後臺文章列表</router-link> |
-    <router-link to="/">回前台</router-link> |
+    <RouterLink to="/admin/products">後臺產品列表</RouterLink> |
+    <RouterLink to="/admin/orders">後臺訂單列表</RouterLink> |
+    <RouterLink to="/admin/articles">後臺文章列表</RouterLink> |
+    <RouterLink to="/">回前台</RouterLink> |
     <a href="#" @click.prevent="logout">登出</a>
   </div>
   <hr />
-  <router-view v-if="isCheck"></router-view>
+  <RouterView v-if="isCheck"/>
 </template>
 
 <script>
-import { RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 const { VITE_URL } = import.meta.env
 
 export default {
@@ -21,7 +21,8 @@ export default {
     }
   },
   components: {
-    RouterView
+    RouterView,
+    RouterLink
   },
   methods: {
     logout () {

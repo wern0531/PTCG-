@@ -1,7 +1,7 @@
 <template>
   <div>訂單資訊</div>
-  <hr>
-  <div class="container justify-content-center">
+  <hr />
+  <div class="container justify-content-center" v-if="order.id">
     <div class="row">
       <div class="col-lg-6">
         <div class="row">
@@ -42,7 +42,7 @@
         <div>
           <div class="row mb-2" v-for="item in order.products" :key="item.id">
             <div class="col-3">
-              <img style="width: 60px" :src="item.product.imageUrl" alt="" />
+              <img style="width: 60px" :src="item.product.imageUrl" alt="商品圖片" />
             </div>
             <div class="col-4 d-flex align-items-center justify-content-center">
               {{ item.product.title }}
@@ -97,11 +97,12 @@ export default {
         .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${this.orderId}`)
         .then((res) => {
           this.order = res.data.order
-        }).catch((err) => {
+        })
+        .catch((err) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
     },
@@ -109,20 +110,20 @@ export default {
       this.$http
         .post(`${VITE_URL}v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then(() => {
-          this.getCarts()
           Swal.fire({
-            position: 'top-center',
             icon: 'success',
             title: '付款完成',
-            showConfirmButton: false,
+            showConfirmButton: true,
             timer: 1500
-          })
-          this.$router.push({
-            path: '/cart/completeOrder',
-            query: {
-              orderId: this.order.id,
-              orderData: JSON.stringify(this.order)
-            }
+          }).then(() => {
+            this.getCarts()
+            this.$router.push({
+              path: '/cart/completeOrder',
+              query: {
+                orderId: this.order.id,
+                orderData: JSON.stringify(this.order)
+              }
+            })
           })
         })
         .catch((err) => {

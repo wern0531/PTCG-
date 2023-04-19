@@ -20,7 +20,7 @@
         <tr v-for="order in orders" :key="order.id">
           <td>{{ createDate(order.create_at) }}</td>
           <td>{{ order.user.email }}</td>
-          <td class="">
+          <td>
             <ul class="list-unstyled">
               <li v-for="product in order.products" :key="product.id">
                 {{ product.product.title }} 數量 : {{ product.qty
@@ -28,7 +28,7 @@
               </li>
             </ul>
           </td>
-          <td class="">{{ order.total }}</td>
+          <td>{{ order.total }}</td>
           <td>
             <div class="form-check form-switch">
               <input
@@ -248,7 +248,7 @@
 
 <script>
 import { Modal } from 'bootstrap'
-import Pagination from '../../components/PaginationView.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 let orderModal = ''

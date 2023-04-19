@@ -21,7 +21,7 @@ export const cartStore = defineStore('cart', {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: `${err}.response.data.message`
+          text: `${err.response.data.message}`
         })
       })
     },
@@ -35,10 +35,9 @@ export const cartStore = defineStore('cart', {
         .then((res) => {
           this.getCarts()
           Swal.fire({
-            position: 'top-center',
             icon: 'success',
             title: `${title} 已成功選購`,
-            showConfirmButton: false,
+            showConfirmButton: true,
             timer: 1500
           })
         })
@@ -46,7 +45,7 @@ export const cartStore = defineStore('cart', {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
     },
@@ -56,10 +55,9 @@ export const cartStore = defineStore('cart', {
         .then((res) => {
           this.getCarts()
           Swal.fire({
-            position: 'top-center',
             icon: 'success',
             title: `商品 ${title} 已刪除`,
-            showConfirmButton: false,
+            showConfirmButton: true,
             timer: 1500
           })
         })
@@ -67,7 +65,7 @@ export const cartStore = defineStore('cart', {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${err}.response.data.message`
+            text: `${err.response.data.message}`
           })
         })
     }
