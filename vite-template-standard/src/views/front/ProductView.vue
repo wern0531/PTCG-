@@ -50,6 +50,7 @@
           </div>
           <div class="col-5 col-lg-4">
             <button
+            :class="{disabled : isDisable}"
               class="btn btn-myBgMain text-myColor border-myColor"
               @click="addToCart(product.id, product.title)"
             >
@@ -96,6 +97,7 @@
         <div class="mt-2">{{ product.title }}</div>
         <div class="mt-2">
           <button
+          :class="{disabled : isDisable}"
             class="btn btn-myBgMain text-myColor border-myColor"
             @click="addToCart(product.id, product.title)"
           >
@@ -175,6 +177,10 @@ export default {
   computed: {
     filteredProducts () {
       return this.products.slice(0, 4) // 取前四筆資料
+    },
+    isDisable () {
+      const store = this.$pinia.state.value
+      return store.cart.isDisable
     }
   },
   mounted () {

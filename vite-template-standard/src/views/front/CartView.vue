@@ -208,7 +208,11 @@
           class="row p-3 mx-0 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
         >
           <div class="col-lg-2">
-            <img style="width: 100px" :src="cart.product.imageUrl" alt="商品圖片" />
+            <img
+              style="width: 100px"
+              :src="cart.product.imageUrl"
+              alt="商品圖片"
+            />
           </div>
           <div class="mt-2 mt-lg-0 col-lg-3">{{ cart.product.title }}</div>
           <div class="mt-2 mt-lg-0 col-lg-2">
@@ -243,14 +247,16 @@
             </div>
           </div>
           <div class="mt-2 mt-lg-0 col-lg-3">$NT{{ cart.total }}</div>
-          <div
-            class="mt-2 mt-lg-0 col-lg-2 delBtn"
+          <button
+          type="button"
+            :class="{ disabled: isDisable }"
+            class="mt-2 mt-lg-0 col-lg-2 btn border-0 text-white delBtn"
             @click="delCart(cart.id, cart.product.title)"
           >
-            <span type="button" class="material-symbols-outlined">
+            <span class="material-symbols-outlined">
               delete
             </span>
-          </div>
+          </button>
         </div>
       </div>
       <div class="mt-3 mx-0 row d-flex align-items-center">
@@ -344,6 +350,10 @@ export default {
     cartsData () {
       const store = this.$pinia.state.value
       return store.cart.carts
+    },
+    isDisable () {
+      const store = this.$pinia.state.value
+      return store.cart.isDisable
     }
   },
   watch: {
@@ -394,7 +404,7 @@ export default {
   background-color: #ffdbc7;
 }
 .delBtn:hover {
-  color: red;
+  color: red !important;
 }
 @media (max-width: 991.5px) {
   .step {

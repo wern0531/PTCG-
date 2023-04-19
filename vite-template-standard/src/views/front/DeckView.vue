@@ -11,7 +11,9 @@
         v-for="(item, index) in deckmenu"
         :key="index"
       >
-        <button class="deckBtn btn btn-myBgMain text-myColor fs-6 fs-md-3" @click="getDeck(item)">
+        <button
+        :class="{disabled : isDisabled}"
+        class="deckBtn btn btn-myBgMain text-myColor fs-6 fs-md-3" @click="getDeck(item)">
           {{ item }}
         </button>
       </div>
@@ -106,6 +108,7 @@ export default {
     return {
       isready: false,
       isLoading: false,
+      isDisabled: false,
       article: {},
       starLevel: 4,
       title: '',
@@ -149,6 +152,7 @@ export default {
           this.isready = true
         }).then(() => {
           this.isLoading = false
+          this.isDisabled = false
         })
         .catch((err) => {
           Swal.fire({
@@ -160,6 +164,7 @@ export default {
     },
     getDeck (title) {
       this.isLoading = true
+      this.isDisabled = true
       this.title = title
       this.getArticles(false)
     }

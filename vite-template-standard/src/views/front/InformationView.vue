@@ -145,7 +145,10 @@ export default {
         })
     }
   },
-  components: { RouterLink }
+  components: { RouterLink },
+  mounted () {
+    window.scrollTo(0, 0) // 將頁面捲動到頂部
+  }
 }
 </script>
 

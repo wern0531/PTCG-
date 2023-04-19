@@ -6,7 +6,8 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 
 export const cartStore = defineStore('cart', {
   state: () => ({
-    carts: []
+    carts: [],
+    isDisable: false
   }),
   getters: {
     getCartNum (state) {
@@ -26,6 +27,7 @@ export const cartStore = defineStore('cart', {
       })
     },
     addToCart (id, title) {
+      this.isDisable = true
       const data = {
         product_id: id,
         qty: 1
@@ -40,6 +42,8 @@ export const cartStore = defineStore('cart', {
             showConfirmButton: true,
             timer: 1500
           })
+        }).then(() => {
+          this.isDisable = false
         })
         .catch((err) => {
           Swal.fire({
@@ -50,6 +54,7 @@ export const cartStore = defineStore('cart', {
         })
     },
     delCart (cartId, title) {
+      this.isDisable = true
       axios
         .delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${cartId}`)
         .then((res) => {
@@ -60,6 +65,8 @@ export const cartStore = defineStore('cart', {
             showConfirmButton: true,
             timer: 1500
           })
+        }).then(() => {
+          this.isDisable = false
         })
         .catch((err) => {
           Swal.fire({

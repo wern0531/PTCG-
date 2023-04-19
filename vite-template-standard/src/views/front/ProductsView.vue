@@ -1,5 +1,5 @@
 <template>
-  <LoadingItem :active="isLoading" :is-full-page="fullPage">
+  <LoadingItem :active="isLoading" :z-index="1060">
     <div class="loadingGif">
       <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
@@ -72,7 +72,7 @@
                     style="max-width: 70%; height: auto"
                     :src="product.imageUrl"
                     class="card-img-top"
-                    alt="..."
+                    alt="商品圖片"
                   />
                 </div>
                 <div class="py-3" style="width: 176px; margin: 0 auto">
@@ -83,13 +83,16 @@
                     NT$ {{ product.price }}
                   </div>
                 </div>
+              </RouterLink>
+              <div class="d-flex justify-content-center">
                 <button
+                  :class="{disabled : isDisable}"
                   class="btn text-myColor productBtn"
                   @click.prevent="addToCart(product.id, product.title)"
                 >
                   <p>加入購物車</p>
                 </button>
-              </RouterLink>
+              </div>
             </div>
           </div>
         </div>
@@ -123,10 +126,15 @@ export default {
       page: 1
     }
   },
+  computed: {
+    isDisable () {
+      const store = this.$pinia.state.value
+      return store.cart.isDisable
+    }
+  },
   methods: {
     ...mapActions(cartStore, ['addToCart']),
     getProducts (page = 1, category = '全部商品') {
-      window.scrollTo(0, 0) // 將頁面捲動到頂部
       this.isLoading = true
       this.page = page
       this.category = category
@@ -138,6 +146,7 @@ export default {
           if (category === '全部商品') {
             this.productCategory = this.products
             this.isLoading = false
+            window.scrollTo(0, 0) // 將頁面捲動到頂部
           } else {
             this.getCategory(category)
           }
@@ -199,10 +208,8 @@ export default {
   box-sizing: border-box;
   padding: 8px;
   margin-bottom: 10px;
-
   width: 176px;
   height: 52px;
-
   background-color: #1c1a19;
   border: 1px solid #ff6915;
   border-radius: 8px;
@@ -224,10 +231,8 @@ export default {
   box-sizing: border-box;
   padding: 8px;
   margin-bottom: 10px;
-
   width: 176px;
   height: 52px;
-
   background-color: #1c1a19;
   border: 1px solid #ff6915;
   border-radius: 8px;
@@ -272,10 +277,8 @@ export default {
     box-sizing: border-box;
     padding: 8px;
     margin-bottom: 10px;
-
     width: 320px;
     height: 52px;
-
     background-color: #1c1a19;
     border: 1px solid #ff6915;
     border-radius: 8px;
@@ -284,10 +287,8 @@ export default {
     box-sizing: border-box;
     padding: 8px;
     margin-bottom: 10px;
-
     width: 320px;
     height: 52px;
-
     border-radius: 8px;
   }
   .productCardWrap {

@@ -52,11 +52,12 @@ export default {
     }
   },
   methods: {},
+  components: { RouterLink },
   mounted () {
+    window.scrollTo(0, 0) // 將頁面捲動到頂部
     this.orderId = this.$route.query.orderId
     this.orderData = JSON.parse(this.$route.query.orderData)
-  },
-  components: { RouterLink }
+  }
 }
 </script>
 

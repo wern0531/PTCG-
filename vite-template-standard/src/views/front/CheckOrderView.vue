@@ -139,6 +139,9 @@ export default {
   created () {
     this.orderId = this.$route.params.orderId
     this.getOrder()
+  },
+  mounted () {
+    window.scrollTo(0, 0) // 將頁面捲動到頂部
   }
 }
 </script>
