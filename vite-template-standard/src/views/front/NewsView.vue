@@ -110,6 +110,7 @@ export default {
     }
   },
   mounted () {
+    window.scrollTo(0, 0) // 將頁面捲動到頂部
     this.isLoading = true
     this.getArticles()
   }
