@@ -7,7 +7,9 @@
     <a href="#" @click.prevent="logout">登出</a>
   </div>
   <hr />
-  <RouterView v-if="isCheck"/>
+  <main>
+    <RouterView v-if="isCheck"/>
+  </main>
 </template>
 
 <script>
@@ -56,3 +58,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+main{
+  min-height: 100vh;
+}
+</style>

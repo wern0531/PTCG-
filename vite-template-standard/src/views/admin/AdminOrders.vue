@@ -1,10 +1,10 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060">
+  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0">
     <div class="loadingGif">
       <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
-    <div class="container">
+    <div class="container" v-if="isready">
     <table class="table mt-4 text-white">
       <thead>
         <tr>
@@ -257,6 +257,7 @@ let delOrderModal = ''
 export default {
   data () {
     return {
+      isready: false,
       isLoading: false,
       orders: [],
       pagination: {},
@@ -284,6 +285,7 @@ export default {
         .then((res) => {
           this.orders = res.data.orders
           this.pagination = res.data.pagination
+          this.isready = true
           this.isLoading = false
         })
     },

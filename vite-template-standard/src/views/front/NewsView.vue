@@ -28,7 +28,6 @@
     <div class="row">
       <div
         class="card col-md-6 col-lg-4 mb-2 bg-myBgMain"
-        style="width: 442px"
         v-for="item in articles.product"
         :key="item.id"
       >
@@ -54,7 +53,6 @@
     <div class="row">
       <div
         class="card col-md-6 col-lg-4 mb-2 bg-myBgMain"
-        style="width: 442px"
         v-for="item in articles.game"
         :key="item.id"
       >

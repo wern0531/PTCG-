@@ -1,10 +1,10 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060">
+  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0">
     <div class="loadingGif">
       <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
-  <div class="container">
+  <div class="container" v-if="isready">
     <div class="text-end mt-4">
       <button class="btn btn-primary" @click="openModel('add')">
         建立新文章
@@ -257,6 +257,7 @@ let delProductModal = ''
 export default {
   data () {
     return {
+      isready: false,
       isLoading: false,
       articles: {},
       nowArticle: { tag: [''] },
@@ -281,6 +282,7 @@ export default {
         .then((res) => {
           this.articles = res.data.articles
           this.pagination = res.data.pagination
+          this.isready = true
           this.isLoading = false
         })
         .catch((err) => {

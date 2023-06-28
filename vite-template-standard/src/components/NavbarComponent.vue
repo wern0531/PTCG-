@@ -150,9 +150,6 @@ export default {
         this.$router.push('/products/全部商品')
       })
     },
-    toAdmin () {
-      this.$router.push('/login')
-    },
     hideMenu () {
       this.$refs.collapse.classList.remove('show')
     }

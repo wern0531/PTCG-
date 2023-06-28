@@ -136,6 +136,11 @@ export default {
     RouterView,
     Navbar
   },
+  methods: {
+    toAdmin () {
+      this.$router.push('/login')
+    }
+  },
   created () {
     if (this.$route.path !== '/') {
       this.$router.push('/')
