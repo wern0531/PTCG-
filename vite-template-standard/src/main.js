@@ -22,6 +22,10 @@ import router from './router'
 
 import './assets/all.scss'
 
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0)
+})
+
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule])
 })

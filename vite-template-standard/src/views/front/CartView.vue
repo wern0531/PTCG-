@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="row my-5 align-items-stretch">
-      <div class="col-lg-3">
-        <div class="d-none d-lg-block">
+      <div class="col-6 col-md-3">
+        <div class="d-none d-md-block">
           <img src="@/assets/image/town_league.png" alt="購物流程步驟一" />
         </div>
         <div
-          class="step mt-3 d-flex align-items-center"
+          class="border border-myColor rounded-3 p-2 mt-3 d-flex align-items-center justify-content-center"
           :class="{ nowStep: currentPath === '/cart' }"
         >
           <div class="me-2">商品確認</div>
@@ -51,12 +51,12 @@
           </svg>
         </div>
       </div>
-      <div class="col-lg-3">
-        <div class="d-none d-lg-block">
+      <div class="col-6 col-md-3">
+        <div class="d-none d-md-block">
           <img src="@/assets/image/regional_league.png" alt="購物流程步驟二" />
         </div>
         <div
-          class="step mt-3 d-flex align-items-center"
+          class="border border-myColor rounded-3 p-2 mt-3 d-flex align-items-center justify-content-center"
           :class="{ nowStep: currentPath === '/cart/information' }"
         >
           <div class="me-2">填寫資料</div>
@@ -101,12 +101,12 @@
           </svg>
         </div>
       </div>
-      <div class="col-lg-3">
-        <div class="d-none d-lg-block">
+      <div class="col-6 col-md-3">
+        <div class="d-none d-md-block">
           <img src="@/assets/image/championships.png" alt="購物流程步驟三" />
         </div>
         <div
-          class="step mt-3 d-flex align-items-center"
+          class="border border-myColor rounded-3 p-2 mt-3 d-flex align-items-center justify-content-center"
           :class="{ nowStep: isCurrentPath('/cart/checkOrder') }"
         >
           <div class="me-2">確認訂單</div>
@@ -151,12 +151,12 @@
           </svg>
         </div>
       </div>
-      <div class="col-lg-3">
-        <div class="d-none d-lg-block">
+      <div class="col-6 col-md-3">
+        <div class="d-none d-md-block">
           <img class="mb-2" src="@/assets/image/wcs.png" alt="購物流程步驟四" />
         </div>
         <div
-          class="step mt-3 d-flex align-items-center"
+          class="border border-myColor rounded-3 p-2 mt-3 d-flex align-items-center justify-content-center"
           :class="{ nowStep: currentPath === '/cart/completeOrder' }"
         >
           <div class="me-2">完成訂單</div>
@@ -205,79 +205,94 @@
     <div v-if="currentPath === '/cart'">
       <div v-for="cart in cartsData" :key="cart.id">
         <div
-          class="row p-3 mx-0 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
+          class="row py-3 mx-0 mb-2 border border-btnBg rounded-3 d-flex align-items-center"
         >
-          <div class="col-lg-2">
-            <img
-              style="width: 100px"
-              :src="cart.product.imageUrl"
-              alt="商品圖片"
-            />
+          <div class="col-md-4 mb-3 mb-md-0">
+            <img class="w-100" :src="cart.product.imageUrl" alt="商品圖片" />
           </div>
-          <div class="mt-2 mt-lg-0 col-lg-3">{{ cart.product.title }}</div>
-          <div class="mt-2 mt-lg-0 col-lg-2">
-            <div class="input-group">
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                @click="
-                  cart.qty > 1
-                    ? updateQty(cart.product_id, cart.qty, cart.id, 'reduce')
-                    : null
-                "
-                :disabled="cart.product.id === loadingItem"
-              >
-                -
-              </button>
-              <input
-                type="text"
-                class="btn form-control text-center"
-                v-model.number="cart.qty"
-                min="0"
-                disabled
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                @click="updateQty(cart.product_id, cart.qty, cart.id, 'add')"
-                :disabled="cart.product.id === loadingItem"
-              >
-                +
-              </button>
+          <div class="col-md-8">
+            <div class="row align-items-center">
+              <div class="col-8 col-md-8">
+                <div class="row align-items-center">
+                  <div class="col-md-6 col-lg-8 mb-3 mb-md-0">
+                    <div class="fs-5">{{ cart.product.title }}</div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 mx-auto">
+                    <div class="input-group">
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        @click="
+                          cart.qty > 1
+                            ? updateQty(
+                                cart.product_id,
+                                cart.qty,
+                                cart.id,
+                                'reduce'
+                              )
+                            : null
+                        "
+                        :disabled="cart.product.id === loadingItem"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="btn form-control text-center"
+                        v-model.number="cart.qty"
+                        min="0"
+                        disabled
+                      />
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        @click="
+                          updateQty(cart.product_id, cart.qty, cart.id, 'add')
+                        "
+                        :disabled="cart.product.id === loadingItem"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 col-md-4">
+                <div class="row align-items-center">
+                  <div class="col-md-8 mb-3 mb-md-0">$NT{{ cart.total }}</div>
+                  <div class="col-md-4 p-0">
+                    <button
+                      type="button"
+                      :class="{ disabled: isDisable }"
+                      class="btn border-0 text-white text-center delBtn"
+                      @click="delCart(cart.id, cart.product.title)"
+                    >
+                      <span class="material-symbols-outlined"> delete </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="mt-2 mt-lg-0 col-lg-3">$NT{{ cart.total }}</div>
-          <button
-          type="button"
-            :class="{ disabled: isDisable }"
-            class="mt-2 mt-lg-0 col-lg-2 btn border-0 text-white delBtn"
-            @click="delCart(cart.id, cart.product.title)"
-          >
-            <span class="material-symbols-outlined">
-              delete
-            </span>
-          </button>
         </div>
       </div>
-      <div class="mt-3 mx-0 row d-flex align-items-center">
-        <div class="col-lg-2">
+      <div class="mt-3 d-flex align-items-start align-items-md-center">
+        <div>
           <RouterLink
             type="button"
-            class="btn d-flex btn-myBgMain"
+            class="p-0 btn d-flex btn-myBgMain"
             :to="'/products/全部商品'"
           >
             <div class="material-symbols-outlined">arrow_back</div>
             <div>繼續選購</div>
           </RouterLink>
         </div>
-        <div class="col-lg-5 d-flex ms-auto align-items-center">
-          <div class="col-lg-6">
-            總計: $NT{{ calculateFinalTotal(cartsData) }}
-          </div>
-          <div class="col-lg-4 ms-auto">
+        <div class="ms-auto d-flex flex-column flex-md-row align-items-end align-items-md-center">
+          <div class="mb-2 mb-md-0">總計: $NT{{ calculateFinalTotal(cartsData) }}</div>
+          <div class="ms-3">
             <button
               type="button"
-              class="btn text-myColor border-myColor btn-hover"
+              class="px-3 btn text-myColor border-myColor btn-hover"
               @click="nextStep"
             >
               確認訂單
@@ -329,6 +344,7 @@ export default {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`
@@ -363,6 +379,7 @@ export default {
     cartsData: function (arr) {
       if (this.$route.path === '/cart' && arr.length === 0) {
         Swal.fire({
+          backdrop: false,
           icon: 'warning',
           title: '您的購物車空啦~',
           text: '來去看看其他商品吧!!'
@@ -383,18 +400,7 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 900px;
-  min-height: 100%;
   color: white;
-  flex-grow: 1;
-}
-.step {
-  height: 40px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #ff6915;
-  border-radius: 8px;
 }
 .nowStep {
   color: black;
@@ -405,11 +411,5 @@ export default {
 }
 .delBtn:hover {
   color: red !important;
-}
-@media (max-width: 991.5px) {
-  .step {
-    width: 50%;
-    margin-bottom: 5px;
-  }
 }
 </style>

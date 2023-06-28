@@ -1,69 +1,79 @@
 <template>
-    <LoadingItem :active="isLoading" :z-index="1060">
+  <LoadingItem
+    :active="isLoading"
+    :z-index="1060"
+    :opacity="0"
+  >
     <div class="loadingGif">
       <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
     </div>
   </LoadingItem>
   <div class="container text-white">
-    <div class="row mx-0 newsCardWrap" style="margin-top: 63px">
-      <h1 class="my-lg-3" v-if="articles.pack.length>0">補充包資訊</h1>
-      <div class="col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" v-for="item in articles.pack" :key="item.id">
-        <img
-          :src="item.image"
-          class="card-img-top w-100"
-          alt="..."
-        />
-        <div class="mt-1  text-white">
-          <div class="text-start pb-1">&lt;{{item.tag}}&gt;</div>
-          <div class="text-start pb-1">{{ item.title }}</div>
-          <div class="text-start pb-1">{{ item.description }}</div>
+    <p class="fs-2 my-4" v-if="articles.pack.length > 0">補充包資訊</p>
+    <div class="row mx-auto mt-5">
+      <div
+        class="card col-md-6 col-lg-4 mb-2 bg-myBgMain"
+        v-for="item in articles.pack"
+        :key="item.id"
+      >
+        <img :src="item.image" class="card-img-top w-100" alt="..." />
+        <div class="px-4 py-2 text-white bg-myBgCard">
+          <p class="text-start my-2">&lt;{{ item.tag }}&gt;</p>
+          <p class="text-start my-2">{{ item.title }}</p>
+          <p class="text-start my-2">{{ item.description }}</p>
         </div>
       </div>
     </div>
-    <div class="row newsCardWrap">
-      <h1 class="my-lg-3" v-if="articles.product.length>0">商品資訊</h1>
-      <div class="row">
-        <div class=" col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" style="width: 442px" v-for="item in articles.product" :key="item.id">
-          <div
-            class="d-flex justify-content-center align-items-center;"
-            style="background-color: black"
-          >
-            <img
-              style="max-width: 134px; max-height: 154px"
-              :src="item.image"
-              class="card-img-top"
-              alt="..."
-            />
-          </div>
-          <div class="mt-1  text-white">
-            <div class="text-start pb-1">&lt;{{item.tag}}&gt;</div>
-            <div class="text-start pb-1">{{ item.title }}</div>
-            <div class="text-start pb-1">{{ item.description }}</div>
-          </div>
+    <p class="fs-2 my-4" v-if="articles.product.length > 0">商品資訊</p>
+    <div class="row">
+      <div
+        class="card col-md-6 col-lg-4 mb-2 bg-myBgMain"
+        style="width: 442px"
+        v-for="item in articles.product"
+        :key="item.id"
+      >
+        <div
+          class="d-flex justify-content-center align-items-center;"
+          style="background-color: black"
+        >
+          <img
+            style="max-width: 134px; max-height: 154px"
+            :src="item.image"
+            class="card-img-top"
+            alt="..."
+          />
+        </div>
+        <div class="px-4 py-2 text-white bg-myBgCard">
+          <p class="text-start my-2">&lt;{{ item.tag }}&gt;</p>
+          <p class="text-start my-2">{{ item.title }}</p>
+          <p class="text-start my-2">{{ item.description }}</p>
         </div>
       </div>
     </div>
-    <div class="row newsCardWrap">
-      <h1 class="my-lg-3" v-if="articles.game.length>0">比賽資訊</h1>
-      <div class="row">
-        <div class="col-lg-6 newsCard card mb-2 p-2 bg-myBgCard" style="width: 442px" v-for="item in articles.game" :key="item.id">
-          <div
-            class="d-flex justify-content-center align-items-center;"
-            style="background-color: black"
-          >
-            <img
-              style="max-width: 134px; max-height: 154px"
-              :src="item.image"
-              class="card-img-top"
-              alt="..."
-            />
-          </div>
+    <p class="fs-2 my-4" v-if="articles.game.length > 0">比賽資訊</p>
+    <div class="row">
+      <div
+        class="card col-md-6 col-lg-4 mb-2 bg-myBgMain"
+        style="width: 442px"
+        v-for="item in articles.game"
+        :key="item.id"
+      >
+        <div
+          class="d-flex justify-content-center align-items-center;"
+          style="background-color: black"
+        >
+          <img
+            style="max-width: 134px; max-height: 154px"
+            :src="item.image"
+            class="card-img-top"
+            alt="..."
+          />
+        </div>
 
-          <div class="mt-1  text-white">
-            <div class="text-start pb-1">&lt;{{item.tag}}&gt;</div>
-            <div class="text-start pb-1">{{ item.title }}</div>
-            <div class="text-start pb-1">{{ item.description }}</div>
-          </div>
+        <div class="px-4 py-2 text-white bg-myBgCard">
+          <p class="text-start my-2">&lt;{{ item.tag }}&gt;</p>
+          <p class="text-start my-2">{{ item.title }}</p>
+          <p class="text-start my-2">{{ item.description }}</p>
         </div>
       </div>
     </div>
@@ -89,7 +99,7 @@ export default {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
         .then((res) => {
-          res.data.articles.forEach(item => {
+          res.data.articles.forEach((item) => {
             if (item.tag === '補充包') {
               this.articles.pack.push(item)
             } else if (item.tag === '商品') {
@@ -102,6 +112,7 @@ export default {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`
@@ -110,7 +121,6 @@ export default {
     }
   },
   mounted () {
-    window.scrollTo(0, 0) // 將頁面捲動到頂部
     this.isLoading = true
     this.getArticles()
   }
@@ -118,26 +128,20 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  max-width: 900px;
-  flex-grow: 1;
-}
-
-@media (max-width: 991.5px){
-  h1{
+/* @media (max-width: 991.5px) {
+  h1 {
     padding: 0;
   }
-  .container{
+  .container {
     width: 375px;
   }
-  .newsCardWrap{
+  .newsCardWrap {
     width: 350px;
     margin: 0 auto;
   }
-.newsCard{
-  width: 350px;
-  margin: 0 auto;
-}
-}
-
+  .newsCard {
+    width: 350px;
+    margin: 0 auto;
+  }
+} */
 </style>

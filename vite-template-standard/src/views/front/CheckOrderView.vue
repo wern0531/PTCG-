@@ -111,6 +111,7 @@ export default {
         .post(`${VITE_URL}v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then(() => {
           Swal.fire({
+            backdrop: false,
             icon: 'success',
             title: '付款完成',
             showConfirmButton: true,
@@ -129,6 +130,7 @@ export default {
         .catch((err) => {
           this.isLoading = false
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err}.response.data.message`

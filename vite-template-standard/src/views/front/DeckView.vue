@@ -1,10 +1,10 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060">
-    <div class="loadingGif">
-      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
-    </div>
+  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0">
+    <!-- <div class="loadingGif"> -->
+    <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
+    <!-- </div> -->
   </LoadingItem>
-  <div class="container mt-5">
+  <div class="container mt-5" v-if="isready">
     <div class="d-flex flex-column flex-md-row">
       <div
         class="mb-2 mb-lg-0 d-flex justify-content-start justify-content-lg-center"
@@ -12,8 +12,10 @@
         :key="index"
       >
         <button
-        :class="{disabled : isDisabled}"
-        class="deckBtn btn btn-myBgMain text-myColor fs-6 fs-md-3" @click="getDeck(item)">
+          :class="{ disabled: isDisabled }"
+          class="deckBtn btn btn-myBgMain text-myColor fs-6 fs-md-3"
+          @click="getDeck(item)"
+        >
           {{ item }}
         </button>
       </div>
@@ -39,54 +41,60 @@
     </div>
   </div>
   <div class="container mt-5 p-3" v-if="isready">
-    <div>
-      <div>
+    <div class="row align-items-center">
+      <div class="col-lg-9">
         <img class="deckImg" :src="article.image" alt="牌組圖片" />
       </div>
-      <div
-        class="ms-3 text-center text-white d-flex flex-column justify-content-center"
-      >
-        <span class="my-3">{{ article.description }}</span>
-        <h1 class="mb-3 mb-md-5">{{ article.title }}</h1>
-        <div>
-          <div class="deckList d-flex justify-content-between flex-column">
-            <div class="d-flex mb-1">
-              <div class="d-flex text-white">牌組強度</div>
-              <div class="d-flex align-items-center text-white ms-3">
-                <i
-                  v-for="index in 5"
-                  :key="index"
-                  :class="{
-                    'fa-solid fa-star text-myColor': index <= starLevel,
-                    'fa-regular fa-star': index > starLevel,
-                  }"
-                ></i>
-              </div>
+      <div class="col-lg-3">
+        <div class="ms-3 text-start text-white">
+          <div class="row align-items-center my-3 my-mb-5 my-lg-0">
+            <div
+              class="col-md-6 col-lg-12 mb-4 mb-md-0 text-center text-md-start"
+            >
+              <p class="mb-3">{{ article.description }}</p>
+              <h1 class="mb-0 mb-lg-5">{{ article.title }}</h1>
             </div>
-            <div class="d-flex mb-1">
-              <div class="d-flex text-white">操作難度</div>
-              <div class="d-flex align-items-center text-white ms-3">
-                <i
-                  v-for="index in 5"
-                  :key="index"
-                  :class="{
-                    'fa-solid fa-star text-myColor': index <= starLevel,
-                    'fa-regular fa-star': index > starLevel,
-                  }"
-                ></i>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="d-flex text-white">構築價格</div>
-              <div class="d-flex align-items-center text-white ms-3">
-                <i
-                  v-for="index in 5"
-                  :key="index"
-                  :class="{
-                    'fa-solid fa-star text-myColor': index <= starLevel,
-                    'fa-regular fa-star': index > starLevel,
-                  }"
-                ></i>
+            <div class="col-md-6 col-lg-12">
+              <div class="deckList d-flex justify-content-between flex-column">
+                <div class="d-flex mb-1 mx-auto mx-md-0">
+                  <div class="text-white">牌組強度</div>
+                  <div class="d-flex align-items-center text-white ms-3">
+                    <i
+                      v-for="index in 5"
+                      :key="index"
+                      :class="{
+                        'fa-solid fa-star text-myColor': index <= starLevel,
+                        'fa-regular fa-star': index > starLevel,
+                      }"
+                    ></i>
+                  </div>
+                </div>
+                <div class="d-flex mb-1 mx-auto mx-md-0">
+                  <div class="text-white">操作難度</div>
+                  <div class="d-flex align-items-center text-white ms-3">
+                    <i
+                      v-for="index in 5"
+                      :key="index"
+                      :class="{
+                        'fa-solid fa-star text-myColor': index <= starLevel,
+                        'fa-regular fa-star': index > starLevel,
+                      }"
+                    ></i>
+                  </div>
+                </div>
+                <div class="d-flex mx-auto mx-md-0">
+                  <div class="text-white">構築價格</div>
+                  <div class="d-flex align-items-center text-white ms-3">
+                    <i
+                      v-for="index in 5"
+                      :key="index"
+                      :class="{
+                        'fa-solid fa-star text-myColor': index <= starLevel,
+                        'fa-regular fa-star': index > starLevel,
+                      }"
+                    ></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -138,6 +146,7 @@ export default {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`
@@ -150,12 +159,14 @@ export default {
         .then((res) => {
           this.article = res.data.article
           this.isready = true
-        }).then(() => {
+        })
+        .then(() => {
           this.isLoading = false
           this.isDisabled = false
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`
@@ -170,7 +181,6 @@ export default {
     }
   },
   mounted () {
-    window.scrollTo(0, 0) // 將頁面捲動到頂部
     this.isLoading = true
     this.title = this.$route.params.name
     this.getArticles()
@@ -179,15 +189,12 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  max-width: 900px;
-  flex-grow: 1;
-}
 .deckImg {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
-.deckBtn:hover{
+.deckBtn:hover {
   background: #ff6915;
-  color: black !important
+  color: black !important;
 }
 </style>

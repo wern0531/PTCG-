@@ -128,6 +128,7 @@ export default {
           this.$refs.form.resetForm()
           this.isclick = false
           Swal.fire({
+            backdrop: false,
             icon: 'success',
             title: '您的訂單已建立',
             showConfirmButton: true,
@@ -138,6 +139,7 @@ export default {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`

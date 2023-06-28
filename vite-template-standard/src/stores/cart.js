@@ -20,6 +20,7 @@ export const cartStore = defineStore('cart', {
         this.carts = res.data.data.carts
       }).catch((err) => {
         Swal.fire({
+          backdrop: false,
           icon: 'error',
           title: 'Oops...',
           text: `${err.response.data.message}`
@@ -37,6 +38,7 @@ export const cartStore = defineStore('cart', {
         .then((res) => {
           this.getCarts()
           Swal.fire({
+            backdrop: false,
             icon: 'success',
             title: `${title} 已成功選購`,
             showConfirmButton: true,
@@ -47,6 +49,7 @@ export const cartStore = defineStore('cart', {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`
@@ -60,6 +63,7 @@ export const cartStore = defineStore('cart', {
         .then((res) => {
           this.getCarts()
           Swal.fire({
+            backdrop: false,
             icon: 'success',
             title: `商品 ${title} 已刪除`,
             showConfirmButton: true,
@@ -70,6 +74,7 @@ export const cartStore = defineStore('cart', {
         })
         .catch((err) => {
           Swal.fire({
+            backdrop: false,
             icon: 'error',
             title: 'Oops...',
             text: `${err.response.data.message}`

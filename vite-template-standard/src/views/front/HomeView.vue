@@ -99,7 +99,10 @@
       商品列表
     </div>
     <div class="row">
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto">
+      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+      data-aos="fade-up"
+     data-aos-easing="linear"
+     data-aos-duration="500">
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -115,7 +118,10 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto">
+      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+      data-aos="fade-up"
+     data-aos-easing="linear"
+     data-aos-duration="700">
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -131,7 +137,10 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto">
+      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+      data-aos="fade-up"
+     data-aos-easing="linear"
+     data-aos-duration="900">
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -147,7 +156,10 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto">
+      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+      data-aos="fade-up"
+     data-aos-easing="linear"
+     data-aos-duration="1100">
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -199,13 +211,15 @@
       </div>
       <div class="col-12 col-lg-8 flex-column align-items-center">
         <div class="deckcontent">
-          <div class="row justify-content-center">
-            <div class="hartdeck" data-aos="fade-down">熱門牌組</div>
+          <div class="d-flex justify-content-center">
+            <div class="hartdeck text-myBgMain" data-aos="fade-down">熱門牌組</div>
           </div>
-
           <div class="deckAll">
             <div class="row px-5">
-              <div class="col-12 col-md-6 mb-4">
+              <div class="col-12 col-md-6 mb-4"
+              data-aos="flip-left"
+     data-aos-easing="linear"
+     data-aos-duration="500">
                 <div
                   class="deckCard deck1 p-4"
                   type="button"
@@ -262,7 +276,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6 mb-4">
+              <div class="col-12 col-md-6 mb-4"
+              data-aos="flip-left"
+     data-aos-easing="linear"
+     data-aos-duration="700">
                 <div
                   class="deckCard deck2 p-4"
                   type="button"
@@ -320,7 +337,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6 mb-4 mb-md-0">
+              <div class="col-12 col-md-6 mb-4 mb-md-0"
+              data-aos="flip-left"
+     data-aos-easing="linear"
+     data-aos-duration="900">
                 <div
                   class="deckCard deck3 p-4"
                   type="button"
@@ -377,7 +397,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6">
+              <div class="col-12 col-md-6"
+              data-aos="flip-left"
+     data-aos-easing="linear"
+     data-aos-duration="1100">
                 <div
                   class="deckCard deck4 p-4"
                   type="button"
@@ -462,8 +485,9 @@
           </div>
         </div>
       </div>
-      <div class="row mt-5">
-        <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
+      <div class="row mt-5"
+      data-aos="fade-up">
+        <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
           <RouterLink to="/news" >
             <img
             src="@/assets/image/SV1_TWHK_THUMBNAIL_before.png"
@@ -477,7 +501,7 @@
             <p class="newsCardTime">預定發售日2023/02/03</p>
           </div>
         </div>
-        <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
+        <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
           <RouterLink to="/news">
             <div
             class="d-flex justify-content-center align-items-center bg-white"
@@ -496,7 +520,7 @@
             <p class="newsCardTime">預定發售日2023/03/03</p>
           </div>
         </div>
-        <div class="col-12 col-sm-7 col-xl-4 mx-auto newsCard">
+        <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
           <RouterLink to="/news">
             <div
             class="d-flex justify-content-center align-items-center"
@@ -520,6 +544,7 @@
         </div>
       </div>
       <button
+      data-aos="fade-up"
         class="my-5 py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor"
         type="button"
         @click="toNews"
@@ -534,31 +559,31 @@
       <p>官方頻道</p>
       <div class="border"></div>
     </div>
-    <div class="row mt-4">
-      <div class="col-12 col-sm-8 col-lg-4 mx-auto">
+    <div class="row mt-4 align-items-center">
+      <div class="col-4 ">
         <a href="https://asia.pokemon-card.com/tw/"
           >
             <img
-              style="width: 195px; height: 100px"
+             class="w-75"
               src="@/assets/image/ptcg.png"
               alt="寶可夢官方網站LOGO"
             /></a>
       </div>
-      <div class="col-12 col-sm-8 col-lg-4 mx-auto mt-4 mt-lg-0 d-flex justify-content-center align-items-center officialFB">
+      <div class="col-4 officialFB">
         <a href="https://www.facebook.com/Pokemon.TCG.Official.Taiwan"
           >
             <img
-              style="width: 228px; height: 46px"
+            class="w-75"
               src="@/assets/image/fb.png"
               alt="寶可夢官方FB LOGO"
             />
         </a>
       </div>
-      <div class="col-12 col-sm-8 col-lg-4 mx-auto mt-5 mt-lg-0 d-flex justify-content-center align-items-center officialYT">
+      <div class="col-4 officialYT">
         <a href="https://www.youtube.com/@pokemontcgtw"
           >
             <img
-              style="width: 240px; height: 54px"
+              class="w-75"
               src="@/assets/image/yt.png"
               alt="寶可夢官方YT LOGO"
             /></a>
@@ -597,15 +622,17 @@ export default {
   },
   components: { RouterLink }
 }
+
 </script>
 
 <style scoped>
 /* 主圖輪播 */
-.mainImg {
-  widows: 1920px;
+
+/* .mainImg {
+  width: 1920px;
   height: 710px;
   object-fit: cover;
-}
+} */
 .carousel-indicators button {
   width: 64px;
   height: 8px;
@@ -730,7 +757,7 @@ export default {
 }
 .deckcontent .deckName {
   font-weight: 900;
-  font-size: 28pofficialx;
+  font-size: 28px;
   line-height: 120%;
 }
 .deckcontent .deckList {
@@ -916,6 +943,9 @@ export default {
   }
   .newswrap {
     margin-top: 400px;
+  }
+  .myh3 {
+    font-size: 80px;
   }
 }
 @media (max-width: 375.5px){

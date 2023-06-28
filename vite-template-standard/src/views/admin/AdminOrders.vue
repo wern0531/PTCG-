@@ -293,9 +293,6 @@ export default {
         .put(`${VITE_URL}v2/api/${VITE_PATH}/admin/order/${item.id}`, {
           data: paid
         })
-        .then((res) => {
-          console.log(res)
-        })
     },
     openModel (status, item) {
       if (status === 'edit') {

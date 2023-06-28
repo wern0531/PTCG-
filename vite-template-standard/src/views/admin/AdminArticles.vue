@@ -232,7 +232,7 @@
             type="button"
             class="btn btn-outline-secondary"
             data-bs-dismiss="modal"
-          >
+            >
             取消
           </button>
           <button type="button" class="btn btn-danger" @click="delArticles">
@@ -243,7 +243,7 @@
     </div>
   </div>
   <!-- Modal -->
-</template>
+  </template>
 
 <script>
 import { Modal } from 'bootstrap'
