@@ -554,7 +554,7 @@
     </div>
   </div>
   <!-- 官方頻道 -->
-  <div class="container official bg-myBgCard" data-aos="fade-up">
+  <div class="container official bg-myBgCard" data-aos="zoom-out">
     <div class="officialText mx-auto text-white">
       <p>官方頻道</p>
       <div class="border"></div>
