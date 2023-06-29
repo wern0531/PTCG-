@@ -195,106 +195,18 @@ export default {
 </script>
 
 <style scoped>
-/* .productBtnList {
-  margin-top: 40px;
-}
-.productsList {
-  box-sizing: border-box;
-  padding: 8px;
-  margin-bottom: 10px;
-  width: 176px;
-  height: 52px;
-  background-color: #1c1a19;
-  border: 1px solid #ff6915;
-  border-radius: 8px;
-}
-.productList {
-  box-sizing: border-box;
-  padding: 8px;
-  margin-bottom: 10px;
-
-  width: 176px;
-  height: 52px;
-
-  border-radius: 8px;
-} */
 .productList:hover {
   color: #ff6915 !important;
   border: 1px solid #ff6915 !important;
 }
-/* .productBtn {
-  box-sizing: border-box;
-  padding: 8px;
-  margin-bottom: 10px;
-  width: 176px;
-  height: 52px;
-  background-color: #1c1a19;
-  border: 1px solid #ff6915;
-  border-radius: 8px;
-} */
-/* img{
-  max-width: 100%;
-  height: auto;
-  object-fit: cover
-} */
 .productBtn:hover {
   background-color: #ffdbc7 !important;
 }
-/* .productsList p,
-.productList p,
-.productBtn p {
-  margin: 0 auto;
-  width: 100px;
-  height: 36px;
-  font-size: 20px;
-  line-height: 180%;
-} */
-/* .productCard {
-  background: #1c1a19;
-  text-align: center;
-  border-radius: 16px;
-} */
 .productCard:hover {
   transform: translateY(-12px);
   box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
 }
-/* .productCard:hover img {
-  transform: scale(1.08);
-  border: 2px solid transparent;
-  box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
-} */
 .hover-pointer:hover {
   cursor: zoom-in;
-}
-@media (max-width: 991.5px) {
-  /* .productBtnList {
-    width: 350px;
-    margin: 0 auto;
-    padding-left: 0;
-    display: flex;
-    align-items: center;
-  }
-  .productsList {
-    box-sizing: border-box;
-    padding: 8px;
-    margin-bottom: 10px;
-    width: 320px;
-    height: 52px;
-    background-color: #1c1a19;
-    border: 1px solid #ff6915;
-    border-radius: 8px;
-  }
-  .productList {
-    box-sizing: border-box;
-    padding: 8px;
-    margin-bottom: 10px;
-    width: 320px;
-    height: 52px;
-    border-radius: 8px;
-  } */
-  /* .productCardWrap {
-    width: 350px;
-    margin: 0 auto;
-  } */
 }
 </style>

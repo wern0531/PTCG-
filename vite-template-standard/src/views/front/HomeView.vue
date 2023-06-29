@@ -1,7 +1,7 @@
 <template>
   <!-- 主圖輪播 -->
 
-    <div
+  <div
     id="carouselExampleIndicators"
     class="carousel slide"
     data-bs-ride="carousel"
@@ -99,10 +99,12 @@
       商品列表
     </div>
     <div class="row">
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
-      data-aos="fade-up"
-     data-aos-easing="linear"
-     data-aos-duration="500">
+      <div
+        class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="500"
+      >
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -118,10 +120,12 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
-      data-aos="fade-up"
-     data-aos-easing="linear"
-     data-aos-duration="700">
+      <div
+        class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="700"
+      >
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -137,10 +141,12 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
-      data-aos="fade-up"
-     data-aos-easing="linear"
-     data-aos-duration="900">
+      <div
+        class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="900"
+      >
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -156,10 +162,12 @@
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
-      data-aos="fade-up"
-     data-aos-easing="linear"
-     data-aos-duration="1100">
+      <div
+        class="col-10 col-md-6 col-lg-3 mb-3 mb-lg-0 mx-auto"
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="1100"
+      >
         <div
           class="card productCard bg-myBgCard align-items-center"
           type="button"
@@ -205,21 +213,29 @@
           <p class="deckDescribeP2 text-center text-lg-start text-white">
             這裡提供最完整的教學資訊!
           </p>
-          <RouterLink to="/deck/夢幻Vmax" class="btn py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor">
-            查看教學</RouterLink>
+          <RouterLink
+            to="/deck/夢幻Vmax"
+            class="btn py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor"
+          >
+            查看教學</RouterLink
+          >
         </div>
       </div>
       <div class="col-12 col-lg-8 flex-column align-items-center">
         <div class="deckcontent">
           <div class="d-flex justify-content-center">
-            <div class="hartdeck text-myBgMain" data-aos="fade-down">熱門牌組</div>
+            <div class="hartdeck text-myBgMain" data-aos="fade-down">
+              熱門牌組
+            </div>
           </div>
           <div class="deckAll">
             <div class="row px-5">
-              <div class="col-12 col-md-6 mb-4"
-              data-aos="flip-left"
-     data-aos-easing="linear"
-     data-aos-duration="500">
+              <div
+                class="col-12 col-md-6 mb-4"
+                data-aos="flip-left"
+                data-aos-easing="linear"
+                data-aos-duration="500"
+              >
                 <div
                   class="deckCard deck1 p-4"
                   type="button"
@@ -276,10 +292,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6 mb-4"
-              data-aos="flip-left"
-     data-aos-easing="linear"
-     data-aos-duration="700">
+              <div
+                class="col-12 col-md-6 mb-4"
+                data-aos="flip-left"
+                data-aos-easing="linear"
+                data-aos-duration="700"
+              >
                 <div
                   class="deckCard deck2 p-4"
                   type="button"
@@ -337,10 +355,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6 mb-4 mb-md-0"
-              data-aos="flip-left"
-     data-aos-easing="linear"
-     data-aos-duration="900">
+              <div
+                class="col-12 col-md-6 mb-4 mb-md-0"
+                data-aos="flip-left"
+                data-aos-easing="linear"
+                data-aos-duration="900"
+              >
                 <div
                   class="deckCard deck3 p-4"
                   type="button"
@@ -397,10 +417,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6"
-              data-aos="flip-left"
-     data-aos-easing="linear"
-     data-aos-duration="1100">
+              <div
+                class="col-12 col-md-6"
+                data-aos="flip-left"
+                data-aos-easing="linear"
+                data-aos-duration="1100"
+              >
                 <div
                   class="deckCard deck4 p-4"
                   type="button"
@@ -485,15 +507,14 @@
           </div>
         </div>
       </div>
-      <div class="row mt-5"
-      data-aos="fade-up">
+      <div class="row mt-5" data-aos="fade-up">
         <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
-          <RouterLink to="/news" >
+          <RouterLink to="/news">
             <img
-            src="@/assets/image/SV1_TWHK_THUMBNAIL_before.png"
-            class="newsCardImg w-100"
-            alt="補充包封面"
-          />
+              src="@/assets/image/SV1_TWHK_THUMBNAIL_before.png"
+              class="newsCardImg w-100"
+              alt="補充包封面"
+            />
           </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
@@ -504,15 +525,15 @@
         <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
           <RouterLink to="/news">
             <div
-            class="d-flex justify-content-center align-items-center bg-white"
-          >
-            <img
-              style="max-width: 206px; max-height: 206px"
-              src="@/assets/image/tw_product_Deck_Shield_93431981.png"
-              class="newsCardImg"
-              alt="寶可夢造型卡套"
-            />
-          </div>
+              class="d-flex justify-content-center align-items-center bg-white"
+            >
+              <img
+                style="max-width: 206px; max-height: 206px"
+                src="@/assets/image/tw_product_Deck_Shield_93431981.png"
+                class="newsCardImg"
+                alt="寶可夢造型卡套"
+              />
+            </div>
           </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;商品&gt;</p>
@@ -523,16 +544,16 @@
         <div class="col-12 col-sm-7 col-lg-4 mx-auto newsCard">
           <RouterLink to="/news">
             <div
-            class="d-flex justify-content-center align-items-center"
-            style="height: 206px; background: black"
-          >
-            <img
-              style="max-width: 134px; max-height: 154px"
-              src="@/assets/image/PTCGleague.png"
-              class="newsCardImg w-100"
-              alt="地區聯盟賽標示"
-            />
-          </div>
+              class="d-flex justify-content-center align-items-center"
+              style="height: 206px; background: black"
+            >
+              <img
+                style="max-width: 134px; max-height: 154px"
+                src="@/assets/image/PTCGleague.png"
+                class="newsCardImg w-100"
+                alt="地區聯盟賽標示"
+              />
+            </div>
           </RouterLink>
           <div class="mt-3 text-start newsCardContent d-flex flex-column">
             <p class="newsCardClass text-myColor">&lt;比賽&gt;</p>
@@ -544,7 +565,7 @@
         </div>
       </div>
       <button
-      data-aos="fade-up"
+        data-aos="fade-up"
         class="my-5 py-1 px-4 border-myColor rounded-2 bg-myBgMain text-myColor"
         type="button"
         @click="toNews"
@@ -554,42 +575,46 @@
     </div>
   </div>
   <!-- 官方頻道 -->
-  <div class="container official bg-myBgCard" data-aos="zoom-out">
+  <div
+    class="container official bg-myBgCard"
+    data-aos="zoom-in"
+    data-aos-offset="200"
+  >
     <div class="officialText mx-auto text-white">
       <p>官方頻道</p>
       <div class="border"></div>
     </div>
     <div class="row mt-4 align-items-center">
-      <div class="col-4 ">
-        <a href="https://asia.pokemon-card.com/tw/"
-          >
-            <img
-             class="w-75"
-              src="@/assets/image/ptcg.png"
-              alt="寶可夢官方網站LOGO"
-            /></a>
+      <div class="col-4">
+        <a href="https://asia.pokemon-card.com/tw/">
+          <img
+            class="w-75"
+            src="@/assets/image/ptcg.png"
+            alt="寶可夢官方網站LOGO"
+        /></a>
       </div>
       <div class="col-4 officialFB">
-        <a href="https://www.facebook.com/Pokemon.TCG.Official.Taiwan"
-          >
-            <img
+        <a href="https://www.facebook.com/Pokemon.TCG.Official.Taiwan">
+          <img
             class="w-75"
-              src="@/assets/image/fb.png"
-              alt="寶可夢官方FB LOGO"
-            />
+            src="@/assets/image/fb.png"
+            alt="寶可夢官方FB LOGO"
+          />
         </a>
       </div>
       <div class="col-4 officialYT">
-        <a href="https://www.youtube.com/@pokemontcgtw"
-          >
-            <img
-              class="w-75"
-              src="@/assets/image/yt.png"
-              alt="寶可夢官方YT LOGO"
-            /></a>
+        <a href="https://www.youtube.com/@pokemontcgtw">
+          <img class="w-75" src="@/assets/image/yt.png" alt="寶可夢官方YT LOGO"
+        /></a>
       </div>
     </div>
   </div>
+  <!-- 至頂按鈕 -->
+  <button class="btn back-top btn-myColor rounded-circle"
+  v-show="showBackToTop"
+  @click="scrollToTop">
+    <i class="bi bi-arrow-up fs-1"></i>
+  </button>
 </template>
 
 <script>
@@ -598,6 +623,7 @@ import { RouterLink } from 'vue-router'
 export default {
   data () {
     return {
+      showBackToTop: false,
       deck1: [5, 3, 4],
       deck2: [4, 2, 2],
       deck3: [5, 5, 4],
@@ -618,21 +644,28 @@ export default {
     },
     toNews () {
       this.$router.push('/news')
+    },
+    handleScroll () { //
+      const scrollPosition = window.scrollY || document.documentElement.scrollTop
+      this.showBackToTop = scrollPosition > 300
+    },
+    scrollToTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
   },
-  components: { RouterLink }
+  components: { RouterLink },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
+  }
 }
-
 </script>
 
 <style scoped>
 /* 主圖輪播 */
 
-/* .mainImg {
-  width: 1920px;
-  height: 710px;
-  object-fit: cover;
-} */
 .carousel-indicators button {
   width: 64px;
   height: 8px;
@@ -818,11 +851,10 @@ export default {
   color: #ffdbc7 !important;
 }
 .newsCard:hover .newsCardTitle {
-  color: #ff6915 !important;;
+  color: #ff6915 !important;
 }
 .newsCard {
   padding: 0px 48px;
-
 }
 .newsCardImg {
   width: auto;
@@ -871,14 +903,20 @@ export default {
   box-sizing: border-box;
   border-left: 2px solid #333333;
 }
-.officialYT{
+.officialYT {
   box-sizing: border-box;
   border-left: 2px solid #333333;
+}
+.back-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 80px;
+  height: 80px;
 }
 
 /* rwd */
 @media (max-width: 1400px) {
-
   .newsText h2 {
     font-size: 40px;
   }
@@ -890,7 +928,7 @@ export default {
   .myh1 {
     font-size: 50px;
   }
-  .myh2{
+  .myh2 {
     font-size: 50px;
   }
 }
@@ -947,12 +985,16 @@ export default {
   .myh3 {
     font-size: 80px;
   }
+  .back-top {
+  width: 60px;
+  height: 60px;
 }
-@media (max-width: 375.5px){
+}
+@media (max-width: 375.5px) {
   .myh3 {
     font-size: 60px;
   }
-  .hartdeck{
+  .hartdeck {
     margin-top: -120px;
     font-size: 60px;
   }
