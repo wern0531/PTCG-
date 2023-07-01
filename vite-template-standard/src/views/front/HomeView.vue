@@ -584,7 +584,7 @@
       <p>官方頻道</p>
       <div class="border"></div>
     </div>
-    <div class="row mt-4 align-items-center">
+    <div class="row gx-0 mt-4 align-items-center">
       <div class="col-4">
         <a href="https://asia.pokemon-card.com/tw/">
           <img
