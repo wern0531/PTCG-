@@ -1,6 +1,5 @@
 <template>
   <!-- 主圖輪播 -->
-
   <div
     id="carouselExampleIndicators"
     class="carousel slide"

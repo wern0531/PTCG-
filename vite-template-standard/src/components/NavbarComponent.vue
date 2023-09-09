@@ -1,145 +1,120 @@
 <template>
-  <nav class="navbar my-navbar fixed-top navbar-expand-lg bg-myBgMain">
+  <nav class="my-navbar fixed-top bg-myBgMain py-2 py-lg-4">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../assets/image/logo.png" alt="PTCGTrainerWeb" />
-      </a>
-      <button class="navbar-toggler ms-auto" type="button">
-        <RouterLink
-          v-if="cartsData.length > 0"
-          to="/cart"
-          type="button"
-          class="nav-link ms-4 d-flex align-items-center"
+      <div class="d-flex align-items-center">
+        <a class="" href="#">
+          <img src="../assets/image/logo.png" alt="PTCGTrainerWeb" />
+        </a>
+        <ul
+          class="d-none d-lg-flex mb-0 align-items-center ms-auto text-white list-unstyled"
         >
-          <div class="shoppingCart position-relative">
-            <span
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-              >{{ getCartNum }}</span
-            >
-          </div>
-        </RouterLink>
-        <button
-          v-else
-          type="button"
-          class="btn nav-link ms-4 d-flex align-items-center"
-          @click="noCarts"
-        >
-          <div class="shoppingCart position-relative"></div>
-        </button>
-      </button>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <img class="d-flex" src="../assets/image/menu.png" alt="菜單" />
-      </button>
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-        ref="collapse"
-      >
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item p-3 p-lg-0" @click="hideMenu">
+          <li class="me-lg-4">
             <RouterLink
               to="/products/全部商品"
-              active-class="active-link"
-              class="nav-link my-nav-item text-white d-block"
+              class="link-item py-2 text-white text-decoration-none"
               href="#"
               >商品列表</RouterLink
             >
           </li>
-          <li class="nav-item p-3 p-lg-0 ms-lg-4" @click="hideMenu">
+          <li class="h-100 me-lg-4">
             <RouterLink
               to="/news"
-              active-class="active-link"
-              class="nav-link my-nav-item text-white"
+              class="link-item py-2 text-white text-decoration-none"
               href="#"
               >最新消息</RouterLink
             >
           </li>
-          <li class="nav-item p-3 p-lg-0 ms-lg-4" @click="hideMenu">
+          <li class="me-lg-4">
             <RouterLink
               to="/deck/夢幻Vmax"
-              active-class="active-link"
-              class="nav-link my-nav-item text-white"
+              class="link-item py-2 text-white text-decoration-none"
               href="#"
               >牌組介紹</RouterLink
             >
           </li>
-          <li class="nav-item d-none d-lg-block">
-            <RouterLink
-              v-if="cartsData.length > 0"
-              to="/cart"
-              type="button"
-              class="nav-link ms-4 d-flex align-items-center"
-            >
-              <div class="shoppingCart position-relative">
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                  >{{ getCartNum }}</span
-                >
-              </div>
-            </RouterLink>
-            <button
-              v-else
-              type="button"
-              class="btn nav-link ms-4 d-flex align-items-center"
-              @click="noCarts"
-            >
-              <div class="shoppingCart position-relative"></div>
-            </button>
-          </li>
         </ul>
+        <!-- 購物車Btn -->
+        <button
+          type="button"
+          class="btn ms-auto ms-lg-0"
+          @click="carts.length > 0 ? $router.push('/cart') : noCarts()"
+        >
+          <div class="shoppingCart position-relative">
+            <span
+              v-if="carts.length > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >{{ getCartNum }}</span
+            >
+          </div>
+        </button>
+        <!-- 漢堡選單按鈕 -->
+        <button
+          class="d-block d-lg-none text-white btn-myBgMain btn ms-4"
+          @click="toggleMenu"
+        >
+          <img
+            class="menuBtnImg bg-myBgMain"
+            src="../assets/image/menu.png"
+            alt="菜單"
+          />
+        </button>
       </div>
     </div>
+    <!-- 漢堡選單 -->
+    <ul
+      class="menu mb-0 ps-0 bg-myBgMain w-100 fs-3 list-unstyled border-bottom"
+      :style="{ height: menuHeight + 'px' }"
+    >
+      <div class="container">
+        <li class="mb-3 text-start" @click="toggleMenu">
+          <RouterLink
+            to="/products/全部商品"
+            class="link-item py-2 text-white text-decoration-none"
+            href="#"
+            >商品列表</RouterLink
+          >
+        </li>
+        <li class="mb-3 text-start" @click="toggleMenu">
+          <RouterLink
+            to="/news"
+            class="link-item py-2 text-white text-decoration-none"
+            href="#"
+            >最新消息</RouterLink
+          >
+        </li>
+        <li class="mb-3 text-start" @click="toggleMenu">
+          <RouterLink
+            to="/deck/夢幻Vmax"
+            class="link-item py-2 text-white text-decoration-none"
+            href="#"
+            >牌組介紹</RouterLink
+          >
+        </li>
+      </div>
+    </ul>
   </nav>
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia'
-import { cartStore } from '@/stores/cart'
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { cartStore } from '@/stores/cart.js'
+import router from '../router/index'
 import Swal from 'sweetalert2'
 
-const { VITE_URL, VITE_PATH } = import.meta.env
-
 export default {
-  data () {
-    return {
-      isLoading: false,
-      checkCardModal: '',
-      loadingItem: ''
-    }
-  },
-  computed: {
-    ...mapState(cartStore, ['getCartNum', 'carts']),
-    cartsData () {
-      return this.carts || []
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['getCarts', 'delCart']),
-    updateQty (productId, qty, id) {
-      const data = {
-        product_id: productId,
-        qty
-      }
-      this.loadingItem = productId
-      this.$http
-        .put(`${VITE_URL}v2/api/${VITE_PATH}/cart/${id}`, { data })
-        .then((res) => {
-          this.getCarts()
-          this.loadingItem = ''
-        })
-        .catch((err) => {
-          alert(err.response.data.message)
-        })
-    },
-    noCarts () {
+  setup () {
+    const cart = cartStore()
+
+    const { getCarts } = cart
+    onMounted(() => {
+      getCarts()
+    })
+
+    const { carts, getCartNum } = storeToRefs(cart) // 取得購物車數量
+
+    const noCarts = () => {
+      // 購物車沒東西跳出提示轉往商品頁
       Swal.fire({
         backdrop: false,
         position: 'top-end',
@@ -147,55 +122,71 @@ export default {
         title: '您的購物車是空的唷~',
         text: '來去逛逛商品吧!!'
       }).then(() => {
-        this.$router.push('/products/全部商品')
+        router.push('/products/全部商品')
       })
-    },
-    hideMenu () {
-      this.$refs.collapse.classList.remove('show')
     }
-  },
-  mounted () {
-    this.getCarts()
+
+    const menuHeight = ref(0)
+    const toggleMenu = () => {
+      menuHeight.value = menuHeight.value === 153 ? 0 : 153
+    }
+
+    return {
+      getCartNum,
+      carts,
+      getCarts,
+      noCarts,
+      menuHeight,
+      toggleMenu
+    }
   }
 }
 </script>
 
 <style scoped>
 .my-navbar {
-  box-sizing: border-box;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.48);
 }
-.nav-item {
+.link-item {
   position: relative;
-  display: block;
-}
-.nav-item {
   font-weight: 900;
 }
-.my-nav-item::after {
+.link-item::after {
+  /* li hover效果偽元素 */
   content: "";
   width: 0;
   height: 4px;
-  background-color: #ff6915 !important;
+  background-color: #ff6915;
   position: absolute;
   top: 100%;
   left: 50%;
-  transition: all 0.8s;
+  transition: all 0.5s;
 }
 .shoppingCart {
   background-image: url(../assets/image/shopping_cart.svg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
   transition: transform 0.2s ease-in-out;
-  background-repeat: no-repeat;
 }
 .shoppingCart:hover {
   transform: scale(1.3);
 }
-@media (min-width: 992px) {
-  .my-nav-item:hover::after {
-    width: 100%;
-    left: 0;
-  }
+.link-item:hover::after {
+  width: 100%;
+  left: 0;
+}
+.menuBtnImg {
+  width: 30px;
+  height: 30px;
+}
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
 }
 </style>
