@@ -1,52 +1,23 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0">
+  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0.5">
     <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
   </LoadingItem>
-  <div class="container" v-if="isready">
+  <div class="container" v-if="isReady">
     <div class="row pt-5 d-flex flex-column flex-md-row">
       <div class="col-md-3">
         <ul
           class="p-0 text-center d-flex flex-md-column justify-content-between flex-wrap"
+
         >
           <li
             type="button"
-            class="btn border-white bg-myBgCard text-myColor mb-2 fs-4 productList"
-            :class="category === '全部商品' ? 'text-myColor' : 'text-white'"
-            @click="getProducts('全部商品')"
-          >
-            全部商品
-          </li>
-          <li
-            type="button"
             class="btn border-white bg-myBgCard mb-2 fs-4 productList"
-            :class="category === '單卡' ? 'text-myColor' : 'text-white'"
-            @click="getProducts(undefined, '單卡')"
+            v-for="thisCategory in allCategory"
+          :key="thisCategory"
+            :class="category === thisCategory ? 'text-myColor' : 'text-white'"
+            @click="getProducts(thisCategory)"
           >
-            單卡
-          </li>
-          <li
-            type="button"
-            class="btn border-white bg-myBgCard mb-2 fs-4 productList"
-            :class="category === '牌組' ? 'text-myColor' : 'text-white'"
-            @click="getProducts(undefined, '牌組')"
-          >
-            牌組
-          </li>
-          <li
-            type="button"
-            class="btn border-white bg-myBgCard mb-2 fs-4 productList"
-            :class="category === '禮盒' ? 'text-myColor' : 'text-white'"
-            @click="getProducts(undefined, '禮盒')"
-          >
-            禮盒
-          </li>
-          <li
-            type="button"
-            class="btn border-white bg-myBgCard mb-2 fs-4 productList"
-            :class="category === '周邊' ? 'text-myColor' : 'text-white'"
-            @click="getProducts(undefined, '周邊')"
-          >
-            周邊
+            {{ thisCategory }}
           </li>
         </ul>
       </div>
@@ -60,10 +31,10 @@
         <div class="row productCardWrap">
           <div
             class="col-md-6 col-lg-4 p-3"
-            v-for="product in productCategory"
+            v-for="product in products"
             :key="product.id"
           >
-            <div class="card bg-myBgCard productCard">
+            <div class="card bg-myBgCard productCard overflow-hidden">
               <RouterLink
                 :to="`/product/${product.id}`"
                 class="hover-pointer text-decoration-none"
@@ -95,9 +66,9 @@
           </div>
         </div>
         <Pagination
-          v-if="category == '全部商品'"
+          v-if="totalPage>1"
           :pages="pagination"
-          @emit-pages="getProducts"
+          @emit-pages="changePage"
         ></Pagination>
       </div>
     </div>
@@ -105,91 +76,147 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia'
-import { cartStore } from '@/stores/cart'
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { cartStore } from '@/stores/cart.js'
+import axios from 'axios'
 import Swal from 'sweetalert2'
 import Pagination from '@/components/PaginationComponent.vue'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
-  data () {
-    return {
-      isready: false,
-      isLoading: false,
-      fullPage: false,
-      products: [],
-      productCategory: [],
-      category: '',
-      pagination: {},
-      page: 1
-    }
-  },
-  computed: {
-    isDisable () {
-      const store = this.$pinia.state.value
-      return store.cart.isDisable
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['addToCart']),
-    getProducts (page = 1, category = '全部商品') {
-      this.page = page
-      this.category = category
-      this.$http
-        .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/?page=${page}`)
-        .then((res) => {
-          this.products = res.data.products
-          this.pagination = res.data.pagination
-          if (category === '全部商品') {
-            this.productCategory = this.products
-            this.isready = true
-            this.isLoading = false
-          } else {
-            this.getCategory(category)
-          }
-        })
-        .catch((err) => {
-          this.isLoading = false
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    },
-    getCategory (category) {
-      this.$http
-        .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
-        .then((res) => {
-          this.productCategory = []
-          res.data.products.forEach((item) => {
-            if (item.category === category) {
-              this.productCategory.push(item)
-            }
-          })
-          this.isready = true
-          this.isLoading = false
-        })
-        .catch((err) => {
-          this.isLoading = false
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    }
-  },
   components: {
     Pagination
   },
-  mounted () {
-    this.isLoading = true
-    this.category = this.$route.params.category
-    this.getProducts(undefined, this.category)
+  setup () {
+    const isLoading = ref(false)
+    const isReady = ref(false)
+    const products = ref([])
+    const category = ref('')
+    const pagination = ref({})
+    const totalPage = ref('')
+    // 取得購物車所有商品
+    const getProducts = (nowCategory = '全部商品') => {
+      isLoading.value = true
+      category.value = nowCategory
+      if (nowCategory === '全部商品') {
+        axios
+          .get(`${VITE_URL}v2/api/${VITE_PATH}/products`)
+          .then((res) => {
+            products.value = res.data.products
+            pagination.value = res.data.pagination
+            totalPage.value = res.data.pagination.total_pages
+            isReady.value = true
+            isLoading.value = false
+          })
+          .catch((err) => {
+            isLoading.value = false
+            Swal.fire({
+              backdrop: false,
+              icon: 'error',
+              title: 'Oops...',
+              text: `${err.response.data.message}`
+            })
+          })
+      } else {
+        getCategory(nowCategory)
+      }
+    }
+    onMounted(() => { getProducts() })
+
+    // 取得購物車特定標籤商品
+    const getCategory = (nowCategory) => {
+      axios
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products?category=${encodeURIComponent(nowCategory)}`)
+        .then((res) => {
+          products.value = res.data.products
+          pagination.value = res.data.pagination
+          totalPage.value = res.data.pagination.total_pages
+          isReady.value = true
+          isLoading.value = false
+        })
+        .catch((err) => {
+          isLoading.value = false
+          Swal.fire({
+            backdrop: false,
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err.response.data.message}`
+          })
+        })
+    }
+
+    // 切換pagination頁數
+    const changePage = (nowPage) => {
+      isLoading.value = true
+      if (category.value === '全部商品') {
+        axios
+          .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}`)
+          .then((res) => {
+            window.scrollTo(0, 0)
+            pagination.value = res.data.pagination
+            products.value = res.data.products
+            isReady.value = true
+            isLoading.value = false
+          })
+          .catch((err) => {
+            isLoading.value = false
+            Swal.fire({
+              backdrop: false,
+              icon: 'error',
+              title: 'Oops...',
+              text: `${err.response.data.message}`
+            })
+          })
+      } else {
+        axios
+          .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}&category=${encodeURIComponent(category.value)}`)
+          .then((res) => {
+            window.scrollTo(0, 0)
+            pagination.value = res.data.pagination
+            products.value = res.data.products
+            isReady.value = true
+            isLoading.value = false
+          })
+          .catch((err) => {
+            isLoading.value = false
+            Swal.fire({
+              backdrop: false,
+              icon: 'error',
+              title: 'Oops...',
+              text: `${err.response.data.message}`
+            })
+          })
+      }
+    }
+
+    // 取得所有不同的category,並額外加入'全部商品'
+    const allCategory = ref([])
+    const checkAllCategory = () => {
+      axios.get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`).then(res => {
+        allCategory.value = ['全部商品', ...new Set(res.data.products.map((item) => item.category))]
+      })
+    }
+    onMounted(() => { checkAllCategory() })
+
+    const cart = cartStore()
+    const { isDisable } = storeToRefs(cart)
+    const { addToCart } = cart
+
+    return {
+      isLoading,
+      isReady,
+      isDisable,
+      category,
+      products,
+      pagination,
+      totalPage,
+      allCategory,
+      getProducts,
+      changePage,
+      addToCart
+    }
   }
 }
 </script>
@@ -203,8 +230,10 @@ export default {
   background-color: #ffdbc7 !important;
 }
 .productCard:hover {
-  transform: translateY(-12px);
   box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+}
+.productCard:hover img {
+  transform: scale(1.1);
 }
 .hover-pointer:hover {
   cursor: zoom-in;

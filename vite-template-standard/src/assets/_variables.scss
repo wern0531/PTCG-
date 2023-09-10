@@ -1683,6 +1683,11 @@ $pagination-bg: $myBgMain;
 $pagination-border-color: $myColor;
 $pagination-color: $white;
 
+$pagination-focus-color: $white;
+$pagination-focus-bg: $myBgMain;
+$pagination-focus-box-shadow: none ;
+$pagination-focus-outline: 0 ;
+
 $pagination-active-color: $myColor;
 $pagination-active-bg: $myBgCard;
 $pagination-active-border-color: $myColor;
@@ -1692,6 +1697,6 @@ $pagination-disabled-border-color: $myColor;
 
 $pagination-hover-color: $myColor;
 $pagination-hover-bg: $btnBg;
-$pagination-hover-border-color: $myBgMain;
+$pagination-hover-border-color: $myColor;
 
 
