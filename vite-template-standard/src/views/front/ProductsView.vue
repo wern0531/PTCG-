@@ -1,9 +1,7 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0.5">
-    <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
-  </LoadingItem>
-  <div class="container" v-if="isReady">
-    <div class="row pt-5 d-flex flex-column flex-md-row">
+  <LoadingComponent :is-loading="isLoading"></LoadingComponent>
+  <div class="container" v-show="isReady">
+    <div class="row w-100 pt-5 d-flex flex-column flex-md-row">
       <div class="col-md-3">
         <ul
           class="p-0 text-center d-flex flex-md-column justify-content-between flex-wrap"
@@ -75,150 +73,131 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { cartStore } from '@/stores/cart.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import LoadingComponent from '../../components/LoadingComponent.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
+const isLoading = ref(false)
+const isReady = ref(false)
+const products = ref([])
+const category = ref('')
+const pagination = ref({})
+const totalPage = ref('')
 
-export default {
-  components: {
-    Pagination
-  },
-  setup () {
-    const isLoading = ref(false)
-    const isReady = ref(false)
-    const products = ref([])
-    const category = ref('')
-    const pagination = ref({})
-    const totalPage = ref('')
-    // 取得購物車所有商品
-    const getProducts = (nowCategory = '全部商品') => {
-      isLoading.value = true
-      category.value = nowCategory
-      if (nowCategory === '全部商品') {
-        axios
-          .get(`${VITE_URL}v2/api/${VITE_PATH}/products`)
-          .then((res) => {
-            products.value = res.data.products
-            pagination.value = res.data.pagination
-            totalPage.value = res.data.pagination.total_pages
-            isReady.value = true
-            isLoading.value = false
-          })
-          .catch((err) => {
-            isLoading.value = false
-            Swal.fire({
-              backdrop: false,
-              icon: 'error',
-              title: 'Oops...',
-              text: `${err.response.data.message}`
-            })
-          })
-      } else {
-        getCategory(nowCategory)
-      }
-    }
-    onMounted(() => { getProducts() })
+const cart = cartStore()
+const { isDisable } = storeToRefs(cart)
+const { addToCart } = cart
 
-    // 取得購物車特定標籤商品
-    const getCategory = (nowCategory) => {
-      axios
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products?category=${encodeURIComponent(nowCategory)}`)
-        .then((res) => {
-          products.value = res.data.products
-          pagination.value = res.data.pagination
-          totalPage.value = res.data.pagination.total_pages
-          isReady.value = true
-          isLoading.value = false
-        })
-        .catch((err) => {
-          isLoading.value = false
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    }
-
-    // 切換pagination頁數
-    const changePage = (nowPage) => {
-      isLoading.value = true
-      if (category.value === '全部商品') {
-        axios
-          .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}`)
-          .then((res) => {
-            window.scrollTo(0, 0)
-            pagination.value = res.data.pagination
-            products.value = res.data.products
-            isReady.value = true
-            isLoading.value = false
-          })
-          .catch((err) => {
-            isLoading.value = false
-            Swal.fire({
-              backdrop: false,
-              icon: 'error',
-              title: 'Oops...',
-              text: `${err.response.data.message}`
-            })
-          })
-      } else {
-        axios
-          .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}&category=${encodeURIComponent(category.value)}`)
-          .then((res) => {
-            window.scrollTo(0, 0)
-            pagination.value = res.data.pagination
-            products.value = res.data.products
-            isReady.value = true
-            isLoading.value = false
-          })
-          .catch((err) => {
-            isLoading.value = false
-            Swal.fire({
-              backdrop: false,
-              icon: 'error',
-              title: 'Oops...',
-              text: `${err.response.data.message}`
-            })
-          })
-      }
-    }
-
-    // 取得所有不同的category,並額外加入'全部商品'
-    const allCategory = ref([])
-    const checkAllCategory = () => {
-      axios.get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`).then(res => {
-        allCategory.value = ['全部商品', ...new Set(res.data.products.map((item) => item.category))]
+// 取得購物車所有商品
+const getProducts = (nowCategory = '全部商品') => {
+  isReady.value = false
+  isLoading.value = true
+  category.value = nowCategory
+  if (nowCategory === '全部商品') {
+    axios
+      .get(`${VITE_URL}v2/api/${VITE_PATH}/products`)
+      .then((res) => {
+        products.value = res.data.products
+        pagination.value = res.data.pagination
+        totalPage.value = res.data.pagination.total_pages
+        isReady.value = true
+        isLoading.value = false
       })
-    }
-    onMounted(() => { checkAllCategory() })
-
-    const cart = cartStore()
-    const { isDisable } = storeToRefs(cart)
-    const { addToCart } = cart
-
-    return {
-      isLoading,
-      isReady,
-      isDisable,
-      category,
-      products,
-      pagination,
-      totalPage,
-      allCategory,
-      getProducts,
-      changePage,
-      addToCart
-    }
+      .catch((err) => {
+        isLoading.value = false
+        Swal.fire({
+          backdrop: false,
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      })
+  } else {
+    getCategory(nowCategory)
   }
 }
+getProducts()
+
+// 取得購物車特定標籤商品
+const getCategory = (nowCategory) => {
+  axios
+    .get(`${VITE_URL}v2/api/${VITE_PATH}/products?category=${encodeURIComponent(nowCategory)}`)
+    .then((res) => {
+      products.value = res.data.products
+      pagination.value = res.data.pagination
+      totalPage.value = res.data.pagination.total_pages
+      isReady.value = true
+      isLoading.value = false
+    })
+    .catch((err) => {
+      isLoading.value = false
+      Swal.fire({
+        backdrop: false,
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.response.data.message}`
+      })
+    })
+}
+
+// 切換pagination頁數
+const changePage = (nowPage) => {
+  isLoading.value = true
+  if (category.value === '全部商品') {
+    axios
+      .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}`)
+      .then((res) => {
+        window.scrollTo(0, 0)
+        pagination.value = res.data.pagination
+        products.value = res.data.products
+        isReady.value = true
+        isLoading.value = false
+      })
+      .catch((err) => {
+        isLoading.value = false
+        Swal.fire({
+          backdrop: false,
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      })
+  } else {
+    axios
+      .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}&category=${encodeURIComponent(category.value)}`)
+      .then((res) => {
+        window.scrollTo(0, 0)
+        pagination.value = res.data.pagination
+        products.value = res.data.products
+        isReady.value = true
+        isLoading.value = false
+      })
+      .catch((err) => {
+        isLoading.value = false
+        Swal.fire({
+          backdrop: false,
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      })
+  }
+}
+
+// 取得所有不同的category,並額外加入'全部商品'
+const allCategory = ref([])
+const checkAllCategory = () => {
+  axios.get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`).then(res => {
+    allCategory.value = ['全部商品', ...new Set(res.data.products.map((item) => item.category))]
+  })
+}
+checkAllCategory()
 </script>
 
 <style scoped>

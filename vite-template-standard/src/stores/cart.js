@@ -27,11 +27,11 @@ export const cartStore = defineStore('cart', {
         })
       })
     },
-    addToCart (id, title) {
+    addToCart (id, title, qty = 1) {
       this.isDisable = true
       const data = {
         product_id: id,
-        qty: 1
+        qty
       }
       axios
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, { data })

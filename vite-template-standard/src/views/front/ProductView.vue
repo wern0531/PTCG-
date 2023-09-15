@@ -1,12 +1,5 @@
 <template>
-  <LoadingItem
-    :active="isLoading"
-    :z-index="1060"
-    :is-full-page="false"
-    :opacity="0"
-  >
-      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
-  </LoadingItem>
+  <LoadingComponent :is-loading="isLoading"></LoadingComponent>
   <div class="container" v-if="isready">
     <div class="pt-5">
       <div class="row flex-column flex-lg-row align-items-center">
@@ -38,7 +31,6 @@
                     class="btn btn-outline-secondary"
                     type="button"
                     @click="qty > 1 ? (qty -= 1) : null"
-                    :disabled="product.id === loadingItem"
                   >
                     -
                   </button>
@@ -53,7 +45,6 @@
                     class="btn btn-outline-secondary"
                     type="button"
                     @click="qty += 1"
-                    :disabled="product.id === loadingItem"
                   >
                     +
                   </button>
@@ -63,7 +54,7 @@
                 <button
                   :class="{ disabled: isDisable }"
                   class="btn btn-myBgMain text-myColor border-myColor"
-                  @click="addToCart(product.id, product.title)"
+                  @click="addToCart(product.id, product.title, qty)"
                 >
                   加入購物車
                 </button>
@@ -94,17 +85,13 @@
         />
       </svg>
     </div>
-    <div class="row d-flex flex-column flex-lg-row align-items-center">
+    <div class="row d-flex flex-column flex-md-row align-items-center">
       <div
-        class="col-lg-3 moreImg mb-4 m-lg-0"
+        class="col-md-6 col-lg-3 mb-4 m-lg-0"
         v-for="product in filteredProducts"
         :key="product.id"
       >
-        <div
-          class="hover"
-          style="cursor: pointer"
-          @click="changeProduct(product.id)"
-        >
+        <div style="cursor: pointer" @click="getProduct(product.id)">
           <img class="w-100" :src="product.imageUrl" alt="更多產品圖片" />
         </div>
         <div class="pt-2 bg-myBgCard">{{ product.title }}</div>
@@ -122,90 +109,78 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from 'pinia'
-import { cartStore } from '@/stores/cart'
+<script setup>
+import LoadingComponent from '../../components/LoadingComponent.vue'
+import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { cartStore } from '@/stores/cart.js'
 import Swal from 'sweetalert2'
-const { VITE_URL, VITE_PATH } = import.meta.env
+import axios from 'axios'
+import { useRoute } from 'vue-router'
 
-export default {
-  data () {
-    return {
-      isready: false,
-      isLoading: false,
-      qty: 1,
-      products: [],
-      product: {},
-      category: '',
-      loadingItem: ''
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['addToCart']),
-    getProducts (category) {
-      this.products = []
-      this.$http
-        .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
-        .then((res) => {
-          res.data.products.forEach((item) => {
-            if (item.category === category && item.id !== this.product.id) {
-              this.products.push(item)
-            }
-          })
-          this.isready = true
-          this.isLoading = false
-        })
-        .catch((err) => {
-          this.isLoading = false
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    },
-    getProduct () {
-      const { id } = this.$route.params
-      this.$http
-        .get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id}`)
-        .then((res) => {
-          this.product = res.data.product
-          this.category = this.product.category
-          this.getProducts(this.category)
-        })
-        .catch((err) => {
-          this.isLoading = false
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    },
-    changeProduct (id) {
-      this.isready = false
-      this.isLoading = true
-      this.$router.push(`/product/${id}`).then(() => {
-        this.getProduct()
+const qty = ref(1)
+const cart = cartStore()
+const { addToCart } = cart
+const { isDisable } = storeToRefs(cart)
+
+const isready = ref(false)
+const isLoading = ref(false)
+const products = ref([])
+const product = ref({})
+const category = ref('')
+const { VITE_URL, VITE_PATH } = import.meta.env
+const currentRoute = useRoute()
+const getProduct = (id = currentRoute.params.id) => {
+  isLoading.value = true
+  isready.value = false
+  window.scrollTo(0, 0)
+  console.log(id)
+  axios
+    .get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id}`)
+    .then((res) => {
+      product.value = res.data.product
+      category.value = product.value.category
+      getProducts(category)
+    })
+    .catch((err) => {
+      isLoading.value = false
+      Swal.fire({
+        backdrop: false,
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.response.data.message}`
       })
-    }
-  },
-  computed: {
-    filteredProducts () {
-      return this.products.slice(0, 4) // 取前四筆資料
-    },
-    isDisable () {
-      const store = this.$pinia.state.value
-      return store.cart.isDisable
-    }
-  },
-  mounted () {
-    this.isLoading = true
-    this.getProduct()
-  }
+    })
 }
+getProduct()
+
+const getProducts = (category) => {
+  products.value = []
+  axios
+    .get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
+    .then((res) => {
+      res.data.products.forEach((item) => {
+        if (item.category === category.value && item.id !== product.value.id) {
+          products.value.push(item)
+        }
+      })
+      isready.value = true
+      isLoading.value = false
+    })
+    .catch((err) => {
+      isLoading.value = false
+      Swal.fire({
+        backdrop: false,
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.response.data.message}`
+      })
+    })
+}
+
+const filteredProducts = computed(() => {
+  return products.value.slice(0, 4) // 取前四筆資料
+})
 </script>
 
 <style scoped>

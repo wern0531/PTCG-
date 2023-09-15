@@ -1,6 +1,6 @@
 <template>
   <div
-    class="footer mt-3 bg-black d-flex justify-content-center align-items-center"
+    class="footer mt-auto bg-black d-flex justify-content-center align-items-center"
   >
     <div class="footerText">
       本網站為個人作品使用，非商業用途 |
