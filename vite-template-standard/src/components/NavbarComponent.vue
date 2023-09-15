@@ -26,7 +26,7 @@
           </li>
           <li class="me-lg-4">
             <RouterLink
-              to="/deck/夢幻Vmax"
+              to="/deck"
               class="link-item py-2 text-white text-decoration-none"
               href="#"
               >牌組介紹</RouterLink

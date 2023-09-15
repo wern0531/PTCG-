@@ -1,20 +1,16 @@
 <template>
-  <LoadingItem :active="isLoading" :z-index="1060" :opacity="0">
-    <!-- <div class="loadingGif"> -->
-    <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
-    <!-- </div> -->
-  </LoadingItem>
-  <div class="container mt-5" v-if="isready">
-    <div class="d-flex flex-column flex-md-row">
+  <LoadingComponent :is-loading="isLoading"></LoadingComponent>
+  <div class="container" v-show="isReady">
+    <div class="d-flex pt-5 flex-column flex-md-row">
       <div
         class="mb-2 mb-lg-0 d-flex justify-content-start justify-content-lg-center"
-        v-for="(item, index) in deckmenu"
+        v-for="(item, index) in deckMenu"
         :key="index"
       >
         <button
           :class="{ disabled: isDisabled }"
           class="deckBtn btn btn-myBgMain text-myColor fs-6 fs-md-3"
-          @click="getDeck(item)"
+          @click="getArticles(item)"
         >
           {{ item }}
         </button>
@@ -31,7 +27,7 @@
           選擇牌組
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li v-for="(item, index) in deckmenu" :key="index">
+          <li v-for="(item, index) in deckMenu" :key="index">
             <a class="dropdown-item" @click="getDeck(item)">
               {{ item }}
             </a>
@@ -40,7 +36,7 @@
       </div> -->
     </div>
   </div>
-  <div class="container mt-5 p-3" v-if="isready">
+  <div class="container mt-5 p-3" v-show="isReady">
     <div class="row align-items-center">
       <div class="col-lg-9">
         <img class="deckImg" :src="article.image" alt="牌組圖片" />
@@ -108,83 +104,64 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 import Swal from 'sweetalert2'
+import axios from 'axios'
+import LoadingComponent from '../../components/LoadingComponent.vue'
 const { VITE_URL, VITE_PATH } = import.meta.env
-export default {
-  data () {
-    return {
-      isready: false,
-      isLoading: false,
-      isDisabled: false,
-      article: {},
-      starLevel: 4,
-      title: '',
-      id: '',
-      deckmenu: []
-    }
-  },
-  methods: {
-    getArticles (first = true) {
-      this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
-        .then((res) => {
-          if (first === true) {
-            const deckdata = res.data.articles
-            deckdata.forEach((item) => {
-              if (item.tag === '牌組') {
-                this.deckmenu.push(item.title)
-              }
-            })
-          }
-          res.data.articles.forEach((item) => {
-            if (item.title === this.title) {
-              this.id = item.id
-            }
-          })
-          this.getArticle()
-        })
-        .catch((err) => {
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    },
-    getArticle () {
-      this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/article/${this.id}`)
-        .then((res) => {
-          this.article = res.data.article
-          this.isready = true
-        })
-        .then(() => {
-          this.isLoading = false
-          this.isDisabled = false
-        })
-        .catch((err) => {
-          Swal.fire({
-            backdrop: false,
-            icon: 'error',
-            title: 'Oops...',
-            text: `${err.response.data.message}`
-          })
-        })
-    },
-    getDeck (title) {
-      this.isLoading = true
-      this.isDisabled = true
-      this.title = title
-      this.getArticles(false)
-    }
-  },
-  mounted () {
-    this.isLoading = true
-    this.title = this.$route.params.name
-    this.getArticles()
-  }
+
+const isReady = ref(false)
+const isLoading = ref(false)
+const isDisabled = ref(false)
+const article = ref({})
+const starLevel = ref(4)
+const id = ref('')
+const deckMenu = ref([])
+
+const getArticles = (nowTitle = '夢幻Vmax') => {
+  isReady.value = false
+  isLoading.value = true
+  axios
+    .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
+    .then((res) => {
+      if (deckMenu.value.length < 1) {
+        deckMenu.value = res.data.articles.filter(item => item.tag === '牌組').map(item => item.title)
+      }
+      res.data.articles.forEach((item) => {
+        if (item.title === nowTitle) {
+          id.value = item.id
+        }
+      })
+      getArticle()
+    })
+    .catch((err) => {
+      Swal.fire({
+        backdrop: false,
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.response.data.message}`
+      })
+    })
+}
+getArticles()
+const getArticle = () => {
+  axios
+    .get(`${VITE_URL}v2/api/${VITE_PATH}/article/${id.value}`)
+    .then((res) => {
+      article.value = res.data.article
+      isReady.value = true
+      isLoading.value = false
+      isDisabled.value = false
+    })
+    .catch((err) => {
+      Swal.fire({
+        backdrop: false,
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.response.data.message}`
+      })
+    })
 }
 </script>
 

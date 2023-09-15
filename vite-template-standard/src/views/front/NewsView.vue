@@ -1,13 +1,5 @@
 <template>
-  <LoadingItem
-    :active="isLoading"
-    :z-index="1060"
-    :opacity="0"
-  >
-    <div class="loadingGif">
-      <img src="@/assets/image/pikachu_gif.gif" alt="會動的皮卡丘過場圖" />
-    </div>
-  </LoadingItem>
+  <LoadingComponent :is-loading="isLoading"></LoadingComponent>
   <div class="container text-white">
     <div class="pt-5">
       <p class="fs-2 mb-4" v-if="articles.pack.length > 0">補充包資訊</p>
@@ -84,6 +76,7 @@
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import LoadingComponent from '../../components/LoadingComponent.vue'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 const isLoading = ref(false)
