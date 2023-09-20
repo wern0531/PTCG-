@@ -24,7 +24,7 @@ const routes = [
         component: () => import('../views/front/NewsView.vue')
       },
       {
-        path: 'deck/:name',
+        path: 'deck',
         component: () => import('../views/front/DeckView.vue')
       },
       {

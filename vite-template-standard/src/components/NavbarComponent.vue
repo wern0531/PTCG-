@@ -84,7 +84,7 @@
         </li>
         <li class="mb-3 text-start" @click="toggleMenu">
           <RouterLink
-            to="/deck/夢幻Vmax"
+            to="/deck"
             class="link-item py-2 text-white text-decoration-none"
             href="#"
             >牌組介紹</RouterLink

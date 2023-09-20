@@ -95,7 +95,7 @@
           <img class="w-100" :src="product.imageUrl" alt="更多產品圖片" />
         </div>
         <div class="pt-2 bg-myBgCard">{{ product.title }}</div> -->
-        <RouterLink style="cursor: pointer" :to="`/product/${product.id}`">
+        <RouterLink style="cursor: pointer" class="text-white text-decoration-none" :to="`/product/${product.id}`">
           <img class="w-100" :src="product.imageUrl" alt="更多產品圖片" />
           <div class="pt-2 bg-myBgCard">{{ product.title }}</div>
         </RouterLink>
@@ -138,16 +138,16 @@ const id = ref(currentRoute.params.id)
 watch(
   () => currentRoute.params.id,
   () => {
+    id.value = currentRoute.params.id
     getProduct()
   }
 )
 const getProduct = () => {
   isLoading.value = true
-  // isready.value = false
+  isready.value = false
   axios
     .get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id.value}`)
     .then((res) => {
-      window.scrollTo(0, 0)
       product.value = res.data.product
       category.value = product.value.category
       getProducts(category)
