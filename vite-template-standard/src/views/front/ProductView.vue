@@ -91,10 +91,14 @@
         v-for="product in filteredProducts"
         :key="product.id"
       >
-        <div style="cursor: pointer" @click="getProduct(product.id)">
+        <!-- <div style="cursor: pointer" @click="getProduct(product.id)">
           <img class="w-100" :src="product.imageUrl" alt="更多產品圖片" />
         </div>
-        <div class="pt-2 bg-myBgCard">{{ product.title }}</div>
+        <div class="pt-2 bg-myBgCard">{{ product.title }}</div> -->
+        <RouterLink style="cursor: pointer" :to="`/product/${product.id}`">
+          <img class="w-100" :src="product.imageUrl" alt="更多產品圖片" />
+          <div class="pt-2 bg-myBgCard">{{ product.title }}</div>
+        </RouterLink>
         <div class="pt-2 bg-myBgCard rounded-bottom">
           <button
             :class="{ disabled: isDisable }"
@@ -111,7 +115,7 @@
 
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { cartStore } from '@/stores/cart.js'
 import Swal from 'sweetalert2'
@@ -130,14 +134,20 @@ const product = ref({})
 const category = ref('')
 const { VITE_URL, VITE_PATH } = import.meta.env
 const currentRoute = useRoute()
-const getProduct = (id = currentRoute.params.id) => {
+const id = ref(currentRoute.params.id)
+watch(
+  () => currentRoute.params.id,
+  () => {
+    getProduct()
+  }
+)
+const getProduct = () => {
   isLoading.value = true
-  isready.value = false
-  window.scrollTo(0, 0)
-  console.log(id)
+  // isready.value = false
   axios
-    .get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id}`)
+    .get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id.value}`)
     .then((res) => {
+      window.scrollTo(0, 0)
       product.value = res.data.product
       category.value = product.value.category
       getProducts(category)
