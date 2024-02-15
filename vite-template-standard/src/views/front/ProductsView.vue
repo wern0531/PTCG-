@@ -3,15 +3,12 @@
   <div class="container" v-show="isReady">
     <div class="row w-100 pt-5 d-flex flex-column flex-md-row">
       <div class="col-md-3">
-        <ul
-          class="p-0 text-center d-flex flex-md-column justify-content-between flex-wrap"
-
-        >
+        <ul class="p-0 text-center d-flex flex-md-column justify-content-between flex-wrap">
           <li
             type="button"
             class="btn border-white bg-myBgCard mb-2 fs-4 productList"
             v-for="thisCategory in allCategory"
-          :key="thisCategory"
+            :key="thisCategory"
             :class="category === thisCategory ? 'text-myColor' : 'text-white'"
             @click="getProducts(thisCategory)"
           >
@@ -27,28 +24,15 @@
           <div v-if="category !== '全部商品'">/{{ category }}</div>
         </div>
         <div class="row productCardWrap">
-          <div
-            class="col-md-6 col-lg-4 p-3"
-            v-for="product in products"
-            :key="product.id"
-          >
+          <div class="col-md-6 col-lg-4 p-3" v-for="product in products" :key="product.id">
             <div class="card bg-myBgCard productCard overflow-hidden">
-              <RouterLink
-                :to="`/product/${product.id}`"
-                class="hover-pointer text-decoration-none"
-              >
-                <img
-                  :src="product.imageUrl"
-                  class="card-img-top"
-                  alt="商品圖片"
-                />
+              <RouterLink :to="`/product/${product.id}`" class="hover-pointer text-decoration-none">
+                <img :src="product.imageUrl" class="card-img-top" alt="商品圖片" />
                 <div class="p-3">
                   <div class="pb-3 text-start text-white">
                     {{ product.title }}
                   </div>
-                  <div class="text-start text-white">
-                    NT$ {{ product.price }}
-                  </div>
+                  <div class="text-start text-white">NT$ {{ product.price }}</div>
                 </div>
               </RouterLink>
               <div class="d-flex justify-content-center">
@@ -63,11 +47,7 @@
             </div>
           </div>
         </div>
-        <Pagination
-          v-if="totalPage>1"
-          :pages="pagination"
-          @emit-pages="changePage"
-        ></Pagination>
+        <Pagination v-if="totalPage > 1" :pages="pagination" @emit-pages="changePage"></Pagination>
       </div>
     </div>
   </div>
@@ -79,7 +59,7 @@ import { storeToRefs } from 'pinia'
 import { cartStore } from '@/stores/cart.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import LoadingComponent from '../../components/LoadingComponent.vue'
+import LoadingComponent from '@/components/LoadingComponent.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -170,7 +150,11 @@ const changePage = (nowPage) => {
       })
   } else {
     axios
-      .get(`${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}&category=${encodeURIComponent(category.value)}`)
+      .get(
+        `${VITE_URL}v2/api/${VITE_PATH}/products?page=${nowPage}&category=${encodeURIComponent(
+          category.value
+        )}`
+      )
       .then((res) => {
         window.scrollTo(0, 0)
         pagination.value = res.data.pagination
@@ -193,7 +177,7 @@ const changePage = (nowPage) => {
 // 取得所有不同的category,並額外加入'全部商品'
 const allCategory = ref([])
 const checkAllCategory = () => {
-  axios.get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`).then(res => {
+  axios.get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`).then((res) => {
     allCategory.value = ['全部商品', ...new Set(res.data.products.map((item) => item.category))]
   })
 }

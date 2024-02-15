@@ -5,9 +5,7 @@
         <a class="" href="#">
           <img src="../assets/image/logo.png" alt="PTCGTrainerWeb" />
         </a>
-        <ul
-          class="d-none d-lg-flex mb-0 align-items-center ms-auto text-white list-unstyled"
-        >
+        <ul class="d-none d-lg-flex mb-0 align-items-center ms-auto text-white list-unstyled">
           <li class="me-lg-4">
             <RouterLink
               to="/products/全部商品"
@@ -17,16 +15,13 @@
             >
           </li>
           <li class="h-100 me-lg-4">
-            <RouterLink
-              to="/news"
-              class="link-item py-2 text-white text-decoration-none"
-              href="#"
+            <RouterLink to="/news" class="link-item py-2 text-white text-decoration-none" href="#"
               >最新消息</RouterLink
             >
           </li>
           <li class="me-lg-4">
             <RouterLink
-              to="/deck"
+              to="/deck/夢幻"
               class="link-item py-2 text-white text-decoration-none"
               href="#"
               >牌組介紹</RouterLink
@@ -34,11 +29,7 @@
           </li>
         </ul>
         <!-- 購物車Btn -->
-        <button
-          type="button"
-          class="btn ms-auto ms-lg-0"
-          @click="carts.length > 0 ? $router.push('/cart') : noCarts()"
-        >
+        <button type="button" class="btn ms-auto ms-lg-0" @click="cartBtn">
           <div class="shoppingCart position-relative">
             <span
               v-if="carts.length > 0"
@@ -48,15 +39,8 @@
           </div>
         </button>
         <!-- 漢堡選單按鈕 -->
-        <button
-          class="d-block d-lg-none text-white btn-myBgMain btn ms-4"
-          @click="toggleMenu"
-        >
-          <img
-            class="menuBtnImg bg-myBgMain"
-            src="../assets/image/menu.png"
-            alt="菜單"
-          />
+        <button class="d-block d-lg-none text-white btn-myBgMain btn ms-4" @click="toggleMenu">
+          <img class="menuBtnImg bg-myBgMain" src="../assets/image/menu.png" alt="菜單" />
         </button>
       </div>
     </div>
@@ -75,18 +59,12 @@
           >
         </li>
         <li class="mb-3 text-start" @click="toggleMenu">
-          <RouterLink
-            to="/news"
-            class="link-item py-2 text-white text-decoration-none"
-            href="#"
+          <RouterLink to="/news" class="link-item py-2 text-white text-decoration-none" href="#"
             >最新消息</RouterLink
           >
         </li>
         <li class="mb-3 text-start" @click="toggleMenu">
-          <RouterLink
-            to="/deck"
-            class="link-item py-2 text-white text-decoration-none"
-            href="#"
+          <RouterLink to="/deck" class="link-item py-2 text-white text-decoration-none" href="#"
             >牌組介紹</RouterLink
           >
         </li>
@@ -95,51 +73,34 @@
   </nav>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { cartStore } from '@/stores/cart.js'
 import router from '../router/index'
 import Swal from 'sweetalert2'
 
-export default {
-  setup () {
-    const cart = cartStore()
+const cart = cartStore()
+const { carts, getCartNum } = storeToRefs(cart)
 
-    const { getCarts } = cart
-    onMounted(() => {
-      getCarts()
+const cartBtn = async () => {
+  if (getCartNum.value > 0) {
+    await router.push('/cart')
+  } else {
+    await Swal.fire({
+      backdrop: false,
+      position: 'top-end',
+      icon: 'warning',
+      title: '您的購物車是空的唷~',
+      text: '來去逛逛商品吧!!'
     })
-
-    const { carts, getCartNum } = storeToRefs(cart) // 取得購物車數量
-
-    const noCarts = () => {
-      // 購物車沒東西跳出提示轉往商品頁
-      Swal.fire({
-        backdrop: false,
-        position: 'top-end',
-        icon: 'warning',
-        title: '您的購物車是空的唷~',
-        text: '來去逛逛商品吧!!'
-      }).then(() => {
-        router.push('/products/全部商品')
-      })
-    }
-
-    const menuHeight = ref(0)
-    const toggleMenu = () => {
-      menuHeight.value = menuHeight.value === 153 ? 0 : 153
-    }
-
-    return {
-      getCartNum,
-      carts,
-      getCarts,
-      noCarts,
-      menuHeight,
-      toggleMenu
-    }
+    await router.push('/products/全部商品')
   }
+}
+
+const menuHeight = ref(0)
+const toggleMenu = () => {
+  menuHeight.value = menuHeight.value === 153 ? 0 : 153
 }
 </script>
 
@@ -153,7 +114,7 @@ export default {
 }
 .link-item::after {
   /* li hover效果偽元素 */
-  content: "";
+  content: '';
   width: 0;
   height: 4px;
   background-color: #ff6915;

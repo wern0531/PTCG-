@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="footer mt-auto bg-black d-flex justify-content-center align-items-center"
-  >
+  <div class="footer mt-auto bg-black d-flex justify-content-center align-items-center">
     <div class="footerText">
       本網站為個人作品使用，非商業用途 |
       <svg
@@ -25,16 +23,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import router from '../router/index'
 
-export default {
-  setup () {
-    const toAdmin = () => {
-      router.push('/login')
-    }
-    return { toAdmin }
-  }
+const toAdmin = () => {
+  router.push('/login')
 }
 </script>
 <style scoped>
